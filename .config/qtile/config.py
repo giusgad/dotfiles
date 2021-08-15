@@ -414,22 +414,21 @@ def init_widgets_list():
             fontsize=14,
         ),
         widget.Systray(background=colors[1], icon_size=20, padding=4),
-        Spacer(length=10, background=colors[1]),
+        widget.Sep(padding=10, background=colors[1], foreground=colors[1]),
     ]
     return widgets_list
 
 
-def init_widgets_screen2():
-    widgets_screen1 = init_widgets_list()
-    # remove unwanted widgets (systray) on second monitor
-    del widgets_screen1[-1]
-    return widgets_screen1
-
-
 def init_widgets_screen1():
     widgets_screen2 = init_widgets_list()
-    # Monitor 2 will display all widgets in widgets_list
     return widgets_screen2
+
+
+def init_widgets_screen2():
+    widgets_screen1 = init_widgets_list()
+    # remove systray on second monitor
+    del widgets_screen1[-2]
+    return widgets_screen1
 
 
 def init_screens():
@@ -551,7 +550,6 @@ def assign_app_group(client):
         "discord",
         "kdeconnect-app",
     ]
-    # TODO set games
     d[group_names[7]] = ["steam"]
     d[group_names[8]] = [
         "Evolution",
