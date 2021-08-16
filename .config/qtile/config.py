@@ -263,7 +263,7 @@ for i in groups:
 
 def init_layout_theme():
     return {
-        "margin": 30,
+        "margin": 10,
         "border_width": 2,
         "border_focus": colors[8],
         "border_normal": colors[5],
@@ -638,6 +638,7 @@ floating_layout = layout.Floating(
         {"wname": "pinentry"},
         {"wmclass": "ssh-askpass"},
         {"wmclass": "nvidia-settings"},
+        {"wmclass": "tk"}
     ],
     fullscreen_border_width=0,
     border_width=0,
