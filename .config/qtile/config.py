@@ -100,6 +100,8 @@ keys = [
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
+    # switch focus to next window
+    Key([mod], "e", lazy.layout.next()),
     # RESIZE UP, DOWN, LEFT, RIGHT
     Key(
         [mod, "control"],
