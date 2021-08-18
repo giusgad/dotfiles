@@ -33,6 +33,8 @@ from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
+import asyncio
+from libqtile.log_utils import logger
 
 # import arcobattery
 
@@ -486,97 +488,31 @@ dgroups_app_rules = []
 @hook.subscribe.client_new
 def assign_app_group(client):
     d = {}
-    #####################################################################################
-    #     ### Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient ###
-    #     #####################################################################################
-    d[group_names[0]] = [
-        "Navigator",
-        "Firefox",
-        "Vivaldi-stable",
-        "Vivaldi-snapshot",
-        "Chromium",
-        "Google-chrome",
-        "Brave",
-        "Brave-browser",
-        "navigator",
-        "firefox",
-        "vivaldi-stable",
-        "vivaldi-snapshot",
-        "chromium",
-        "google-chrome",
-        "brave",
-        "brave-browser",
-    ]
-    d[group_names[1]] = [
-        "Atom",
-        "Subl",
-        "Geany",
-        "Brackets",
-        "Code-oss",
-        "Code",
-        "atom",
-        "subl",
-        "geany",
-        "brackets",
-        "code-oss",
-        "code",
-    ]
+    # Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient
+    d[group_names[0]] = ["firefox", "Navigator"]
+    d[group_names[1]] = ["atom", "subl", "geany", "code-oss", "code"]
     d[group_names[2]] = []
-    d[group_names[3]] = [
-        "pcmanfm",
-        "Pcmanfm",
-        "nautilus",
-        "Nautilus",
-        "dolphin",
-        "Dolphin",
-        "pcmanfm-qt",
-        "Pcmanfm-qt",
-    ]
+    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin", "pcmanfm-qt"]
     d[group_names[4]] = ["Vlc", "vlc", "Mpv", "mpv"]
-    d[group_names[5]] = [
-        "Spotify",
-        "Pragha",
-        "Clementine",
-        "Deadbeef",
-        "Audacious",
-        "spotify",
-        "pragha",
-        "clementine",
-        "deadbeef",
-        "audacious",
-    ]
-    d[group_names[6]] = [
-        "TelegramDesktop",
-        "Discord",
-        "telegramDesktop",
-        "discord",
-        "kdeconnect-app",
-    ]
-    d[group_names[7]] = ["steam"]
-    d[group_names[8]] = [
-        "Evolution",
-        "Geary",
-        "Mail",
-        "Thunderbird",
-        "VirtualBox Manager",
-        "VirtualBox Machine",
-        "Vmplayer",
-        "virtualbox manager",
-        "virtualbox machine",
-        "vmplayer",
-    ]
-    d[group_names[9]] = [
-        "bpytop",
-        "htop",
-    ]
-    ######################################################################################
+    d[group_names[5]] = ["spotify", "Spotify"]
+    d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
+    d[group_names[7]] = ["Steam"]
+    d[group_names[8]] = []
+    d[group_names[9]] = ["bpytop", "htop"]
 
-    wm_class = client.window.get_wm_class()[0]
+    # get wm_class list
+    wm_class = client.window.get_wm_class()
+    # if it doesn't exist wait and try again
+    # i.e. spotify take longer to get a wm_class
+    while not wm_class:
+        asyncio.sleep(0.02)
+        wm_class = client.window.get_wm_class()
+    # only use the first value of the wm_class
+    wm_class = wm_class[0]
 
-    for i in range(len(d)):
-        if wm_class in list(d.values())[i]:
-            group = list(d.keys())[i]
-            client.togroup(group)
+    for key in d:
+        if wm_class in d[key]:
+            client.togroup(key)
             client.group.cmd_toscreen(toggle=False)
 
 
@@ -640,7 +576,7 @@ floating_layout = layout.Floating(
         {"wname": "pinentry"},
         {"wmclass": "ssh-askpass"},
         {"wmclass": "nvidia-settings"},
-        {"wmclass": "tk"}
+        {"wmclass": "tk"},
     ],
     fullscreen_border_width=0,
     border_width=0,
