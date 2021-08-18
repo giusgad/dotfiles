@@ -34,7 +34,9 @@ from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
 import asyncio
-from libqtile.log_utils import logger
+
+# debug tool
+# from libqtile.log_utils import logger
 
 # import arcobattery
 
@@ -80,6 +82,7 @@ def window_to_next_group(qtile):
 
 
 keys = [
+    # DEFAULT
     # Most of our keybindings are in sxhkd file - except these
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
@@ -97,7 +100,6 @@ keys = [
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Left", lazy.layout.left()),
     Key([mod], "Right", lazy.layout.right()),
-    # FIXME kjhl not working
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
@@ -168,10 +170,10 @@ keys = [
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
     # FLIP LAYOUT FOR BSP
-    Key([mod, "mod2"], "k", lazy.layout.flip_up()),
-    Key([mod, "mod2"], "j", lazy.layout.flip_down()),
-    Key([mod, "mod2"], "l", lazy.layout.flip_right()),
-    Key([mod, "mod2"], "h", lazy.layout.flip_left()),
+    # Key([mod, "mod2"], "k", lazy.layout.flip_up()),
+    # Key([mod, "mod2"], "j", lazy.layout.flip_down()),
+    # Key([mod, "mod2"], "l", lazy.layout.flip_right()),
+    # Key([mod, "mod2"], "h", lazy.layout.flip_left()),
     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
@@ -279,10 +281,9 @@ layout_theme = init_layout_theme()
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    layout.Bsp(**layout_theme),
-    layout.Floating(**layout_theme),
+    # layout.Bsp(**layout_theme),
+    # layout.Floating(**layout_theme),
     layout.Max(**layout_theme),
-    layout.MonadWide(**layout_theme),
 ]
 
 # WIDGETS FOR THE BAR
