@@ -494,7 +494,7 @@ def assign_app_group(client):
     d[group_names[1]] = ["atom", "subl", "geany", "code-oss", "code"]
     d[group_names[2]] = []
     d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin", "pcmanfm-qt"]
-    d[group_names[4]] = ["Vlc", "vlc", "Mpv", "mpv"]
+    d[group_names[4]] = ["Vlc", "vlc", "Mpv", "mpv", "resolve"]
     d[group_names[5]] = ["spotify", "Spotify"]
     d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
     d[group_names[7]] = ["Steam", "lutris"]
