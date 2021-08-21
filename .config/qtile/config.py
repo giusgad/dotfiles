@@ -288,18 +288,18 @@ layouts = [
 
 # WIDGETS FOR THE BAR
 
+font = "Roboto"
+
 
 def init_widgets_defaults():
-    return dict(font="Noto Sans", fontsize=12, padding=2, background=colors[0])
+    return dict(font=font, fontsize=14, background=colors[0])
 
 
 widget_defaults = init_widgets_defaults()
 
-font = "Roboto"
-
 
 def init_widgets_list():
-    prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
+    # prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
         # left aligned
         widget.GroupBox(
@@ -497,7 +497,7 @@ def assign_app_group(client):
     d[group_names[4]] = ["Vlc", "vlc", "Mpv", "mpv"]
     d[group_names[5]] = ["spotify", "Spotify"]
     d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
-    d[group_names[7]] = ["Steam"]
+    d[group_names[7]] = ["Steam", "lutris"]
     d[group_names[8]] = []
     d[group_names[9]] = ["bpytop", "htop"]
 
