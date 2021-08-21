@@ -13,6 +13,7 @@
 alias clear='clear && neofetch'
 alias tclock='tty-clock -c'
 alias dotsupdate='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias resolve='/opt/resolve/bin/resolve'
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
