@@ -316,7 +316,14 @@ def init_widgets_list():
             this_current_screen_border=colors[8],
             this_screen_border=colors[4],
         ),
-        Spacer(),
+        widget.Sep(**widget_defaults),
+        widget.WindowName(
+            font=font,
+            fontsize=14,
+            background=colors[0],
+            foreground=colors[5],
+        ),
+        # Spacer(),
         # center aligned
         widget.Clock(
             foreground=colors[5],
