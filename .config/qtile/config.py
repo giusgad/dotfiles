@@ -29,6 +29,7 @@ import os
 import re
 import socket
 import subprocess
+from libqtile import qtile
 from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
@@ -417,6 +418,14 @@ def init_widgets_list():
             foreground=colors[1],
             padding=0,
             fontsize=54,
+        ),
+        widget.TextBox(
+            text="🔊",
+            background=colors[1],
+            foreground=colors[5],
+            padding=0,
+            fontsize=14,
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("sh ~/.config/qtile/scripts/change_output.sh", shell=True)},
         ),
         widget.KeyboardLayout(
             background=colors[1],
