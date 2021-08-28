@@ -21,8 +21,6 @@ alias vim=nvim
 
 export HISTCONTROL=ignoreboth:erasedups
 
-# Make nano the default editor
-
 export EDITOR='vim'
 export VISUAL='vim'
 
@@ -248,4 +246,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+# init starship prompt
+eval "$(starship init bash)"

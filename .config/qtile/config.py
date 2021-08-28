@@ -290,6 +290,9 @@ layouts = [
 # WIDGETS FOR THE BAR
 
 font = "Roboto"
+powerline_font = "Caskaydia Cove Nerd Font"
+powerline_font_size = 54
+powerline_char = ""
 
 
 def init_widgets_defaults():
@@ -317,14 +320,14 @@ def init_widgets_list():
             this_current_screen_border=colors[8],
             this_screen_border=colors[4],
         ),
-        widget.Sep(**widget_defaults),
-        widget.WindowName(
-            font=font,
-            fontsize=14,
-            background=colors[0],
-            foreground=colors[5],
-        ),
-        # Spacer(),
+        # widget.Sep(**widget_defaults),
+        # widget.WindowName(
+        #     font=font,
+        #     fontsize=14,
+        #     background=colors[0],
+        #     foreground=colors[5],
+        # ),
+        Spacer(),
         # center aligned
         widget.Clock(
             foreground=colors[5],
@@ -336,11 +339,12 @@ def init_widgets_list():
         Spacer(),
         # right aligned
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[1],
             foreground=colors[2],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.Net(
             font=font,
@@ -351,11 +355,12 @@ def init_widgets_list():
             format="{down} ↓↑ {up}",
         ),
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[2],
             foreground=colors[1],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.TextBox(
             text=" ",
@@ -363,6 +368,7 @@ def init_widgets_list():
             foreground=colors[5],
             padding=0,
             fontsize=14,
+            font=font,
         ),
         widget.CPU(
             background=colors[1],
@@ -372,21 +378,23 @@ def init_widgets_list():
             font=font,
         ),
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[1],
             foreground=colors[2],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.CurrentLayout(
             font=font, foreground=colors[5], background=colors[2], fontsize=14
         ),
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[2],
             foreground=colors[1],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.ThermalSensor(
             foreground=colors[5],
@@ -399,11 +407,12 @@ def init_widgets_list():
             font=font,
         ),
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[1],
             foreground=colors[2],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.Clock(
             foreground=colors[5],
@@ -413,11 +422,12 @@ def init_widgets_list():
             format="%d-%m-%Y",
         ),
         widget.TextBox(
-            text="",
+            text=powerline_char,
             background=colors[2],
             foreground=colors[1],
             padding=0,
-            fontsize=54,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.TextBox(
             text="🔊",
@@ -425,7 +435,11 @@ def init_widgets_list():
             foreground=colors[5],
             padding=0,
             fontsize=14,
-            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("sh ~/.config/qtile/scripts/change_output.sh", shell=True)},
+            mouse_callbacks={
+                "Button1": lambda: qtile.cmd_spawn(
+                    "sh ~/.config/qtile/scripts/change_output.sh", shell=True
+                )
+            },
         ),
         widget.KeyboardLayout(
             background=colors[1],
