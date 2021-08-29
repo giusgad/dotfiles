@@ -367,7 +367,7 @@ def init_widgets_list():
             background=colors[1],
             foreground=colors[5],
             padding=0,
-            fontsize=14,
+            fontsize=24,
             font=font,
         ),
         widget.CPU(
