@@ -11,7 +11,7 @@ alias vim=nvim
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -la'
-alias l='ls'
+alias l='ls -l'
 alias l.="ls -A | egrep '^\.'"
 
 ## Colorize the grep command output for ease of use (good for log files)##
