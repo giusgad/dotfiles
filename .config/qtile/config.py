@@ -289,7 +289,7 @@ layouts = [
 
 # WIDGETS FOR THE BAR
 
-font = "Roboto"
+font = "Caskaydia Cove Nerd Font"
 powerline_font = "Caskaydia Cove Nerd Font"
 powerline_font_size = 54
 powerline_char = ""
@@ -363,11 +363,11 @@ def init_widgets_list():
             font=powerline_font,
         ),
         widget.TextBox(
-            text=" ",
+            text="  ",
             background=colors[1],
             foreground=colors[5],
             padding=0,
-            fontsize=24,
+            fontsize=18,
             font=font,
         ),
         widget.CPU(
