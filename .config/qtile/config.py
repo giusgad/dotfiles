@@ -434,12 +434,19 @@ def init_widgets_list():
             background=colors[1],
             foreground=colors[5],
             padding=0,
-            fontsize=14,
+            fontsize=16,
             mouse_callbacks={
                 "Button1": lambda: qtile.cmd_spawn(
                     "sh ~/.config/qtile/scripts/change_output.sh", shell=True
                 )
             },
+        ),
+        widget.Volume(
+            background=colors[1],
+            foreground=colors[5],
+            font=font,
+            padding=5,
+            fontsize=14,
         ),
         widget.KeyboardLayout(
             background=colors[1],
