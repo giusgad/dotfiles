@@ -9,12 +9,6 @@ disabled = true
 # [character]                         # The name of the module we are configuring is "character"
 # success_symbol = "[➜](bold green)"  # The "success_symbol" is set to "➜" with color "bold green"
 
-# Use custom format
-# format = """
-# [┌───────────────────>](bold green)
-# [│](bold green)$directory$rust$package
-# [└─>](bold green) """
-
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
@@ -88,4 +82,3 @@ symbol = " "
 
 [swift]
 symbol = "ﯣ "
-
