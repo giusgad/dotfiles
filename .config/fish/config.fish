@@ -50,6 +50,10 @@ function _plugin-bang-bang_uninstall --on-event plugin-bang-bang_uninstall
     functions --erase _plugin-bang-bang_uninstall
 end
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
 
 # run neofetch at startup
 if status is-interactive
