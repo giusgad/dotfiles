@@ -330,11 +330,11 @@ ctrl + shift + Print
 
 #Raises volume
 XF86AudioRaiseVolume
-    amixer set Master 10%+
+    amixer set Master 2%+
 
 #Lowers volume
 XF86AudioLowerVolume
-    amixer set Master 10%-
+    amixer set Master 2%-
 
 #Mute
 XF86AudioMute
