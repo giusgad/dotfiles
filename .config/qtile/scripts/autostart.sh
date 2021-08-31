@@ -35,7 +35,7 @@ run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 
 #starting utility applications at boot time
 #run variety &
-run nitrogen --restore &
+nitrogen --restore
 run caffeine &
 run nm-applet &
 run redshift -l 46.4:9.35 &
