@@ -293,6 +293,7 @@ font = "Caskaydia Cove Nerd Font"
 powerline_font = "Caskaydia Cove Nerd Font"
 powerline_font_size = 54
 powerline_char = ""
+powerline_padding=-8
 
 
 def init_widgets_defaults():
@@ -342,7 +343,7 @@ def init_widgets_list():
             text=powerline_char,
             background=colors[1],
             foreground=colors[2],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
@@ -351,14 +352,14 @@ def init_widgets_list():
             fontsize=14,
             foreground=colors[5],
             background=colors[2],
-            padding=0,
+            padding=5,
             format="{down} ↓↑ {up}",
         ),
         widget.TextBox(
             text=powerline_char,
             background=colors[2],
             foreground=colors[1],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
@@ -381,7 +382,7 @@ def init_widgets_list():
             text=powerline_char,
             background=colors[1],
             foreground=colors[2],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
@@ -392,7 +393,7 @@ def init_widgets_list():
             text=powerline_char,
             background=colors[2],
             foreground=colors[1],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
@@ -410,7 +411,7 @@ def init_widgets_list():
             text=powerline_char,
             background=colors[1],
             foreground=colors[2],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
@@ -425,7 +426,7 @@ def init_widgets_list():
             text=powerline_char,
             background=colors[2],
             foreground=colors[1],
-            padding=0,
+            padding=powerline_padding,
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
