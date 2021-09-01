@@ -1,4 +1,5 @@
 # basic settings (export)
+# 
 set fish_greeting
 set TERM "alacritty"
 set EDITOR "vim"
@@ -49,6 +50,9 @@ function _plugin-bang-bang_uninstall --on-event plugin-bang-bang_uninstall
     bind --erase --all '$'
     functions --erase _plugin-bang-bang_uninstall
 end
+
+# autojump
+if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

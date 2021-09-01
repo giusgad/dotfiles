@@ -198,3 +198,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# autojump
+[[ -s /home/giuseppe/.autojump/etc/profile.d/autojump.sh ]] && source /home/giuseppe/.autojump/etc/profile.d/autojump.sh
+

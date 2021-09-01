@@ -95,5 +95,9 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 # init starship prompt
 eval "$(starship init bash)"
+
+# autojump
+[[ -s /home/giuseppe/.autojump/etc/profile.d/autojump.sh ]] && source /home/giuseppe/.autojump/etc/profile.d/autojump.sh
