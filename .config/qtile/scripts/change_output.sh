@@ -20,7 +20,14 @@ function setCard() {
   echo "Moving input: $INPUT to sink: $NEW_SINK";
   echo "Setting default sink to: $NEW_SINK";
 
-  notify-send --urgency=low "Audio Switching" "SINK: $NEW_SINK"
+  if [ "$NEW_SINK" == "1" ]
+    then
+      NOTIF="Hyperx Headphones"
+    else
+      NOTIF="Speakers"
+    fi
+  zenity --notification --text "Output set to: $NOTIF"
+  # notify-send --urgency=low "Audio Switching" "SINK: $NEW_SINK"
 }
 
 function toggleSinks() {
