@@ -202,7 +202,6 @@ group_names = [
     "7",
     "8",
     "9",
-    "0",
 ]
 
 # FOR AZERTY KEYBOARDS
@@ -215,16 +214,14 @@ group_labels = [
     "DEV",
     "TERM",
     "FILES",
-    "VID",
+    "SYS",
     "MUS",
     "NET",
-    "GAMES",
+    "VID",
     "OTHER",
-    "SYS",
 ]
 
 group_layouts = [
-    "monadtall",
     "monadtall",
     "monadtall",
     "monadtall",
@@ -529,20 +526,19 @@ def assign_app_group(client):
     d = {}
     # Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient
     d[group_names[0]] = ["firefox", "Navigator"]
-    d[group_names[1]] = ["atom", "subl", "geany", "code-oss", "code"]
+    d[group_names[1]] = ["atom", "subl", "code-oss", "code"]
     d[group_names[2]] = []
-    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin", "pcmanfm-qt"]
-    d[group_names[4]] = ["Vlc", "vlc", "Mpv", "mpv", "resolve"]
+    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin",]
+    d[group_names[4]] = []
     d[group_names[5]] = ["spotify", "Spotify"]
     d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
-    d[group_names[7]] = ["Steam", "lutris"]
+    d[group_names[7]] = ["Vlc", "vlc", "Mpv", "mpv", "resolve"]
     d[group_names[8]] = []
-    d[group_names[9]] = ["bpytop", "htop"]
 
     # get wm_class list
     wm_class = client.window.get_wm_class()
     # if it doesn't exist wait and try again
-    # i.e. spotify take longer to get a wm_class
+    # i.e. spotify takes longer to get a wm_class
     while not wm_class:
         asyncio.sleep(0.02)
         wm_class = client.window.get_wm_class()
