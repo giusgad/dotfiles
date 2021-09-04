@@ -51,7 +51,7 @@ super + F11
     rofi
 
 #Rofi
-super + F12
+super + shift + d
     rofi -show drun
 
 #################################################################
@@ -117,7 +117,7 @@ super + shift + Return
 #	thunar
 
 #dmenu
-super + shift + d
+super + F12
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
 
 #reload sxhkd:
