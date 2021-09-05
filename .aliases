@@ -12,6 +12,7 @@ alias dotss='dots status'
 
 # Edit config files
 alias viqtile='vim $HOME/.config/qtile/config.py'
+alias vistart='vim $HOME/.config/qtile/scripts/autostart.sh'
 alias vifish='vim $HOME/.config/fish/config.fish'
 alias vialiases='vim $HOME/.aliases'
 alias vistarship='vim $HOME/.config/starship.toml'
@@ -56,7 +57,7 @@ alias merge="xrdb -merge ~/.Xresources"
 
 # Aliases for software managment
 # pacman or pm
-alias pacman='sudo pacman --color auto'
+alias pacman='pacman --color auto'
 alias update='sudo pacman -Syyu'
 
 # paru as aur helper - updates everything
