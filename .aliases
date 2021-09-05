@@ -3,9 +3,18 @@
 # My aliases
 alias clear='/bin/clear; neofetch'
 alias tclock='tty-clock -c'
-alias dots='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias resolve='/opt/resolve/bin/resolve'
 alias vim=nvim
+
+# dotfiles repo
+alias dots='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dotss='dots status'
+
+# Edit config files
+alias viqtile='vim $HOME/.config/qtile/config.py'
+alias vifish='vim $HOME/.config/fish/config.fish'
+alias vialiases='vim $HOME/.aliases'
+alias vistarship='vim $HOME/.config/starship.toml'
 
 # Change ls to exa
 alias exa='exa --color=always --icons --group-directories-first'
