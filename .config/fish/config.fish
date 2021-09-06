@@ -66,6 +66,9 @@ if status is-interactive
     neofetch
 end
 
+# autojump
+if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
+
 # import aliases
 source "$HOME/.aliases"
 
