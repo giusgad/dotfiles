@@ -235,13 +235,17 @@ group_layouts = [
 # group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 for i in range(len(group_names)):
-    groups.append(
-        Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
-        )
+    group_defaults = dict(
+        name=group_names[i],
+        layout=group_layouts[i].lower(),
+        label=group_labels[i],
     )
+    if group_labels[i] == "SYS":
+        # spawn terminal with proc in the right group
+        group = Group(**group_defaults, spawn="alacritty -e bpytop")
+    else:
+        group = Group(**group_defaults)
+    groups.append(group)
 
 for i in groups:
     keys.extend(
@@ -290,7 +294,7 @@ font = "Caskaydia Cove Nerd Font"
 powerline_font = "Caskaydia Cove Nerd Font"
 powerline_font_size = 54
 powerline_char = ""
-powerline_padding=-8
+powerline_padding = -8
 
 
 def init_widgets_defaults():
@@ -528,7 +532,7 @@ def assign_app_group(client):
     d[group_names[0]] = ["firefox", "Navigator"]
     d[group_names[1]] = ["atom", "subl", "code-oss", "code"]
     d[group_names[2]] = []
-    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin",]
+    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin"]
     d[group_names[4]] = []
     d[group_names[5]] = ["spotify", "Spotify"]
     d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
