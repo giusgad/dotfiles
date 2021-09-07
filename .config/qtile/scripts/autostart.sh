@@ -28,5 +28,5 @@ picom --config $HOME/.config/qtile/scripts/picom.conf &
 #starting user applications at boot time
 run firefox &
 run spotify &
-run kdeconnect-app &
+run kdeconnect-indicator &
 run telegram-desktop &
