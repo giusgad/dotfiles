@@ -10,7 +10,7 @@ alias vim=nvim
 alias dots='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 alias dotss='dots status'
 alias dotsfish='dots add .config/fish/config.fish && dots commit -m'
-alias dotqtile='dots add .config/qtile/config.py && dots commit -m'
+alias dotsqtile='dots add .config/qtile/config.py && dots commit -m'
 alias dotsaliases='dots add .aliases && dots commit -m'
 
 # Edit config files
