@@ -170,11 +170,6 @@ keys = [
     ),
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
-    # FLIP LAYOUT FOR BSP
-    # Key([mod, "mod2"], "k", lazy.layout.flip_up()),
-    # Key([mod, "mod2"], "j", lazy.layout.flip_down()),
-    # Key([mod, "mod2"], "l", lazy.layout.flip_right()),
-    # Key([mod, "mod2"], "h", lazy.layout.flip_left()),
     # MOVE WINDOWS UP OR DOWN BSP LAYOUT
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
@@ -185,8 +180,6 @@ keys = [
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
-    # TOGGLE FLOATING LAYOUT
-    # Key([mod, "shift"], "space", lazy.winmod1dow.toggle_floating()),
 ]
 
 groups = []
@@ -204,10 +197,6 @@ group_names = [
     "9",
 ]
 
-# FOR AZERTY KEYBOARDS
-# group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
-
-# group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
 # group_labels = ["", "", "", "", "", "", "", "", "", "",]
 group_labels = [
     "WWW",
@@ -232,7 +221,6 @@ group_layouts = [
     "monadtall",
     "monadtall",
 ]
-# group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
 for i in range(len(group_names)):
     group_defaults = dict(
@@ -257,7 +245,7 @@ for i in groups:
             Key(["mod1"], "Tab", lazy.screen.next_group()),
             Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
+            Key([mod, "control", "shift"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
             Key(
                 [mod, "shift"],
@@ -283,8 +271,6 @@ layout_theme = init_layout_theme()
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    # layout.Bsp(**layout_theme),
-    # layout.Floating(**layout_theme),
     layout.Max(**layout_theme),
 ]
 
