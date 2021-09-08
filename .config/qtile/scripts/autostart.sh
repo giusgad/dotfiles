@@ -15,7 +15,7 @@ run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 nitrogen --restore
 run caffeine &
 run nm-applet &
-run redshift -l 46.4:9.35 &
+run redshift-gtk -l 46.4:9.35 &
 run pamac-tray &
 run xfce4-power-manager &
 run volumeicon &
