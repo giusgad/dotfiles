@@ -382,13 +382,12 @@ def init_widgets_list():
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
-        widget.ThermalSensor(
+        widget.NvidiaSensors(
             foreground=colors[5],
             foreground_alert=colors[3],
             background=colors[1],
-            metric=True,
             padding=3,
-            threshold=80,
+            threshold=75,
             fontsize=14,
             font=font,
         ),
