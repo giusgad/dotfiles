@@ -21,7 +21,8 @@ run xfce4-power-manager &
 run volumeicon &
 numlockx on &
 #blueberry-tray &
-picom --config $HOME/.config/qtile/scripts/picom.conf &
+# picom --config $HOME/.config/qtile/scripts/picom.conf &
+picom --config $HOME/.config/qtile/scripts/picom-jonaburg.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
