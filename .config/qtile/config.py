@@ -273,12 +273,13 @@ layouts = [
 ]
 
 # WIDGETS FOR THE BAR
+# powerline characters: https://github.com/ryanoasis/powerline-extra-symbols
 
 font = "Caskaydia Cove Nerd Font"
 powerline_font = "Caskaydia Cove Nerd Font"
-powerline_font_size = 54
-powerline_char = ""
-powerline_padding = -8
+powerline_font_size = 35
+powerline_char = "\uE0B2"
+powerline_padding = 0
 
 
 def init_widgets_defaults():
@@ -349,7 +350,7 @@ def init_widgets_list():
             font=powerline_font,
         ),
         widget.TextBox(
-            text="  ",
+            text=" ",
             background=colors[1],
             foreground=colors[5],
             padding=0,
