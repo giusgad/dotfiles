@@ -278,8 +278,8 @@ layouts = [
 
 font = "Caskaydia Cove Nerd Font"
 powerline_font = "Caskaydia Cove Nerd Font"
-powerline_font_size = 35
-powerline_char = "\uE0B2"
+powerline_font_size = 40
+powerline_char = "\uE0B6"
 powerline_padding = 0
 
 
