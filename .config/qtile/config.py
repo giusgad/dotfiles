@@ -229,6 +229,8 @@ for i in range(len(group_names)):
     if group_labels[i] == "SYS":
         # spawn terminal with proc in the right group
         group = Group(**group_defaults, spawn="alacritty -e bpytop")
+    elif group_labels[i] == "WWW":
+        group = Group(**group_defaults, spawn="firefox")
     else:
         group = Group(**group_defaults)
     groups.append(group)
@@ -506,15 +508,12 @@ dgroups_app_rules = []
 
 # ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 # BEGIN
-
-#########################################################
-################ assgin apps to groups ##################
-#########################################################
 @hook.subscribe.client_new
 def assign_app_group(client):
     d = {}
     # Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient
-    d[group_names[0]] = ["firefox", "Navigator"]
+    # some of the apps open in the designed group only at startup -> line 230
+    d[group_names[0]] = []
     d[group_names[1]] = ["atom", "subl", "code-oss", "code"]
     d[group_names[2]] = []
     d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin"]
