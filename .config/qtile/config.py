@@ -386,14 +386,12 @@ def init_widgets_list():
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
-        widget.NvidiaSensors(
+        widget.Clock(
             foreground=colors[5],
-            foreground_alert=colors[3],
             background=colors[1],
-            padding=3,
-            threshold=75,
             fontsize=14,
             font=font,
+            format="%d-%m-%Y",
         ),
         widget.TextBox(
             text=powerline_char,
@@ -403,24 +401,9 @@ def init_widgets_list():
             fontsize=powerline_font_size,
             font=powerline_font,
         ),
-        widget.Clock(
-            foreground=colors[5],
-            background=colors[2],
-            fontsize=14,
-            font=font,
-            format="%d-%m-%Y",
-        ),
-        widget.TextBox(
-            text=powerline_char,
-            background=colors[2],
-            foreground=colors[1],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
-        ),
         widget.TextBox(
             text="🔊",
-            background=colors[1],
+            background=colors[2],
             foreground=colors[5],
             padding=0,
             fontsize=16,
@@ -431,18 +414,26 @@ def init_widgets_list():
             },
         ),
         widget.Volume(
-            background=colors[1],
+            background=colors[2],
             foreground=colors[5],
             font=font,
             padding=5,
             fontsize=14,
         ),
         widget.KeyboardLayout(
-            background=colors[1],
+            background=colors[2],
             configured_keyboards=["us", "it"],
             font=font,
             foreground=colors[5],
             fontsize=14,
+        ),
+        widget.TextBox(
+            text=powerline_char,
+            background=colors[2],
+            foreground=colors[1],
+            padding=powerline_padding,
+            fontsize=powerline_font_size,
+            font=powerline_font,
         ),
         widget.Systray(background=colors[1], icon_size=20, padding=4),
         widget.Sep(padding=10, background=colors[1], foreground=colors[1]),
@@ -457,8 +448,9 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen1 = init_widgets_list()
-    # remove systray on second monitor
-    del widgets_screen1[-2]
+    # remove unwanted widgets on second monitor
+    # systray and first separator
+    del widgets_screen1[-3:]
     return widgets_screen1
 
 
