@@ -54,6 +54,10 @@ super + F11
 super + shift + d
     rofi -show drun
 
+#Rofi windows
+super + alt + d
+    rofi -show window
+
 #################################################################
 # SUPER + ... KEYS
 #################################################################
