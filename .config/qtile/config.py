@@ -44,16 +44,16 @@ import asyncio
 # colors
 def init_colors():
     colors = [
-        "#391e26",  # color 0 - background - deep red
-        "#391e26",  # color 1 - arrows background - deep red
-        "#e73956",  # color 2 - arrows background - pinkish red
-        "#e19b37",  # color 3 - yellow
-        "#c1516c",  # color 4 - blue
-        "#e9dcb6",  # color 5 - foreground - yellow/white
-        "#c17fd2",  # color 6 - magenta?
-        "#a6bb55",  # color 7 - green
-        "#e73956",  # color 8 - selected workspace/border - red-pink-ish
-        "#FEF28A",  # color 9 - inactive - light yellow
+        "#391e26",  # color 0 - bar background
+        "#391e26",  # color 1 - powerline background
+        "#e73956",  # color 2 - powerline background
+        "#e19b37",  # color 3 - alert color
+        "#c1516c",  # color 4 - inactive screen wallpaper
+        "#e9dcb6",  # color 5 - foreground
+        "#c17fd2",  # color 6 - 
+        "#497333",  # color 7 - other screen workspace
+        "#e73956",  # color 8 - selected workspace/ active window border
+        "#FEF28A",  # color 9 - inactive workspace font
     ]
     return colors
 
@@ -317,6 +317,9 @@ def init_widgets_list():
             inactive=colors[5],
             this_current_screen_border=colors[8],
             this_screen_border=colors[4],
+            other_screen_border=colors[7],
+            other_current_screen_border=colors[7],
+            urgent_border=colors[3],
         ),
         # widget.Sep(**widget_defaults),
         # widget.WindowName(
@@ -468,7 +471,7 @@ def init_screens():
             top=bar.Bar(
                 widgets=init_widgets_screen1(),
                 size=26,
-                opacity=0.7,
+                opacity=0.65,
                 margin=[5, 10, 0, 10],
             )
         ),
