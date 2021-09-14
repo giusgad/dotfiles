@@ -30,7 +30,7 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
+from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
@@ -180,61 +180,68 @@ keys = [
     Key([mod], "m", lazy.layout.shrink()),
 ]
 
+# DEFINING WORKSPACES
+# group_labels = ["WWW", "DEV", "TERM", "FILES", "SYS", "MUS", "NET", "VID", "OTHER"]
+
+workspaces = [
+    {"label": " ", "key": "1", "spawn": "firefox"},
+    {"label": " ", "key": "2"},
+    {"label": " ", "key": "3"},
+    {"label": " ", "key": "4"},
+    {"label": " ", "key": "5", "spawn": "alacritty -e bpytop"},
+    {"label": "阮 ", "key": "6"},
+    {"label": " ", "key": "7"},
+    {"label": " ", "key": "8"},
+    {"label": " ", "key": "9"},
+]
+
 groups = []
-
-# FOR QWERTY KEYBOARDS
-group_names = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-]
-
-# group_labels = ["", "", "", "", "", "", "", "", "", "",]
-group_labels = [
-    "WWW",
-    "DEV",
-    "TERM",
-    "FILES",
-    "SYS",
-    "MUS",
-    "NET",
-    "VID",
-    "OTHER",
-]
-
-group_layouts = [
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-]
-
-for i in range(len(group_names)):
-    group_defaults = dict(
-        name=group_names[i],
-        layout=group_layouts[i].lower(),
-        label=group_labels[i],
+for workspace in workspaces:
+    matches = workspace["matches"] if "matches" in workspace else None
+    spawn = workspace["spawn"] if "spawn" in workspace else None
+    group_layout = workspace["layout"] if "layout" in workspace else "monadtall"
+    groups.append(
+        Group(
+            name=workspace["key"],
+            label=workspace["label"],
+            layout=group_layout,
+            matches=matches,
+            spawn=spawn,
+        )
     )
-    if group_labels[i] == "SYS":
-        # spawn terminal with proc in the right group
-        group = Group(**group_defaults, spawn="alacritty -e bpytop")
-    elif group_labels[i] == "WWW":
-        group = Group(**group_defaults, spawn="firefox")
-    else:
-        group = Group(**group_defaults)
-    groups.append(group)
 
+# ASSIGN APPS TO GROUPS
+@hook.subscribe.client_new
+def assign_app_group(client):
+    d = {}
+    # Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient
+    # some of the apps open in the designed group only at startup | see above
+    d["1"] = []
+    d["2"] = ["atom", "subl", "code-oss", "code"]
+    d["3"] = []
+    d["4"] = ["pcmanfm", "nautilus", "dolphin"]
+    d["5"] = []
+    d["6"] = ["spotify", "Spotify"]
+    d["7"] = ["telegram-desktop", "discord", "kdeconnect-app"]
+    d["8"] = ["joplin"]
+    d["9"] = []
+
+    # get wm_class list
+    wm_class = client.window.get_wm_class()
+    # if it doesn't exist wait and try again
+    # i.e. spotify takes longer to get a wm_class
+    while not wm_class:
+        asyncio.sleep(0.02)
+        wm_class = client.window.get_wm_class()
+    # only use the first value of the wm_class
+    wm_class = wm_class[0]
+
+    for key in d:
+        if wm_class in d[key]:
+            client.togroup(key)
+            client.group.cmd_toscreen(toggle=False)
+
+# KEYBINDINGS FOR GROUPS
 for i in groups:
     keys.extend(
         [
@@ -298,9 +305,9 @@ def init_widgets_list():
         # left aligned
         widget.GroupBox(
             font=font,
-            fontsize=14,
+            fontsize=16,
             padding_y=6,
-            padding_x=5,
+            padding_x=10,
             borderwidth=0,
             disable_drag=True,
             highlight_method="block",
@@ -353,7 +360,7 @@ def init_widgets_list():
             font=powerline_font,
         ),
         widget.TextBox(
-            text=" ",
+            text=" ",
             background=colors[1],
             foreground=colors[5],
             padding=0,
@@ -402,7 +409,7 @@ def init_widgets_list():
             font=powerline_font,
         ),
         widget.TextBox(
-            text="🔊",
+            text=" ",
             background=colors[2],
             foreground=colors[5],
             padding=0,
@@ -500,35 +507,6 @@ dgroups_app_rules = []
 
 # ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 # BEGIN
-@hook.subscribe.client_new
-def assign_app_group(client):
-    d = {}
-    # Use xprop fo find  the value of WM_CLASS(STRING) -> First field is sufficient
-    # some of the apps open in the designed group only at startup -> line 230
-    d[group_names[0]] = []
-    d[group_names[1]] = ["atom", "subl", "code-oss", "code"]
-    d[group_names[2]] = []
-    d[group_names[3]] = ["pcmanfm", "nautilus", "dolphin"]
-    d[group_names[4]] = []
-    d[group_names[5]] = ["spotify", "Spotify"]
-    d[group_names[6]] = ["telegram-desktop", "discord", "kdeconnect-app"]
-    d[group_names[7]] = ["Vlc", "vlc", "Mpv", "mpv", "resolve"]
-    d[group_names[8]] = []
-
-    # get wm_class list
-    wm_class = client.window.get_wm_class()
-    # if it doesn't exist wait and try again
-    # i.e. spotify takes longer to get a wm_class
-    while not wm_class:
-        asyncio.sleep(0.02)
-        wm_class = client.window.get_wm_class()
-    # only use the first value of the wm_class
-    wm_class = wm_class[0]
-
-    for key in d:
-        if wm_class in d[key]:
-            client.togroup(key)
-            client.group.cmd_toscreen(toggle=False)
 
 
 # END
