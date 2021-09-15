@@ -50,7 +50,7 @@ def init_colors():
         "#e19b37",  # color 3 - alert color
         "#c1516c",  # color 4 - inactive screen wallpaper
         "#e9dcb6",  # color 5 - foreground
-        "#c17fd2",  # color 6 - 
+        "#c17fd2",  # color 6 -
         "#497333",  # color 7 - other screen workspace
         "#e73956",  # color 8 - selected workspace/ active window border
         "#FEF28A",  # color 9 - inactive workspace font
@@ -87,6 +87,7 @@ keys = [
     # Most of our keybindings are in sxhkd file - except these
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
+    Key([mod], "t", lazy.window.toggle_floating()),
     Key([mod], "q", lazy.window.kill()),
     # SUPER + SHIFT KEYS
     Key([mod, "shift"], "q", lazy.window.kill()),
@@ -251,7 +252,7 @@ for i in groups:
             Key(["mod1"], "Tab", lazy.screen.next_group()),
             Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-            Key([mod, "control", "shift"], i.name, lazy.window.togroup(i.name)),
+            Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
             Key(
                 [mod, "shift"],
@@ -572,6 +573,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),
         Match(wm_class="nvidia-settings"),
         Match(wm_class="tk"),
+        Match(wm_class="gnome-screenshot"),
     ],
     fullscreen_border_width=0,
     border_width=0,
