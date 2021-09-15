@@ -191,13 +191,12 @@ workspaces = [
     {"label": " ", "key": "5", "spawn": "alacritty -e bpytop"},
     {"label": "阮 ", "key": "6"},
     {"label": " ", "key": "7"},
-    {"label": " ", "key": "8"},
+    {"label": " ", "key": "8", "spawn": "joplin"},
     {"label": " ", "key": "9"},
 ]
 
 groups = []
 for workspace in workspaces:
-    matches = workspace["matches"] if "matches" in workspace else None
     spawn = workspace["spawn"] if "spawn" in workspace else None
     group_layout = workspace["layout"] if "layout" in workspace else "monadtall"
     groups.append(
@@ -205,7 +204,6 @@ for workspace in workspaces:
             name=workspace["key"],
             label=workspace["label"],
             layout=group_layout,
-            matches=matches,
             spawn=spawn,
         )
     )
