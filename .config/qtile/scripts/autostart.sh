@@ -16,7 +16,7 @@ run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 #starting utility applications at boot time
 #run variety &
 nitrogen --restore
-#sh .config/qtile/scripts/live_wallpaper.sh $wallpaper
+sh .config/qtile/scripts/live_wallpaper.sh $wallpaper
 run caffeine &
 run nm-applet &
 run redshift-gtk -l 46.4:9.35 &
