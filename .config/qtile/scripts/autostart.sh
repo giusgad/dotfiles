@@ -7,13 +7,16 @@ function run {
   fi
 }
 
+#get animated wallpaper
+wallpaper=$(cat $HOME/.config/qtile/scripts/wallpaper_path)
+
 #start sxhkd to replace Qtile native key-bindings
 run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 
 #starting utility applications at boot time
 #run variety &
 nitrogen --restore
-#sh .config/qtile/scripts/live_wallpaper.sh /mnt/MyBook/wallpapers/video/nobara_roses.mp4
+#sh .config/qtile/scripts/live_wallpaper.sh $wallpaper
 run caffeine &
 run nm-applet &
 run redshift-gtk -l 46.4:9.35 &

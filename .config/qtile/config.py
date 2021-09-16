@@ -438,6 +438,18 @@ def init_widgets_list():
             fontsize=14,
         ),
         widget.TextBox(
+            text="﨤 ",
+            background=colors[2],
+            foreground=colors[5],
+            padding=0,
+            fontsize=16,
+            mouse_callbacks={
+                "Button1": lambda: qtile.cmd_spawn(
+                    "sh ~/.config/qtile/scripts/live_wallpaper_toggle.sh", shell=True
+                )
+            },
+        ),
+        widget.TextBox(
             text=powerline_char,
             background=colors[2],
             foreground=colors[1],
@@ -523,6 +535,8 @@ main = None
 def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
+    lazy.group["6"].toscreen(toggle=False)
+    lazy.group["1"].toscreen()
 
 
 @hook.subscribe.startup
