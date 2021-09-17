@@ -3,7 +3,7 @@
 # My aliases
 alias clear='/bin/clear; neofetch'
 alias tclock='tty-clock -c'
-alias resolve='/opt/resolve/bin/resolve'
+alias joplin='~/.joplin/Joplin.AppImage'
 alias vim=nvim
 
 # dotfiles repo
