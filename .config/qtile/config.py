@@ -190,9 +190,9 @@ workspaces = [
     {"label": " ", "key": "3"},
     {"label": " ", "key": "4"},
     {"label": " ", "key": "5", "spawn": "alacritty -e bpytop"},
-    {"label": "阮 ", "key": "6"},
-    {"label": " ", "key": "7"},
-    {"label": " ", "key": "8", "spawn": "joplin"},
+    {"label": "阮 ", "key": "6", "spawn": "spotify"},
+    {"label": " ", "key": "7", "spawn": "telegram-desktop"},
+    {"label": " ", "key": "8"},
     {"label": " ", "key": "9"},
 ]
 
