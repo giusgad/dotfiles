@@ -1,0 +1,7 @@
+configuration {
+modi: "window,drun,ssh,run";
+columns: 2;
+font: "Caskaydia Cove Nerd Font 12";
+show-icons: true;
+}
+@import "/usr/share/rofi/themes/Arc-Dark-Hibiscus-transparent.rasi"
