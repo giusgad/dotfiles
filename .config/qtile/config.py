@@ -51,7 +51,7 @@ def init_colors():
         "#c1516c",  # color 4 - inactive screen wallpaper
         "#e9dcb6",  # color 5 - foreground
         "#c17fd2",  # color 6 -
-        "#497333",  # color 7 - other screen workspace
+        "#ec87a1",  # color 7 - other screen workspace
         "#e73956",  # color 8 - selected workspace/ active window border
         "#FEF28A",  # color 9 - inactive workspace font
     ]
@@ -535,6 +535,7 @@ main = None
 def start_once():
     home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
+    # TODO group to screen at startup
     lazy.group["6"].toscreen(toggle=False)
     lazy.group["1"].toscreen()
 
@@ -588,6 +589,7 @@ floating_layout = layout.Floating(
         Match(wm_class="nvidia-settings"),
         Match(wm_class="tk"),
         Match(wm_class="gnome-screenshot"),
+        Match(wm_class="gpartedbin"),
     ],
     fullscreen_border_width=0,
     border_width=0,
