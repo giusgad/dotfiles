@@ -34,9 +34,9 @@ super + alt + d
 # SUPER + ... KEYS
 #################################################################
 
-#arcolinux-logout
+#rofi logout
 super + x
-    arcolinux-logout
+    rofi -show p -modi p:'.config/rofi/rofi-power-menu'
 
 #Rofi theme selector
 super + control + r

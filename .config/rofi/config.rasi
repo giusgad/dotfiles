@@ -1,7 +1,7 @@
 configuration {
 modi: "window,drun,ssh,run";
-columns: 2;
 font: "Caskaydia Cove Nerd Font 12";
 show-icons: true;
 }
-@theme "/usr/share/rofi/themes/Monokai.rasi"
+//@theme "/usr/share/rofi/themes/Monokai.rasi"
+@theme "/usr/share/rofi/themes/Pop-Dark.rasi"
