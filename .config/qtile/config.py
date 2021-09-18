@@ -441,6 +441,7 @@ def init_widgets_list():
             text="﨤 ",
             background=colors[2],
             foreground=colors[5],
+            font=font,
             padding=0,
             fontsize=16,
             mouse_callbacks={
@@ -448,6 +449,21 @@ def init_widgets_list():
                     "sh ~/.config/qtile/scripts/live_wallpaper_toggle.sh", shell=True
                 )
             },
+        ),
+        widget.CheckUpdates(
+            background=colors[2],
+            foreground=colors[5],
+            colour_no_updates=colors[5],
+            colour_have_updates=colors[5],
+            padding=2,
+            fontsize=16,
+            font=font,
+            display_format=" {updates} ",
+            update_interval=900,
+            restart_indicator="ﰇ",
+            mouse_callbacks={
+                "Button1": lambda: qtile.cmd_spawn("update")
+            }
         ),
         widget.TextBox(
             text=powerline_char,
