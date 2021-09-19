@@ -66,6 +66,7 @@ mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser("~")
+my_term = "alacritty"
 
 
 @lazy.function
@@ -189,7 +190,7 @@ workspaces = [
     {"label": " ", "key": "2"},
     {"label": " ", "key": "3"},
     {"label": " ", "key": "4"},
-    {"label": " ", "key": "5", "spawn": "alacritty -e bpytop"},
+    {"label": " ", "key": "5", "spawn": f"{my_term} -e bpytop"},
     {"label": "阮 ", "key": "6", "spawn": "spotify"},
     {"label": " ", "key": "7", "spawn": "telegram-desktop"},
     {"label": " ", "key": "8"},
@@ -455,15 +456,15 @@ def init_widgets_list():
             foreground=colors[5],
             colour_no_updates=colors[5],
             colour_have_updates=colors[5],
-            padding=2,
+            padding=0,
             fontsize=16,
             font=font,
-            display_format=" {updates} ",
+            display_format="| {updates} ",
             update_interval=900,
             restart_indicator="ﰇ",
             mouse_callbacks={
-                "Button1": lambda: qtile.cmd_spawn("update")
-            }
+                "Button1": lambda: qtile.cmd_spawn(my_term + " -e sudo pacman -Syyu")
+            },
         ),
         widget.TextBox(
             text=powerline_char,
@@ -549,7 +550,6 @@ main = None
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser("~")
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
     # TODO group to screen at startup
     lazy.group["6"].toscreen(toggle=False)
