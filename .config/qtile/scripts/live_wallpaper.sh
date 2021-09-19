@@ -1,9 +1,9 @@
 _screen() {
     xwinwrap -ov -g $1 -- mpv --fullscreen\
-	--hwdec=auto --vo=gpu \
+	--hwdec=nvdec --vo=gpu --hwdec-codecs=all \
         --on-all-workspaces --no-keepaspect-window \
         --no-stop-screensaver --no-input-default-bindings \
-	--no-sub --no-window-dragging \
+	--no-sub --no-window-dragging  --no-config \
 	--panscan=1.0 \
         --loop-file --no-audio --no-osc --no-osd-bar -wid WID --quiet \
         "$2" --background="$3" --video-zoom="$4" &
