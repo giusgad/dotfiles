@@ -6,8 +6,8 @@ bind \e\[3\;5~ kill-word
 # basic settings (export)
 set fish_greeting
 set TERM "alacritty"
-set EDITOR "vim"
-set VISUAL "vim"
+set EDITOR "nvim"
+set VISUAL "nvim"
 
 # set autocomplete colors
 set fish_color_normal normal
@@ -21,6 +21,8 @@ function fish_user_key_bindings
   fish_default_key_bindings
   # fish_vi_key_bindings
 end
+
+# get aliases to work with sudo
 
 # bash like ! and !!
 function __history_previous_command
