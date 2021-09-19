@@ -30,7 +30,7 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule, Match
+from libqtile.config import Drag, Key, KeyChord, Screen, Group, Drag, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
@@ -462,8 +462,9 @@ def init_widgets_list():
             display_format="| {updates} ",
             update_interval=900,
             restart_indicator="ﰇ",
+            distro = "Arch_checkupdates",
             mouse_callbacks={
-                "Button1": lambda: qtile.cmd_spawn(my_term + " -e sudo pacman -Syyu")
+                "Button1": lambda: qtile.cmd_spawn(my_term + " -e sudo pacman -Syu")
             },
         ),
         widget.TextBox(
