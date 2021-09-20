@@ -552,9 +552,6 @@ main = None
 @hook.subscribe.startup_once
 def start_once():
     subprocess.call([home + "/.config/qtile/scripts/autostart.sh"])
-    # TODO group to screen at startup
-    lazy.group["6"].toscreen(toggle=False)
-    lazy.group["1"].toscreen()
 
 
 @hook.subscribe.startup
