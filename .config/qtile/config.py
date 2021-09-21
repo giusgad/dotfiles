@@ -421,7 +421,8 @@ def init_widgets_list():
             mouse_callbacks={
                 "Button1": lambda: qtile.cmd_spawn(
                     "sh ~/.config/qtile/scripts/change_output.sh", shell=True
-                )
+                ),
+                "Button3": lambda: qtile.cmd_spawn("pavucontrol")
             },
         ),
         widget.Volume(
