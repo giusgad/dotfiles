@@ -148,7 +148,7 @@ XF86AudioLowerVolume
 
 #Mute
 XF86AudioMute
-    amixer -D pulse set Master 1+ Toggle
+    amixer -D pulse set Master 1+ toggle
 
 #Play-pause toggle
 XF86AudioPlay
