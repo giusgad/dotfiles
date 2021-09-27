@@ -50,10 +50,10 @@ def init_colors():
         "#e19b37",  # color 3 - alert color
         "#c1516c",  # color 4 - inactive screen wallpaper
         "#e9dcb6",  # color 5 - foreground
-        "#c17fd2",  # color 6 -
+        "#DBCCDC",  # color 6 - inactive workspace font
         "#ec87a1",  # color 7 - other screen workspace
         "#e73956",  # color 8 - selected workspace/ active window border
-        "#FEF28A",  # color 9 - inactive workspace font
+        "#FEF28A",  # color 9 - active workspace font
     ]
     return colors
 
@@ -314,7 +314,7 @@ def init_widgets_list():
             highlight_method="block",
             background=colors[0],
             active=colors[9],
-            inactive=colors[5],
+            inactive=colors[6],
             this_current_screen_border=colors[8],
             this_screen_border=colors[4],
             other_screen_border=colors[7],
@@ -477,6 +477,19 @@ def init_widgets_list():
             font=powerline_font,
         ),
         widget.Systray(background=colors[1], icon_size=20, padding=4),
+        widget.TextBox(
+            text="",
+            background=colors[1],
+            foreground=colors[5],
+            font=font,
+            padding=5,
+            fontsize=18,
+            mouse_callbacks={
+                "Button1": lambda: qtile.cmd_spawn(
+                    "rofi -show p -modi p:'.config/rofi/rofi-power-menu'", shell=True
+                )
+            },
+        ),
         widget.Sep(padding=10, background=colors[1], foreground=colors[1]),
     ]
     return widgets_list
@@ -491,7 +504,7 @@ def init_widgets_screen2():
     widgets_screen1 = init_widgets_list()
     # remove unwanted widgets on second monitor
     # systray and first separator
-    del widgets_screen1[-3:]
+    del widgets_screen1[-4:]
     return widgets_screen1
 
 

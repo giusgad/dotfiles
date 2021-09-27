@@ -14,14 +14,13 @@ wallpaper=$(cat $HOME/.config/qtile/scripts/wallpaper_path)
 run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 
 #starting utility applications at boot time
-#run variety &
 nitrogen --restore
 sh .config/qtile/scripts/live_wallpaper.sh $wallpaper
 run caffeine &
 run nm-applet &
 run redshift-gtk -l 46.4:9.35 &
 run xfce4-power-manager &
-run volumeicon &
+# run volumeicon &
 numlockx on &
 picom --config $HOME/.config/qtile/scripts/picom-jonaburg.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
