@@ -420,7 +420,7 @@ def init_widgets_list():
             fontsize=16,
             mouse_callbacks={
                 "Button1": lambda: qtile.cmd_spawn(
-                    "sh ~/.config/qtile/scripts/change_output.sh", shell=True
+                    "sh ~/.scripts/change_output.sh", shell=True
                 ),
                 "Button3": lambda: qtile.cmd_spawn("pavucontrol"),
             },
@@ -448,7 +448,7 @@ def init_widgets_list():
             fontsize=16,
             mouse_callbacks={
                 "Button1": lambda: qtile.cmd_spawn(
-                    "sh ~/.config/qtile/scripts/live_wallpaper_toggle.sh", shell=True
+                    "sh ~/.scripts/live_wallpaper_toggle.sh", shell=True
                 )
             },
         ),
