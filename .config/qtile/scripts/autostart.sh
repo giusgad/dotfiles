@@ -22,7 +22,7 @@ run redshift-gtk -l 46.4:9.35 &
 run xfce4-power-manager &
 # run volumeicon &
 numlockx on &
-picom --config $HOME/.config/qtile/scripts/picom-jonaburg.conf &
+picom &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 #/usr/lib/xfce4/notifyd/xfce4-notifyd &
 /usr/bin/dunst &
