@@ -56,25 +56,28 @@ def replace_block(file_path, pattern, subst, strict_equality=False, repetition=F
     fh, abs_path = tempfile.mkstemp()
     with os.fdopen(fh, "w") as new_file:
         with open(file_path) as old_file:
-            start = False
+            writing = False
             line_index = 0
+            found = False
             for line in old_file:
                 if strict_equality:
                     if line == pattern:
-                        start = True
+                        if not found or repetition:
+                            writing = True
+                            found = True
                 else:
                     if pattern in line:
-                        start = True
-                if start and line_index < len(subst):
+                        if not found or repetition:
+                            writing = True
+                            found = True
+                if writing and line_index < len(subst):
                     new_file.write(str(subst[line_index]) + "\n")
                     line_index += 1
                 else:
-                    if not repetition:
-                        break
                     new_file.write(line)
-                    start = False
+                    writing = False
                     line_index = 0
-    # copy permissions (not sure if its necessary)
+    # copy permissions (not sure if it's necessary)
     shutil.copymode(file_path, abs_path)
     # remove the old file and move the new one
     os.remove(file_path)
@@ -91,7 +94,7 @@ def insert_content(content_list):
     # alacritty
     alacritty_path = os.path.join(config_path, "alacritty/alacritty.yml")
     replace_block(alacritty_path, "colors:\n", content_list[0], strict_equality=True)
-    replace_block(alacritty_path, "family:", content_list[1], repetition=False)
+    replace_block(alacritty_path, "family:", content_list[1], repetition=True)
 
 
 def ending():
