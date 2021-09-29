@@ -4,4 +4,5 @@ font: "Caskaydia Cove Nerd Font 12";
 show-icons: true;
 }
 //@theme "/usr/share/rofi/themes/Monokai.rasi"
-@theme "/usr/share/rofi/themes/Pop-Dark.rasi"
+//@theme "/usr/share/rofi/themes/Pop-Dark.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
