@@ -39,26 +39,18 @@ import asyncio
 # debug tool
 # from libqtile.log_utils import logger
 
-# import arcobattery
-
-# colors
-def init_colors():
-    colors = [
-        "#391e26",  # color 0 - bar background
-        "#391e26",  # color 1 - powerline background
-        "#e73956",  # color 2 - powerline background
-        "#e19b37",  # color 3 - alert color
-        "#c1516c",  # color 4 - inactive screen wallpaper
-        "#e9dcb6",  # color 5 - foreground
-        "#DBCCDC",  # color 6 - inactive workspace font
-        "#ec87a1",  # color 7 - other screen workspace
-        "#e73956",  # color 8 - selected workspace/ active window border
-        "#FEF28A",  # color 9 - active workspace font
-    ]
-    return colors
-
-
-colors = init_colors()
+colors = [
+    "#391e26",  # color 0 - bar background
+    "#391e26",  # color 1 - powerline background
+    "#e73956",  # color 2 - powerline background
+    "#e19b37",  # color 3 - alert color
+    "#c1516c",  # color 4 - inactive screen wallpaper
+    "#e9dcb6",  # color 5 - foreground
+    "#DBCCDC",  # color 6 - inactive workspace font
+    "#ec87a1",  # color 7 - other screen workspace
+    "#e73956",  # color 8 - selected workspace/ active window border
+    "#FEF28A",  # color 9 - active workspace font
+]
 
 
 # mod4 or mod = super key
