@@ -1,3 +1,4 @@
+#!/bin/bash
 CARD1="alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00"
 CARD2="alsa_output.pci-0000_0a_00.3"
 

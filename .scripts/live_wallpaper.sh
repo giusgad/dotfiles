@@ -1,3 +1,4 @@
+#!/bin/bash
 _screen() {
     xwinwrap -ov -g $1 -- mpv --fullscreen\
 	--hwdec=auto --vo=opengl --hwdec-codecs=all \
