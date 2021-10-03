@@ -2,7 +2,6 @@
 import os
 import shutil
 import tempfile
-import time
 
 
 def get_available_files():
@@ -82,14 +81,25 @@ def replace_block(file_path, pattern, subst, strict_equality=False, repetition=F
     # remove the old file and move the new one
     os.remove(file_path)
     shutil.move(abs_path, file_path)
-    print("replaced", '"' + pattern.replace("\n", "") + '"', "in", file_path)
+    # print("replaced", '"' + pattern.replace("\n", "") + '"', "in", file_path)
 
 
 def replace_all(file_path, content):
     with open(file_path, "w") as file:
         for line in content:
             file.write(line + "\n")
-        print("wrote file:", file_path)
+        # print("wrote file:", file_path)
+
+
+def refresh_ui():
+    # reload
+    print("reloading wallpaper...")
+    os.system(
+        "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
+    )
+    print("done\nreloading qtile...")
+    os.system("qtile cmd-obj -o cmd -f restart")
+    print("done")
 
 
 def insert_content(content):
@@ -99,9 +109,9 @@ def insert_content(content):
     )
     # create backup
     print("creating backup to ~/.config-ricer-backup...")
-    os.system("mkdir .config-ricer-backup")
+    os.system("rm -rf ~/.config-ricer-backup && mkdir ~/.config-ricer-backup")
     os.system(
-        "cp -r -t .config-ricer-backup/ ~/.config/{alacritty/, qtile/, nvim/, fish/, dunst/}"
+        "cd ~/.config && cp -r -t ~/.config-ricer-backup/ alacritty/ qtile/ nvim/ fish/ dunst/"
     )
     print("done")
 
@@ -127,14 +137,7 @@ def insert_content(content):
     replace_block(dunst_path, "font = ", content[8])
     replace_block(dunst_path, "[urgency_low]", content[9])
 
-    # reload
-    print("reloading wallpaper...")
-    os.system(
-        "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
-    )
-    print("done\nreloading qtile...")
-    os.system("qtile cmd-obj -o cmd -f restart")
-    print("done")
+    refresh_ui()
 
 
 def ending():
@@ -143,7 +146,10 @@ def ending():
         print("\n-----------\n")
         return True
     else:
-        print("Delete backup if there were no errors")
+        delete_backup = input("Delete backup? [y/n]: ")
+        if delete_backup.lower() == "y" or delete_backup.lower() == "yes":
+            os.system("rm -rf ~/.config-ricer-backup")
+            print("backup deleted")
         print("Program finished")
         return False
 
@@ -158,10 +164,14 @@ while running:
             break
     confirm = input(f"Do you want to proceed applying {files[file_index]}? [y/n]: ")
     if confirm.lower() == "y" or confirm.lower() == "yes":
-        # do the things
         content_list = get_content(files, file_index)
         insert_content(content_list)
-        time.sleep(2)
+        restore = input("Do you want to restore the bakup? [y/n]: ")
+        if restore.lower() == "y" or restore.lower() == "yes":
+            print("restoring backup...")
+            os.system("cp -r ~/.config-ricer-backup/* ~/.config/")
+            refresh_ui()
+            print("done")
         running = ending()
         if not running:
             break
