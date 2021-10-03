@@ -1,0 +1,83 @@
+/mnt/MyBook/wallpapers/video/nobara_roses.mp4
+///
+colors:
+  # Default colors
+  primary:
+    background: '0x391e26'
+    foreground: '0xc7b48f'
+  # Normal colors
+  normal:
+    black:   '0x3b212c'
+    red:     '0xe73956'
+    green:   '0xa6bb55'
+    yellow:  '0xe19b37'
+    blue:    '0xc1516c'
+    magenta: '0xc17fd2'
+    cyan:    '0x58bfae'
+    white:   '0xe9dcb6'
+  # Bright colors
+  bright:
+    black:   '0xa34059'
+    red:     '0x9a2847'
+    green:   '0x798531'
+    yellow:  '0xac7d29'
+    blue:    '0x973e54'
+    magenta: '0x6f4579'
+    cyan:    '0x3c9788'
+    white:   '0xece4cf'
+///
+    family: CaskaydiaCove Nerd Font
+///
+colors = [
+    "#391e26",  # color 0 - bar background
+    "#391e26",  # color 1 - powerline background
+    "#e73956",  # color 2 - powerline background
+    "#e19b37",  # color 3 - alert color
+    "#c1516c",  # color 4 - inactive screen wallpaper
+    "#e9dcb6",  # color 5 - foreground
+    "#DBCCDC",  # color 6 - inactive workspace font
+    "#ec87a1",  # color 7 - other screen workspace
+    "#e73956",  # color 8 - selected workspace/ active window border
+    "#FEF28A",  # color 9 - active workspace font
+]
+///
+font = "Caskaydia Cove Nerd Font"
+powerline_font = "Caskaydia Cove Nerd Font"
+powerline_font_size = 40
+powerline_char = "\uE0B6"
+powerline_padding = 0
+///
+colorscheme peachpuff
+///
+set fish_color_normal normal
+set fish_color_autosuggestion '#7d7d7d'
+set fish_color_command green
+set fish_color_error brcyan
+set fish_color_param yellow
+///
+    geometry = "0x0-15+36"
+///
+    font = Caskaydia Cove Nerd Font 11
+///
+[urgency_low]
+    # IMPORTANT: colors have to be defined in quotation marks.
+    # Otherwise the "#" and following would be interpreted as a comment.
+    background = "#391e26"
+    foreground = "#e9dcb6"
+    timeout = 10
+    # Icon for notifications with low urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_normal]
+    background = "#391e26"
+    foreground = "#e9dcb6"
+    timeout = 10
+    # Icon for notifications with normal urgency, uncomment to enable
+    #icon = /path/to/icon
+
+[urgency_critical]
+    background = "#e19b37"
+    foreground = "#ff0000"
+    timeout = 0
+    # Icon for notifications with critical urgency, uncomment to enable
+    #icon = /path/to/icon
