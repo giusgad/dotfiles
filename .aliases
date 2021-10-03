@@ -108,7 +108,7 @@ alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
 alias riplong="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -3000 | nl"
 
 #Cleanup orphaned packages
-alias cleanup='sudo pacman -Qtdq | pacman -Rns -'
+alias cleanup='pacman -Qtdq | sudo pacman -Rns -'
 
 #search content with ripgrep
 alias rg="rg --sort path"
