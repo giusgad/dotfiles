@@ -7,7 +7,7 @@ alias joplin='~/.joplin/Joplin.AppImage'
 alias vim=nvim
 
 # dotfiles repo
-alias dots='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dotss='dots status'
 alias dotsfish='dots add .config/fish/config.fish && dots commit -m'
 alias dotsqtile='dots add .config/qtile/config.py && dots commit -m'
