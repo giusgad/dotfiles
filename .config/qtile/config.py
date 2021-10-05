@@ -367,6 +367,7 @@ def init_widgets_list():
             background=colors[1],
             foreground=colors[5],
             format=" {load_percent}%",
+            update_interval=3.0,
             fontsize=14,
             font=font,
         ),
