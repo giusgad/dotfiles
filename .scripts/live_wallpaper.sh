@@ -1,7 +1,7 @@
 #!/bin/bash
 _screen() {
     xwinwrap -ov -g $1 -- mpv --fullscreen\
-	--hwdec=auto --vo=opengl --hwdec-codecs=all \
+	--hwdec=auto --vo=gpu --hwdec-codecs=all \
         --on-all-workspaces --no-keepaspect-window \
         --no-stop-screensaver --no-input-default-bindings \
 	--no-sub --no-window-dragging  --no-config \
