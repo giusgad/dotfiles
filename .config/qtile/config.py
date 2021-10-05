@@ -453,7 +453,6 @@ def init_widgets_list():
             fontsize=16,
             font=font,
             display_format="| {updates} ",
-            update_interval=900,
             restart_indicator="ﰇ",
             distro="Arch_checkupdates",
             mouse_callbacks={
