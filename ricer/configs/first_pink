@@ -28,7 +28,7 @@ colors:
 ///
     family: CaskaydiaCove Nerd Font
 ///
-colors = [
+COLORS = [
     "#391e26",  # color 0 - bar background
     "#391e26",  # color 1 - powerline background
     "#e73956",  # color 2 - powerline background
@@ -41,11 +41,15 @@ colors = [
     "#FEF28A",  # color 9 - active workspace font
 ]
 ///
-font = "Caskaydia Cove Nerd Font"
-powerline_font = "Caskaydia Cove Nerd Font"
-powerline_font_size = 40
-powerline_char = "\uE0B6"
-powerline_padding = 0
+FONT = "Caskaydia Cove Nerd Font"
+POWERLINE_FONT = "Caskaydia Cove Nerd Font"
+POWERLINE_FONT_SIZE = 40
+POWERLINE_CHAR = "\uE0B6"
+POWERLINE_PADDING = 0
+
+BAR_HEIGHT = 26
+BAR_OPACITY = 0.65
+BAR_MARGIN = [5, 10, 0, 10]
 ///
 colorscheme peachpuff
 ///
@@ -81,3 +85,32 @@ set fish_color_param yellow
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
+///
+transition-length = 300
+transition-pow-x = 0.1
+transition-pow-y = 0.1
+transition-pow-w = 0.1
+transition-pow-h = 0.1
+size-transition = true
+///
+corner-radius = 13.0;
+///
+round-borders = 1;
+///
+inactive-opacity = 0.8;
+frame-opacity = 0.7;
+///
+active-opacity = 1.0;
+///
+blur: {
+  # requires: https://github.com/ibhagwan/picom
+  method = "kawase";
+  #method = "kernel";
+  strength = 2;
+  # deviation = 1.0;
+  # kernel = "11x11gaussian";
+  background = false;
+  background-frame = false;
+  background-fixed = false;
+  kern = "3x3box";
+}

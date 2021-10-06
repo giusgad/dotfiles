@@ -123,8 +123,8 @@ def insert_content(content):
     replace_block(alacritty_path, "family:", content[2], repetition=True)
     # qtile
     qtile_path = os.path.join(config_path, "qtile/config.py")
-    replace_block(qtile_path, "colors = [\n", content[3], strict_equality=True)
-    replace_block(qtile_path, "font = ", content[4])
+    replace_block(qtile_path, "COLORS = [\n", content[3], strict_equality=True)
+    replace_block(qtile_path, "FONT = ", content[4])
     # nvim
     nvim_path = os.path.join(config_path, "nvim/init.vim")
     replace_block(nvim_path, "colorscheme ", content[5])
@@ -136,6 +136,15 @@ def insert_content(content):
     replace_block(dunst_path, "geometry = ", content[7])
     replace_block(dunst_path, "font = ", content[8])
     replace_block(dunst_path, "[urgency_low]", content[9])
+    # picom
+    picom_path = os.path.join(config_path, "picom.conf")
+    replace_block(picom_path, "transition-length = ", content[10])
+    replace_block(picom_path, "corner-radius = ", content[11])
+    replace_block(picom_path, "round-borders = ", content[12])
+    replace_block(picom_path, "inactive-opacity = ", content[13])
+    replace_block(picom_path, "active-opacity = ", content[14])
+    replace_block(picom_path, "blur: {", content[15])
+
 
     refresh_ui()
 
