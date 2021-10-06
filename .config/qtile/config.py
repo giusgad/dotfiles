@@ -39,7 +39,7 @@ import asyncio
 # debug tool
 # from libqtile.log_utils import logger
 
-colors = [
+COLORS = [
     "#391e26",  # color 0 - bar background
     "#391e26",  # color 1 - powerline background
     "#e73956",  # color 2 - powerline background
@@ -261,8 +261,8 @@ def init_layout_theme():
     return {
         "margin": 10,
         "border_width": 2,
-        "border_focus": colors[8],
-        "border_normal": colors[5],
+        "border_focus": COLORS[8],
+        "border_normal": COLORS[5],
     }
 
 
@@ -278,15 +278,19 @@ layouts = [
 # WIDGETS FOR THE BAR
 # powerline characters: https://github.com/ryanoasis/powerline-extra-symbols
 
-font = "Caskaydia Cove Nerd Font"
-powerline_font = "Caskaydia Cove Nerd Font"
-powerline_font_size = 40
-powerline_char = "\uE0B6"
-powerline_padding = 0
+FONT = "Caskaydia Cove Nerd Font"
+POWERLINE_FONT = "Caskaydia Cove Nerd Font"
+POWERLINE_FONT_SIZE = 40
+POWERLINE_CHAR = "\uE0B6"
+POWERLINE_PADDING = 0
+
+BAR_HEIGHT = 26
+BAR_OPACITY = 0.65
+BAR_MARGIN = [5, 10, 0, 10]
 
 
 def init_widgets_defaults():
-    return dict(font=font, fontsize=14, background=colors[0])
+    return dict(font=FONT, fontsize=14, background=COLORS[0])
 
 
 widget_defaults = init_widgets_defaults()
@@ -297,118 +301,118 @@ def init_widgets_list():
     widgets_list = [
         # left aligned
         widget.GroupBox(
-            font=font,
+            font=FONT,
             fontsize=16,
             padding_y=6,
             padding_x=10,
             borderwidth=0,
             disable_drag=True,
             highlight_method="block",
-            background=colors[0],
-            active=colors[9],
-            inactive=colors[6],
-            this_current_screen_border=colors[8],
-            this_screen_border=colors[4],
-            other_screen_border=colors[7],
-            other_current_screen_border=colors[7],
-            urgent_border=colors[3],
+            background=COLORS[0],
+            active=COLORS[9],
+            inactive=COLORS[6],
+            this_current_screen_border=COLORS[8],
+            this_screen_border=COLORS[4],
+            other_screen_border=COLORS[7],
+            other_current_screen_border=COLORS[7],
+            urgent_border=COLORS[3],
         ),
         # widget.Sep(**widget_defaults),
         # widget.WindowName(
-        #     font=font,
+        #     font=FONT,
         #     fontsize=14,
-        #     background=colors[0],
-        #     foreground=colors[5],
+        #     background=COLORS[0],
+        #     foreground=COLORS[5],
         # ),
         Spacer(),
         # center aligned
         widget.Clock(
-            foreground=colors[5],
-            background=colors[0],
+            foreground=COLORS[5],
+            background=COLORS[0],
             fontsize=20,
-            font=font,
+            font=FONT,
             format="%H:%M",
         ),
         Spacer(),
         # right aligned
         widget.TextBox(
-            text=powerline_char,
-            background=colors[1],
-            foreground=colors[2],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[1],
+            foreground=COLORS[2],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
         widget.Net(
-            font=font,
+            font=FONT,
             fontsize=14,
-            foreground=colors[5],
-            background=colors[2],
+            foreground=COLORS[5],
+            background=COLORS[2],
             padding=5,
             format="{down} ↓↑ {up}",
         ),
         widget.TextBox(
-            text=powerline_char,
-            background=colors[2],
-            foreground=colors[1],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[2],
+            foreground=COLORS[1],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
         widget.TextBox(
             text=" ",
-            background=colors[1],
-            foreground=colors[5],
+            background=COLORS[1],
+            foreground=COLORS[5],
             padding=0,
             fontsize=18,
-            font=font,
+            font=FONT,
         ),
         widget.CPU(
-            background=colors[1],
-            foreground=colors[5],
+            background=COLORS[1],
+            foreground=COLORS[5],
             format=" {load_percent}%",
             update_interval=3.0,
             fontsize=14,
-            font=font,
+            font=FONT,
         ),
         widget.TextBox(
-            text=powerline_char,
-            background=colors[1],
-            foreground=colors[2],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[1],
+            foreground=COLORS[2],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
         widget.CurrentLayout(
-            font=font, foreground=colors[5], background=colors[2], fontsize=14
+            font=FONT, foreground=COLORS[5], background=COLORS[2], fontsize=14
         ),
         widget.TextBox(
-            text=powerline_char,
-            background=colors[2],
-            foreground=colors[1],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[2],
+            foreground=COLORS[1],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
         widget.Clock(
-            foreground=colors[5],
-            background=colors[1],
+            foreground=COLORS[5],
+            background=COLORS[1],
             fontsize=14,
-            font=font,
+            font=FONT,
             format="%d-%m-%Y",
         ),
         widget.TextBox(
-            text=powerline_char,
-            background=colors[1],
-            foreground=colors[2],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[1],
+            foreground=COLORS[2],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
         widget.TextBox(
             text=" ",
-            background=colors[2],
-            foreground=colors[5],
+            background=COLORS[2],
+            foreground=COLORS[5],
             padding=0,
             fontsize=16,
             mouse_callbacks={
@@ -419,24 +423,24 @@ def init_widgets_list():
             },
         ),
         widget.Volume(
-            background=colors[2],
-            foreground=colors[5],
-            font=font,
+            background=COLORS[2],
+            foreground=COLORS[5],
+            font=FONT,
             padding=5,
             fontsize=14,
         ),
         widget.KeyboardLayout(
-            background=colors[2],
+            background=COLORS[2],
             configured_keyboards=["us", "it"],
-            font=font,
-            foreground=colors[5],
+            font=FONT,
+            foreground=COLORS[5],
             fontsize=14,
         ),
         widget.TextBox(
             text="﨤 ",
-            background=colors[2],
-            foreground=colors[5],
-            font=font,
+            background=COLORS[2],
+            foreground=COLORS[5],
+            font=FONT,
             padding=0,
             fontsize=16,
             mouse_callbacks={
@@ -446,13 +450,13 @@ def init_widgets_list():
             },
         ),
         widget.CheckUpdates(
-            background=colors[2],
-            foreground=colors[5],
-            colour_no_updates=colors[5],
-            colour_have_updates=colors[5],
+            background=COLORS[2],
+            foreground=COLORS[5],
+            colour_no_updates=COLORS[5],
+            colour_have_updates=COLORS[5],
             padding=0,
             fontsize=16,
-            font=font,
+            font=FONT,
             display_format="| {updates} ",
             restart_indicator="ﰇ",
             distro="Arch_checkupdates",
@@ -461,19 +465,19 @@ def init_widgets_list():
             },
         ),
         widget.TextBox(
-            text=powerline_char,
-            background=colors[2],
-            foreground=colors[1],
-            padding=powerline_padding,
-            fontsize=powerline_font_size,
-            font=powerline_font,
+            text=POWERLINE_CHAR,
+            background=COLORS[2],
+            foreground=COLORS[1],
+            padding=POWERLINE_PADDING,
+            fontsize=POWERLINE_FONT_SIZE,
+            font=POWERLINE_FONT,
         ),
-        widget.Systray(background=colors[1], icon_size=20, padding=4),
+        widget.Systray(background=COLORS[1], icon_size=20, padding=4),
         widget.TextBox(
             text="",
-            background=colors[1],
-            foreground=colors[5],
-            font=font,
+            background=COLORS[1],
+            foreground=COLORS[5],
+            font=FONT,
             padding=5,
             fontsize=18,
             mouse_callbacks={
@@ -482,7 +486,7 @@ def init_widgets_list():
                 )
             },
         ),
-        widget.Sep(padding=10, background=colors[1], foreground=colors[1]),
+        widget.Sep(padding=10, background=COLORS[1], foreground=COLORS[1]),
     ]
     return widgets_list
 
@@ -505,17 +509,17 @@ def init_screens():
         Screen(
             top=bar.Bar(
                 widgets=init_widgets_screen1(),
-                size=26,
-                opacity=0.65,
-                margin=[5, 10, 0, 10],
+                size=BAR_HEIGHT,
+                opacity=BAR_OPACITY,
+                margin=BAR_MARGIN,
             )
         ),
         Screen(
             top=bar.Bar(
                 widgets=init_widgets_screen2(),
-                size=26,
-                opacity=0.7,
-                margin=[5, 10, 0, 10],
+                size=BAR_HEIGHT,
+                opacity=BAR_OPACITY,
+                margin=BAR_MARGIN,
             )
         ),
     ]
