@@ -1,5 +1,7 @@
 /mnt/MyBook/wallpapers/video/nobara_roses.mp4
 ///
+/home/giuseppe/wallpapers/zero_two_dark.jpg
+///
 colors:
   # Default colors
   primary:
@@ -94,12 +96,15 @@ transition-pow-h = 0.1
 size-transition = true
 ///
 corner-radius = 13.0;
-///
 round-borders = 1;
 ///
-inactive-opacity = 0.8;
-frame-opacity = 0.7;
+shadow = false;
+shadow-radius = 7;
+shadow-offset-x = -7;
+shadow-offset-y = -7;
 ///
+frame-opacity = 0.7;
+inactive-opacity = 0.8;
 active-opacity = 1.0;
 ///
 blur: {
@@ -114,3 +119,7 @@ blur: {
   background-fixed = false;
   kern = "3x3box";
 }
+///
+Sleek
+Coral
+///

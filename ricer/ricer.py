@@ -95,10 +95,19 @@ def refresh_ui():
     # reload
     print("reloading wallpaper...")
     os.system(
+        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --head=0 &> /dev/null"
+    )
+    os.system(
+        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --head=1 &> /dev/null"
+    )
+    os.system(
         "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
     )
     print("done\nreloading qtile...")
     os.system("qtile cmd-obj -o cmd -f restart")
+    print("done")
+    print("reloading spicetify...")
+    os.system("spicetify apply")
     print("done")
 
 
@@ -117,34 +126,38 @@ def insert_content(content):
 
     # wallpaper
     replace_all(os.path.join(config_path, "qtile/scripts/wallpaper_path"), content[0])
+    replace_all(
+        os.path.join(config_path, "qtile/scripts/image_wallpaper_path"), content[1]
+    )
     # alacritty
     alacritty_path = os.path.join(config_path, "alacritty/alacritty.yml")
-    replace_block(alacritty_path, "colors:\n", content[1], strict_equality=True)
-    replace_block(alacritty_path, "family:", content[2], repetition=True)
+    replace_block(alacritty_path, "colors:\n", content[2], strict_equality=True)
+    replace_block(alacritty_path, "family:", content[3], repetition=True)
     # qtile
     qtile_path = os.path.join(config_path, "qtile/config.py")
-    replace_block(qtile_path, "COLORS = [\n", content[3], strict_equality=True)
-    replace_block(qtile_path, "FONT = ", content[4])
+    replace_block(qtile_path, "COLORS = [\n", content[4], strict_equality=True)
+    replace_block(qtile_path, "FONT = ", content[5])
     # nvim
     nvim_path = os.path.join(config_path, "nvim/init.vim")
-    replace_block(nvim_path, "colorscheme ", content[5])
+    replace_block(nvim_path, "colorscheme ", content[6])
     # fish
     fish_path = os.path.join(config_path, "fish/config.fish")
-    replace_block(fish_path, "set fish_color_normal", content[6])
+    replace_block(fish_path, "set fish_color_normal", content[7])
     # dunst
     dunst_path = os.path.join(config_path, "dunst/dunstrc")
-    replace_block(dunst_path, "geometry = ", content[7])
-    replace_block(dunst_path, "font = ", content[8])
-    replace_block(dunst_path, "[urgency_low]", content[9])
+    replace_block(dunst_path, "geometry = ", content[8])
+    replace_block(dunst_path, "font = ", content[9])
+    replace_block(dunst_path, "[urgency_low]", content[10])
     # picom
     picom_path = os.path.join(config_path, "picom.conf")
-    replace_block(picom_path, "transition-length = ", content[10])
-    replace_block(picom_path, "corner-radius = ", content[11])
-    replace_block(picom_path, "round-borders = ", content[12])
-    replace_block(picom_path, "inactive-opacity = ", content[13])
-    replace_block(picom_path, "active-opacity = ", content[14])
+    replace_block(picom_path, "transition-length = ", content[11])
+    replace_block(picom_path, "corner-radius = ", content[12])
+    replace_block(picom_path, "shadow = ", content[13], repetition=False)
+    replace_block(picom_path, "frame-opacity = ", content[14])
     replace_block(picom_path, "blur: {", content[15])
-
+    # spicetify
+    os.system(f"spicetify config current_theme {content[16][0]}")
+    os.system(f"spicetify config color_scheme {content[16][1]}")
 
     refresh_ui()
 
@@ -174,7 +187,13 @@ while running:
     confirm = input(f"Do you want to proceed applying {files[file_index]}? [y/n]: ")
     if confirm.lower() == "y" or confirm.lower() == "yes":
         content_list = get_content(files, file_index)
-        insert_content(content_list)
+        try:
+            insert_content(content_list)
+        except Exception as e:
+            print("ERROR:", e, "\nrestoring backup...")
+            os.system("cp -r ~/.config-ricer-backup/* ~/.config/")
+            refresh_ui()
+            print("done")
         restore = input("Do you want to restore the bakup? [y/n]: ")
         if restore.lower() == "y" or restore.lower() == "yes":
             print("restoring backup...")
