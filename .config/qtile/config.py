@@ -222,9 +222,9 @@ def assign_app_group(client):
     wm_class = client.window.get_wm_class()
     # if it doesn't exist wait and try again
     # i.e. spotify takes longer to get a wm_class
-    while not wm_class:
-        asyncio.sleep(0.02)
-        wm_class = client.window.get_wm_class()
+    #while not wm_class:
+    #    asyncio.sleep(0.02)
+    #    wm_class = client.window.get_wm_class()
     # only use the first value of the wm_class
     wm_class = wm_class[0]
 
@@ -568,6 +568,9 @@ def start_once():
 def start_always():
     # Set the cursor to something sane in X
     subprocess.Popen(["xsetroot", "-cursor_name", "left_ptr"])
+    # os.system(
+    #     "sleep 5 && ~/.scripts/live_wallpaper.sh (cat ~/.config/qtile/scripts/wallpaper_path)"
+    # )
 
 
 @hook.subscribe.client_new
