@@ -222,7 +222,7 @@ def assign_app_group(client):
     wm_class = client.window.get_wm_class()
     # if it doesn't exist wait and try again
     # i.e. spotify takes longer to get a wm_class
-    #while not wm_class:
+    # while not wm_class:
     #    asyncio.sleep(0.02)
     #    wm_class = client.window.get_wm_class()
     # only use the first value of the wm_class
@@ -332,6 +332,20 @@ def init_widgets_list():
             fontsize=20,
             font=FONT,
             format="%H:%M",
+        ),
+        widget.Pomodoro(
+            background=COLORS[1],
+            foreground=COLORS[5],
+            color_active=COLORS[5],
+            color_inactive=COLORS[5],
+            color_break=COLORS[5],
+            font=FONT,
+            fontsize=16,
+            prefix_inactive="",
+            prefix_break=" ",
+            prefix_long_break=" ",
+            prefix_paused="",
+            prefix_active=" ",
         ),
         Spacer(),
         # right aligned
@@ -493,6 +507,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen2 = init_widgets_list()
+    del widgets_screen2[3] 
     return widgets_screen2
 
 
