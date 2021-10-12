@@ -88,6 +88,7 @@ keys = [
     # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
+    Key([mod, "shift"], "space", lazy.prev_layout()),
     # CHANGE SCREEN FOCUS
     Key([mod], "w", lazy.next_screen()),
     # CHANGE FOCUS
@@ -272,7 +273,8 @@ layout_theme = init_layout_theme()
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
-    layout.Zoomy(**layout_theme),
+    layout.Floating(**layout_theme),
+    layout.RatioTile(**layout_theme),
 ]
 
 # WIDGETS FOR THE BAR
@@ -507,7 +509,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[3] 
+    del widgets_screen2[3]
     return widgets_screen2
 
 
