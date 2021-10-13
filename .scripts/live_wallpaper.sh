@@ -10,7 +10,7 @@ _screen() {
         "$2" --background="$3" --video-zoom="$4" &
 }
 
-killall xwinwrap
+killall xwinwrap mpv
 
 sleep 0.5
 
