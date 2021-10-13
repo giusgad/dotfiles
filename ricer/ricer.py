@@ -2,6 +2,7 @@
 import os
 import shutil
 import tempfile
+from termcolor import colored
 
 
 def get_available_files():
@@ -103,12 +104,12 @@ def refresh_ui():
     os.system(
         "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
     )
-    print("done\nreloading qtile...")
+    print(colored("done", "green"), "\nreloading qtile...")
     os.system("qtile cmd-obj -o cmd -f restart")
-    print("done")
+    print(colored("done", "green"))
     print("reloading spicetify...")
-    os.system("spicetify apply")
-    print("done")
+    os.system("spicetify apply &> /dev/null")
+    print(colored("done", "green"))
 
 
 def insert_content(content):
@@ -122,7 +123,7 @@ def insert_content(content):
     os.system(
         "cd ~/.config && cp -r -t ~/.config-ricer-backup/ alacritty/ qtile/ nvim/ fish/ dunst/"
     )
-    print("done")
+    print(colored("done", "green"))
 
     # wallpaper
     replace_all(os.path.join(config_path, "qtile/scripts/wallpaper_path"), content[0])
@@ -156,8 +157,8 @@ def insert_content(content):
     replace_block(picom_path, "frame-opacity = ", content[14])
     replace_block(picom_path, "blur: {", content[15])
     # spicetify
-    os.system(f"spicetify config current_theme {content[16][0]}")
-    os.system(f"spicetify config color_scheme {content[16][1]}")
+    os.system(f"spicetify config current_theme {content[16][0]} &> /dev/null")
+    os.system(f"spicetify config color_scheme {content[16][1]} &> /dev/null")
 
     refresh_ui()
 
@@ -193,13 +194,13 @@ while running:
             print("ERROR:", e, "\nrestoring backup...")
             os.system("cp -r ~/.config-ricer-backup/* ~/.config/")
             refresh_ui()
-            print("done")
+            print(colored("done", "green"))
         restore = input("Do you want to restore the bakup? [y/n]: ")
         if restore.lower() == "y" or restore.lower() == "yes":
             print("restoring backup...")
             os.system("cp -r ~/.config-ricer-backup/* ~/.config/")
             refresh_ui()
-            print("done")
+            print("backup restored")
         running = ending()
         if not running:
             break
