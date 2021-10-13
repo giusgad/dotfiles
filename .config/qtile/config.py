@@ -335,20 +335,6 @@ def init_widgets_list():
             font=FONT,
             format="%H:%M",
         ),
-        widget.Pomodoro(
-            background=COLORS[1],
-            foreground=COLORS[5],
-            color_active=COLORS[5],
-            color_inactive=COLORS[5],
-            color_break=COLORS[5],
-            font=FONT,
-            fontsize=16,
-            prefix_inactive="",
-            prefix_break=" ",
-            prefix_long_break=" ",
-            prefix_paused="",
-            prefix_active=" ",
-        ),
         Spacer(),
         # right aligned
         widget.TextBox(
@@ -509,7 +495,6 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[3]
     return widgets_screen2
 
 
