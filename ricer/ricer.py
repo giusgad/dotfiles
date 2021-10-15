@@ -96,10 +96,10 @@ def refresh_ui():
     # reload
     print("reloading wallpaper...")
     os.system(
-        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --head=0 &> /dev/null"
+        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --save --head=0 &> /dev/null"
     )
     os.system(
-        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --head=1 &> /dev/null"
+        "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --save --head=1 &> /dev/null"
     )
     os.system(
         "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
