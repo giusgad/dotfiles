@@ -24,10 +24,12 @@ function setCard() {
   if [ "$NEW_SINK" == "1" ]
     then
       NOTIF="Headphones"
+      NOTIFICON="audio-headphones"
     else
       NOTIF="Speakers"
+      NOTIFICON="audio-speakers"
     fi
-  notify-send --urgency=low "Output switched to $NOTIF"
+  notify-send --urgency=low "Output switched to $NOTIF" --icon=$NOTIFICON
 }
 
 function toggleSinks() {
