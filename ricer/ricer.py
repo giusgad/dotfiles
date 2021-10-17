@@ -93,7 +93,7 @@ def replace_all(file_path, content):
 
 
 def refresh_ui():
-    # reload
+    # set wallpapers
     print("reloading wallpaper...")
     os.system(
         "nitrogen --set-zoom-fill $(cat ~/.config/qtile/scripts/image_wallpaper_path) --save --head=0 &> /dev/null"
@@ -104,11 +104,17 @@ def refresh_ui():
     os.system(
         "~/.scripts/live_wallpaper.sh $(cat ~/.config/qtile/scripts/wallpaper_path) &> /dev/null"
     )
+    # restart qtile
     print(colored("done", "green"), "\nreloading qtile...")
-    os.system("qtile cmd-obj -o cmd -f restart")
+    os.system("qtile cmd-obj -o cmd -f restart &> /dev/null")
     print(colored("done", "green"))
+    # apply spicetify
     print("reloading spicetify...")
     os.system("spicetify apply &> /dev/null")
+    print(colored("done", "green"))
+    # restart dunst
+    print("restarting dunst")
+    os.system("killall dunst; /usr/bin/dunst &> /dev/null &")
     print(colored("done", "green"))
 
 
@@ -147,18 +153,19 @@ def insert_content(content):
     # dunst
     dunst_path = os.path.join(config_path, "dunst/dunstrc")
     replace_block(dunst_path, "geometry = ", content[8])
-    replace_block(dunst_path, "font = ", content[9])
-    replace_block(dunst_path, "[urgency_low]", content[10])
+    replace_block(dunst_path, "format = ", content[9])
+    replace_block(dunst_path, "icon_position = ", content[10])
+    replace_block(dunst_path, "[urgency_low]", content[11])
     # picom
     picom_path = os.path.join(config_path, "picom.conf")
-    replace_block(picom_path, "transition-length = ", content[11])
-    replace_block(picom_path, "corner-radius = ", content[12])
-    replace_block(picom_path, "shadow = ", content[13], repetition=False)
-    replace_block(picom_path, "frame-opacity = ", content[14])
-    replace_block(picom_path, "blur: {", content[15])
+    replace_block(picom_path, "transition-length = ", content[12])
+    replace_block(picom_path, "corner-radius = ", content[13])
+    replace_block(picom_path, "shadow = ", content[14], repetition=False)
+    replace_block(picom_path, "frame-opacity = ", content[15])
+    replace_block(picom_path, "blur: {", content[16])
     # spicetify
-    os.system(f"spicetify config current_theme {content[16][0]} &> /dev/null")
-    os.system(f"spicetify config color_scheme {content[16][1]} &> /dev/null")
+    os.system(f"spicetify config current_theme {content[17][0]} &> /dev/null")
+    os.system(f"spicetify config color_scheme {content[17][1]} &> /dev/null")
 
     refresh_ui()
 
