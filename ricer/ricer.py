@@ -46,7 +46,10 @@ def get_content(files_list, index):
     for i in range(len(content_list)):
         lines = content_list[i].split("\n")
         # remove empty string as last item
-        lines = [str(x) for x in lines if x != ""]
+        if not lines[-1]:
+            del lines[-1]
+        if not lines[0]:
+            del lines[0]
         content_list[i] = lines
     return content_list
 
@@ -202,7 +205,7 @@ while running:
             os.system("cp -r ~/.config-ricer-backup/* ~/.config/")
             refresh_ui()
             print(colored("done", "green"))
-        restore = input("Do you want to restore the bakup? [y/n]: ")
+        restore = input("Do you want to restore the backup? [y/n]: ")
         if restore.lower() == "y" or restore.lower() == "yes":
             print("restoring backup...")
             os.system("cp -r ~/.config-ricer-backup/* ~/.config/")

@@ -87,7 +87,7 @@ set fish_color_param yellow
     vertical_alignment = center
     word_wrap = yes
 ///
-icon_position = left
+    icon_position = left
     min_icon_size = 0
     max_icon_size = 32
 
