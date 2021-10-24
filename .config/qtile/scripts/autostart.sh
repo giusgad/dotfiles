@@ -13,14 +13,14 @@ wallpaper=$(cat $HOME/.config/qtile/scripts/wallpaper_path)
 #start sxhkd to replace Qtile native key-bindings
 run sxhkd -c ~/.config/qtile/sxhkd/sxhkdrc &
 
-#starting utility applications at boot time
+# starting utility applications at boot time
 nitrogen --restore
-sh .scripts/live_wallpaper.sh $wallpaper
+#sh .scripts/live_wallpaper.sh $wallpaper
 run caffeine &
 run nm-applet &
 run redshift-gtk -l 46.4:9.35 &
 run xfce4-power-manager &
-# run volumeicon &
+#run volumeicon &
 numlockx on &
 picom --experimental-backends &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -29,4 +29,4 @@ picom --experimental-backends &
 
 #starting user applications at boot time
 run kdeconnect-indicator &
-run $HOME/.joplin/Joplin.AppImage &
+#run $HOME/.joplin/Joplin.AppImage &
