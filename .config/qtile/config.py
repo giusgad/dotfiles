@@ -52,7 +52,7 @@ COLORS = [
     "#282828",  # color 9 - powerline background
     "#4D4A4A",  # color 10 - powerline background
     "#282828",  # color 11 - powerline background
-    "#4D4A4A",  # color 12 - powerline background
+    "#4D4A4A",  # color 12 - powerline background 
     "#282828",  # color 13 - powerline background
 ]
 
@@ -460,7 +460,7 @@ def init_widgets_list():
             foreground=COLORS[3],
             colour_no_updates=COLORS[3],
             colour_have_updates=COLORS[3],
-            custom_command="paru -Qu",
+            custom_command="paru -Qua && pacman -Qu",
             padding=0,
             fontsize=16,
             font=FONT,
