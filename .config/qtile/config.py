@@ -52,7 +52,7 @@ COLORS = [
     "#282828",  # color 9 - powerline background
     "#4D4A4A",  # color 10 - powerline background
     "#282828",  # color 11 - powerline background
-    "#4D4A4A",  # color 12 - powerline background 
+    "#4D4A4A",  # color 12 - powerline background
     "#282828",  # color 13 - powerline background
 ]
 
@@ -191,7 +191,8 @@ workspaces = [
     {"label": "阮 ", "key": "6", "spawn": "spotify"},
     {"label": " ", "key": "7", "spawn": "telegram-desktop"},
     {"label": " ", "key": "8"},
-    {"label": " ", "key": "9"},
+    {"label": " ", "key": "9", "layout": "floating"},
+    {"label": " ", "key": "0"},
 ]
 
 groups = []
@@ -221,7 +222,8 @@ def assign_app_group(client):
     d["6"] = ["spotify", "Spotify"]
     d["7"] = ["telegram-desktop", "discord", "kdeconnect-app"]
     d["8"] = ["joplin"]
-    d["9"] = []
+    d["9"] = ["Steam", "heroic"]
+    d["0"] = []
 
     # get wm_class list
     wm_class = client.window.get_wm_class()
@@ -467,9 +469,7 @@ def init_widgets_list():
             display_format="| {updates} ",
             restart_indicator="ﰇ",
             distro="Arch",
-            mouse_callbacks={
-                "Button1": lambda: qtile.cmd_spawn(my_term + " -e paru")
-            },
+            mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(my_term + " -e paru")},
         ),
         widget.TextBox(
             text=POWERLINE_CHAR,
@@ -624,6 +624,8 @@ floating_layout = layout.Floating(
         Match(wm_class="tk"),
         Match(wm_class="gnome-screenshot"),
         Match(wm_class="gpartedbin"),
+        Match(wm_class="Steam"),
+        Match(wm_class="heroic"),
     ],
     fullscreen_border_width=0,
     border_width=0,
