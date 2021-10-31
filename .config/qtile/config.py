@@ -191,7 +191,7 @@ workspaces = [
     {"label": "阮 ", "key": "6", "spawn": "spotify"},
     {"label": " ", "key": "7", "spawn": "telegram-desktop"},
     {"label": " ", "key": "8"},
-    {"label": " ", "key": "9", "layout": "floating"},
+    {"label": " ", "key": "9"},
     {"label": " ", "key": "0"},
 ]
 
@@ -289,7 +289,7 @@ layouts = [
 FONT = "Caskaydia Cove Nerd Font"
 POWERLINE_FONT = "Caskaydia Cove Nerd Font"
 POWERLINE_FONT_SIZE = 26
-POWERLINE_CHAR = "\ue0be "
+POWERLINE_CHAR = "\ue0b6"
 POWERLINE_PADDING = 0
 
 BAR_HEIGHT = 26
@@ -461,9 +461,7 @@ def init_widgets_list():
             background=COLORS[12],
             foreground=COLORS[3],
             colour_no_updates=COLORS[3],
-            colour_have_updates=COLORS[3],
-            custom_command="paru -Qua && pacman -Qu",
-            padding=0,
+            pkdding=0,
             fontsize=16,
             font=FONT,
             display_format="| {updates} ",
@@ -624,8 +622,6 @@ floating_layout = layout.Floating(
         Match(wm_class="tk"),
         Match(wm_class="gnome-screenshot"),
         Match(wm_class="gpartedbin"),
-        Match(wm_class="Steam"),
-        Match(wm_class="heroic"),
     ],
     fullscreen_border_width=0,
     border_width=0,
