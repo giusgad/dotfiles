@@ -13,6 +13,10 @@ disabled = true
 [package]
 disabled = true
 
+
+[git_status]
+style = "purple"
+
 # configure nerd font
 [aws]
 symbol = "  "

@@ -461,12 +461,12 @@ def init_widgets_list():
             background=COLORS[12],
             foreground=COLORS[3],
             colour_no_updates=COLORS[3],
+            colour_have_updates=COLORS[3],
             pkdding=0,
             fontsize=16,
             font=FONT,
             display_format="| {updates} ",
             restart_indicator="ﰇ",
-            distro="Arch",
             mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(my_term + " -e paru")},
         ),
         widget.TextBox(

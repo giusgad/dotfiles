@@ -36,8 +36,7 @@ super + alt + d
 
 #rofi logout
 super + x
-    rofi -show p -modi p:'.config/rofi/rofi-power-menu'
-
+    rofi -show p -modi p:'.config/rofi/rofi-power-menu' -selected-row 2
 #Rofi theme selector
 super + control + r
     rofi-theme-selector
@@ -127,7 +126,7 @@ ctrl + shift + Escape
 
 #Scrot
 Print
-    scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
+    scrot 'ArchLinux-%Y-%m-%d-%s.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
 
 #Gnome-Screenshot
 ctrl + Print
