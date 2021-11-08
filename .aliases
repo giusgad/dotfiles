@@ -5,6 +5,7 @@ alias clear='/bin/clear; neofetch'
 alias tclock='tty-clock -c'
 alias joplin='~/.joplin/Joplin.AppImage'
 alias vim=nvim
+alias emulator='Android/Sdk/emulator/emulator -avd Pixel5_API30_android11 & && disown (jobs -p)'
 
 # dotfiles repo
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
