@@ -81,3 +81,8 @@ starship init fish | source
 if [ -d "$HOME/.local/bin" ]
     set PATH "$HOME/.local/bin:$PATH"
 end
+
+# keyring
+if test -n "$DESKTOP_SESSION"
+    set -x (gnome-keyring-daemon --start | string split "=")
+end
