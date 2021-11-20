@@ -29,7 +29,9 @@ symbol = " "
 
 [directory]
 read_only = " "
-style= "bold blue"
+style = "bold blue"
+truncation_length = 1
+truncation_symbol = "  "
 
 [docker_context]
 symbol = " "
