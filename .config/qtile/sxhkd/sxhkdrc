@@ -126,7 +126,7 @@ ctrl + shift + Escape
 
 #Scrot
 Print
-    scrot 'ArchLinux-%Y-%m-%d-%s.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
+    scrot 'ArchLinux-%Y-%m-%d-%s.jpg' -e 'mv $f /home/giuseppe/Pictures/screenshots'
 
 #Gnome-Screenshot
 ctrl + Print
