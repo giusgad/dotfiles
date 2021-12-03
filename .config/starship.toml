@@ -31,7 +31,7 @@ symbol = " "
 read_only = " "
 style = "bold blue"
 truncation_length = 1
-truncation_symbol = "  "
+truncation_symbol = "  "
 
 [docker_context]
 symbol = " "

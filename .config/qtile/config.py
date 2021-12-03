@@ -80,7 +80,6 @@ def window_to_next_group(qtile):
 
 
 keys = [
-    # DEFAULT
     # Most of our keybindings are in sxhkd file - except these
     # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
@@ -111,61 +110,41 @@ keys = [
         [mod, "control"],
         "l",
         lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
     ),
     Key(
         [mod, "control"],
         "Right",
         lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
     ),
     Key(
         [mod, "control"],
         "h",
         lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
     ),
     Key(
         [mod, "control"],
         "Left",
         lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
     ),
     Key(
         [mod, "control"],
         "k",
         lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
     ),
     Key(
         [mod, "control"],
         "Up",
         lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
     ),
     Key(
         [mod, "control"],
         "j",
         lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
     ),
     Key(
         [mod, "control"],
         "Down",
         lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
     ),
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
@@ -184,7 +163,7 @@ keys = [
 
 workspaces = [
     {"label": " ", "key": "1", "spawn": "firefox"},
-    {"label": " ", "key": "2"},
+    {"label": " ", "key": "2", "layout": "bsp"},
     {"label": " ", "key": "3"},
     {"label": " ", "key": "4"},
     {"label": " ", "key": "5"},
@@ -229,9 +208,11 @@ def assign_app_group(client):
     wm_class = client.window.get_wm_class()
     # if it doesn't exist wait and try again
     # i.e. spotify takes longer to get a wm_class
-    # while not wm_class:
-    #    asyncio.sleep(0.02)
-    #    wm_class = client.window.get_wm_class()
+    wm_class_timeout = 0
+    while not wm_class and wm_class_timeout < 50:
+       asyncio.sleep(0.02)
+       wm_class_timeout += 1
+       wm_class = client.window.get_wm_class()
     # only use the first value of the wm_class
     wm_class = wm_class[0]
 
@@ -249,8 +230,6 @@ for i in groups:
             Key([mod], i.name, lazy.group[i.name].toscreen()),
             Key([mod], "Tab", lazy.screen.next_group()),
             Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
-            Key(["mod1"], "Tab", lazy.screen.next_group()),
-            Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
             Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
@@ -279,8 +258,9 @@ layout_theme = init_layout_theme()
 layouts = [
     layout.MonadTall(**layout_theme),
     layout.Max(**layout_theme),
+    layout.Bsp(**layout_theme, fair=False),
+    layout.Columns(**layout_theme, insert_position=1, border_on_single=True),
     layout.Floating(**layout_theme),
-    layout.RatioTile(**layout_theme),
 ]
 
 # WIDGETS FOR THE BAR
