@@ -305,14 +305,15 @@ def init_widgets_list():
             other_current_screen_border=COLORS[5],
             urgent_border=COLORS[1],
         ),
-        # widget.Sep(**widget_defaults),
-        # widget.WindowName(
-        #     font=FONT,
-        #     fontsize=14,
-        #     background=COLORS[0],
-        #     foreground=COLORS[3],
-        # ),
-        Spacer(),
+        widget.Sep(**widget_defaults),
+        widget.WindowName(
+            font=FONT,
+            fontsize=14,
+            background=COLORS[0],
+            foreground=COLORS[3],
+            max_chars=50,
+        ),
+        # Spacer(),
         # center aligned
         widget.Clock(
             foreground=COLORS[3],
@@ -320,6 +321,20 @@ def init_widgets_list():
             fontsize=20,
             font=FONT,
             format="%H:%M",
+        ),
+        widget.Pomodoro(
+            background=COLORS[0],
+            foreground=COLORS[3],
+            color_active=COLORS[5],
+            color_inactive=COLORS[5],
+            color_break=COLORS[5],
+            font=FONT,
+            fontsize=16,
+            prefix_inactive="",
+            prefix_break=" ",
+            prefix_long_break=" ",
+            prefix_paused="",
+            prefix_active=" ",
         ),
         Spacer(),
         # right aligned
@@ -478,6 +493,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen2 = init_widgets_list()
+    del widgets_screen2[4]
     return widgets_screen2
 
 
