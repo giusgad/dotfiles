@@ -228,8 +228,6 @@ for i in groups:
         [
             # CHANGE WORKSPACES
             Key([mod], i.name, lazy.group[i.name].toscreen()),
-            Key([mod], "Tab", lazy.screen.next_group()),
-            Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
             Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE

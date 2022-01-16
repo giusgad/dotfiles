@@ -36,7 +36,7 @@ super + alt + d
 
 #rofi logout
 super + x
-    rofi -show p -modi p:'.config/rofi/rofi-power-menu' -selected-row 2
+    rofi -show p -modi p:'$HOME/.config/rofi/rofi-power-menu' -selected-row 2
 #Rofi theme selector
 super + control + r
     rofi-theme-selector
@@ -57,6 +57,10 @@ super + Escape
 #Terminal
 super + KP_Enter
     alacritty
+
+# switch keyboard layout
+super + Tab
+    $HOME/.scripts/switch_keyboard_layout.sh
 
 #################################################################
 # SUPER + SHIFT KEYS
