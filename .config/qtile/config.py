@@ -210,9 +210,9 @@ def assign_app_group(client):
     # i.e. spotify takes longer to get a wm_class
     wm_class_timeout = 0
     while not wm_class and wm_class_timeout < 50:
-       asyncio.sleep(0.02)
-       wm_class_timeout += 1
-       wm_class = client.window.get_wm_class()
+        asyncio.sleep(0.02)
+        wm_class_timeout += 1
+        wm_class = client.window.get_wm_class()
     # only use the first value of the wm_class
     wm_class = wm_class[0]
 
