@@ -85,6 +85,7 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod], "t", lazy.window.toggle_floating()),
     Key([mod], "q", lazy.window.kill()),
+    Key([mod], "c", lazy.window.kill()),
     # SUPER + SHIFT KEYS
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
