@@ -62,10 +62,11 @@ end
 eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
-# run neofetch at startup
+# Run fetch tool at startup in interactive session
 if status is-interactive
     # commands for interactive sessions
-    neofetch
+    # neofetch
+    /home/giuseppe/.scripts/fetch.sh
 end
 
 # autojump
@@ -110,4 +111,4 @@ end
 #end
 
 # ssh
-#eval "$(ssh-agent -c)" > /dev/null
+eval "$(ssh-agent -c)" > /dev/null
