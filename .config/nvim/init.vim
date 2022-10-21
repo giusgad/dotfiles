@@ -7,6 +7,9 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'vim-airline/vim-airline'
+Plug 'mbbill/undotree'
+Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -38,6 +41,15 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_left_sep = "\uE0B0"
 let g:airline_right_sep = "\uE0B2"
 
+" undo tree
+nnoremap <F5> :UndotreeToggle<CR>
+
+" nerdtree
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+let NERDTreeShowHidden=1
+
 " #############################
 " INIT
 " #############################
@@ -45,3 +57,7 @@ colorscheme gruvbox
 
 set relativenumber 
 set number
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
