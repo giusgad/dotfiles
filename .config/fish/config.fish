@@ -112,3 +112,6 @@ end
 
 # ssh
 eval "$(ssh-agent -c)" > /dev/null
+
+# fix for E79: Cannot load wildcards
+set -x SHELL /bin/bash
