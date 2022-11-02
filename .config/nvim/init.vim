@@ -1,5 +1,14 @@
+" #############################
 " INIT
+" #############################
 set guifont=Caskaydia\ Cove\ Nerd\ Font
+
+set relativenumber 
+set number
+
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " VIM-PLUG
 call plug#begin(stdpath('data') . '/plugged')
@@ -8,10 +17,19 @@ Plug 'morhetz/gruvbox'
 Plug 'chrisbra/Colorizer'
 Plug 'vim-airline/vim-airline'
 Plug 'mbbill/undotree'
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+" #############################
+" CUSTOM KEYBINDINGS
+" #############################
+" fix control+space
+inoremap <C-Space> <C-x><C-o>
+" copy paste to clipboard
+vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
 
 " #############################
 " PLUGIN SETTINGS
@@ -19,6 +37,7 @@ call plug#end()
 " gruvbox
 let g:gruvbox_transparent_bg = 1
 autocmd VimEnter * hi Normal ctermbg=none
+colorscheme gruvbox
 
 " colorizer
 let g:colorizer_skip_comments = 1
@@ -45,19 +64,7 @@ let g:airline_right_sep = "\uE0B2"
 nnoremap <F5> :UndotreeToggle<CR>
 
 " nerdtree
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-let NERDTreeShowHidden=1
-
-" #############################
-" INIT
-" #############################
-colorscheme gruvbox
-
-set relativenumber 
-set number
-
-set tabstop=4
-set shiftwidth=4
-set expandtab
+"nnoremap <C-n> :NERDTree<CR>
+"nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
+"let NERDTreeShowHidden=1
