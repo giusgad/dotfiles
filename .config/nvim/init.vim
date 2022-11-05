@@ -26,8 +26,6 @@ call plug#end()
 " #############################
 " CUSTOM KEYBINDINGS
 " #############################
-" fix control+space
-inoremap <C-Space> <C-x><C-o>
 " copy paste to clipboard
 vnoremap <C-C> :w !xclip -i -sel c<CR><CR>
 
