@@ -98,6 +98,15 @@ if not pgrep --full ssh-agent | string collect > /dev/null
   set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
 end
 
+### ANDROID
+set -Ux ANDROID_SDK_ROOT /opt/android-sdk
+set PATH "$PATH:$ANDROID_SDK_ROOT/emulator/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/platform-tools/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/tools"
+set -Ux JAVA_HOME /usr/lib/jvm/java-19-openjdk/
+set -Ux JAVA_OPTS ""
+
 ### OTHER
 # fix for E79: Cannot load wildcards
 set -x SHELL /bin/bash
