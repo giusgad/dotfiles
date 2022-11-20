@@ -9,6 +9,11 @@ bind -k nul --mode insert accept-autosuggestion
 bind --mode insert \b backward-kill-word
 bind --mode insert \cp up-or-search
 
+# SET EITHER DEFAULT EMACS MODE OR VI MODE
+function fish_user_key_bindings
+  # fish_default_key_bindings
+  fish_vi_key_bindings
+end
 
 # bash like ! and !!
 function __history_previous_command
@@ -57,11 +62,8 @@ set fish_color_command green
 set fish_color_error brcyan
 set fish_color_param yellow
 
-# SET EITHER DEFAULT EMACS MODE OR VI MODE
-function fish_user_key_bindings
-  # fish_default_key_bindings
-  fish_vi_key_bindings
-end
+# set man pages colors - see https://man.archlinux.org/man/less.1#D
+set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'
 
 ### CONDA
 # >>> conda initialize >>>
