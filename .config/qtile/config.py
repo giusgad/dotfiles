@@ -26,11 +26,9 @@
 
 
 import os
-import re
-import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Drag, Key, KeyChord, Screen, Group, Drag, Match
+from libqtile.config import Drag, Key, Screen, Group, Drag, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
@@ -507,17 +505,9 @@ def init_screens():
     return [
         Screen(
             top=bar.Bar(
-                widgets=init_widgets_screen1(),
+                widgets=[],
                 size=BAR_HEIGHT,
-                opacity=BAR_OPACITY,
-                margin=BAR_MARGIN,
-            )
-        ),
-        Screen(
-            top=bar.Bar(
-                widgets=init_widgets_screen2(),
-                size=BAR_HEIGHT,
-                opacity=BAR_OPACITY,
+                opacity=0,
                 margin=BAR_MARGIN,
             )
         ),

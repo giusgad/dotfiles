@@ -47,7 +47,7 @@ super + v
 
 #Terminal
 super + Return
-    alacritty
+    kitty
 
 #Xkill
 super + Escape
@@ -56,7 +56,7 @@ super + Escape
 #Keyboard dependent
 #Terminal
 super + KP_Enter
-    alacritty
+    kitty
 
 # switch keyboard layout
 super + Tab
