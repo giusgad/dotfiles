@@ -1,6 +1,7 @@
 vim.opt.guifont = "Caskaydia Cove Nerd Font"
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
+vim.opt.termguicolors = true
 
 vim.opt.relativenumber = true
 vim.opt.number = true

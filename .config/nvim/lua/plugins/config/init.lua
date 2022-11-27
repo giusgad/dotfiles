@@ -2,7 +2,10 @@
 require("plugins.config.lualine")
 require("plugins.config.telescope")
 require("plugins.config.lspsaga")
-require("plugins.config.lspconfig")
 require("plugins.config.cmp")
 require("plugins.config.null-ls")
-
+require("plugins.config.lsp")
+require("plugins.config.treesitter")
+require("plugins.config.autopairs")
+require("plugins.config.bufferline")
+require("plugins.config.dashboard")

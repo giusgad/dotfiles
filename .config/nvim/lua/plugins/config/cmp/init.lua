@@ -17,12 +17,11 @@ cmp.setup({
 			luasnip.lsp_expand(args.body)
 		end,
 	},
-	sources = cmp.config.sources({ -- order sensitive
+	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
-		{ name = "cmdline" },
 	}),
 	mapping = cmp.mapping.preset.insert({
 		["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -62,6 +61,7 @@ cmp.setup({
 		}),
 	}),
 	window = {
+
 		-- completion = cmp.config.window.bordered(),
 		-- documentation = cmp.config.window.bordered(),
 	},
@@ -80,6 +80,7 @@ cmp.setup({
 			})[entry.source.name]
 			return vim_item
 		end,
+        max_height = 3,
 	},
 })
 

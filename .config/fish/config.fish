@@ -52,8 +52,8 @@ end
 # basic settings (export)
 set fish_greeting
 set TERM "kitty"
-set EDITOR "nvim"
-set VISUAL "nvim"
+set -gx EDITOR "nvim"
+set -gx VISUAL "nvim"
 
 # set autocomplete colors
 set fish_color_normal normal
