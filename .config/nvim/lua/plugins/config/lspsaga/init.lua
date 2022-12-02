@@ -34,7 +34,7 @@ saga.init_lsp_saga({
 		sign = true,
 		update_time = 150,
 		sign_priority = 20,
-		virtual_text = true,
+		virtual_text = false, -- show icon at the end of the line
 	},
 	-- finder icons
 	finder_icons = {
