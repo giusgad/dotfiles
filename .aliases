@@ -5,8 +5,9 @@
 alias clear='/bin/clear; $HOME/.scripts/fetch.sh'
 alias tclock='tty-clock -c'
 alias joplin='~/.joplin/Joplin.AppImage'
-alias vim=nvim
 alias pclear='/bin/clear; pfetch'
+
+alias cat="bat --style plain"
 
 # dotfiles repo
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
