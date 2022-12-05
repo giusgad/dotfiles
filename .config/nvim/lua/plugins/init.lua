@@ -2,6 +2,9 @@
 require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 
+	--MINIGAME
+	use({ "ThePrimeagen/vim-be-good" })
+
 	-- IMPATIENT
 	use({ "lewis6991/impatient.nvim" })
 
@@ -26,6 +29,9 @@ require("packer").startup(function()
 	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
 	use({ "famiu/bufdelete.nvim" })
 
+	-- GITSIGNS
+	use({ "lewis6991/gitsigns.nvim" })
+
 	-- DASHBOARD
 	use({ "glepnir/dashboard-nvim" })
 
@@ -43,6 +49,7 @@ require("packer").startup(function()
 		"neovim/nvim-lspconfig", -- configure lsp
 		"jayp0521/mason-null-ls.nvim", -- null-ls to mason integration
 	})
+
 	-- AUTOCOMPLETON and DIAGNOSTICS
 	use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }) -- snippets engine - config inside cmp
 	use({ "rafamadriz/friendly-snippets" }) -- snippets source
@@ -55,6 +62,7 @@ require("packer").startup(function()
 		"saadparwaiz1/cmp_luasnip", -- snippet completions
 	})
 	use({ "glepnir/lspsaga.nvim" }) -- show definitions, code actions etc.
+
 	-- NULL-LS
 	use({ "jose-elias-alvarez/null-ls.nvim" }) -- formatter/linter
 	use({
@@ -68,12 +76,14 @@ require("packer").startup(function()
 	-- UTILITY
 	use({ "numToStr/Comment.nvim" }) -- comment with <gcc>
 	use({ "windwp/nvim-autopairs" }) -- close brackets automatically
+	use({ "akinsho/toggleterm.nvim", tag = "*" })
 end)
 
 -- QUICK SETUP
 require("Comment").setup()
 require("refactoring").setup()
 require("nvim-web-devicons").setup()
+require("gitsigns").setup()
 
 -- CONFIG
 require("plugins.config")

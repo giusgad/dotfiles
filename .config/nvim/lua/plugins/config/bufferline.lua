@@ -46,10 +46,14 @@ bufferline.setup({
 		close_button_selected = {
 			fg = "#d79921",
 		},
+		close_button_visible = {
+			fg = "#d79921",
+		},
 		buffer_selected = {
 			fg = "#d79921",
-			bold = true,
-			italic = true,
+		},
+		buffer_visible = {
+			fg = "#d79921",
 		},
 		modified = {
 			fg = "#ebdbb2",

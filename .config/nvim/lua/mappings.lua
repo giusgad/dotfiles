@@ -1,6 +1,12 @@
 -- FUNCTIONS
 local function map(mode, shortcut, command)
-	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+	if type(mode) == "string" then
+		vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
+		return
+	end
+	for _, mod in ipairs(mode) do
+		vim.api.nvim_set_keymap(mod, shortcut, command, { noremap = true, silent = true })
+	end
 end
 
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
@@ -9,6 +15,14 @@ end
 vim.api.nvim_set_keymap("", "<space>", "<Nop>", { silent = true, noremap = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- MOVEMENTS
+-- center cursor when going down or up by half pages
+map({ "v", "n" }, "<C-d>", "<C-d>zz")
+map({ "v", "n" }, "<C-u>", "<C-u>zz")
+-- center cursor when searching
+map({ "v", "n" }, "n", "nzz")
+map({ "v", "n" }, "N", "Nzz")
 
 -- VISUAL MODE
 -- Copy

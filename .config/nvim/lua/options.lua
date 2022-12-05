@@ -1,25 +1,46 @@
--- show line numbers
-vim.opt.relativenumber = true
-vim.opt.number = true
-
 -- tabs/indentation
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.cindent = true
+vim.opt.cursorline = true
 
 -- APPEARANCE
+local function extend_hl(name, def)
+	local current_def = vim.api.nvim_get_hl_by_name(name, true)
+	local new_def = vim.tbl_extend("force", {}, current_def, def)
+	vim.api.nvim_set_hl(0, name, new_def)
+end
+
+-- show line numbers
+vim.opt.relativenumber = true
+vim.opt.number = true
+-- font and colorshceme
 vim.opt.guifont = "Caskaydia Cove Nerd Font"
-vim.o.background = "dark" -- or "light" for light mode
+vim.o.background = "dark"
 vim.cmd([[colorscheme gruvbox]])
 vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes"
--- sign column and sign
-vim.api.nvim_set_hl(0, "SignColumn", {})
-vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#fb4934" })
-vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#fabd2d" })
-vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#689d6a" })
-vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#83a598" })
--- bufferline underline between tabs
-vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {})
+vim.opt.signcolumn = "yes" -- always show SignColumn
+
+extend_hl("NvimTreeCursorLine", { ctermbg = 1 }) -- Nvim-tree line highlight
+
+-- Transparency
+vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {}) -- bufferline underline between tabs
+
+local remove_backgound = {
+	"GitSignsAdd",
+	"GitSignsChange",
+	"GitSignsDelete",
+	"DiagnosticSignError",
+	"DiagnosticSignWarn",
+	"DiagnosticSignHint",
+	"DiagnosticSignInfo",
+	"SignColumn",
+	"CursorLine",
+	"CursorLineNr",
+	"WinBarNC", -- unfocused outline
+}
+for _, v in ipairs(remove_backgound) do
+	extend_hl(v, { bg = "NONE" })
+end
