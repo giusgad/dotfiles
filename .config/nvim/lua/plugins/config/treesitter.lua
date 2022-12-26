@@ -8,7 +8,7 @@ configs.setup({
 
 	autopairs = { enable = true },
 	highlight = {
-		enable = false, -- `false` will disable the whole extension
+		enable = true, -- `false` will disable the whole extension
 		disable = { "all" }, -- list of language that will be disabled
 		additional_vim_regex_highlighting = true,
 	},

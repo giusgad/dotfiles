@@ -4,43 +4,28 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.cindent = true
-vim.opt.cursorline = true
+
+vim.opt.wrap = false
+vim.opt.updatetime = 50
+
+-- keep at least n extra lines visible while scrolling
+vim.opt.scrolloff = 10
+
+-- get undos from the past
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+vim.opt.undofile = true
+
+-- search
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
 
 -- APPEARANCE
-local function extend_hl(name, def)
-	local current_def = vim.api.nvim_get_hl_by_name(name, true)
-	local new_def = vim.tbl_extend("force", {}, current_def, def)
-	vim.api.nvim_set_hl(0, name, new_def)
-end
-
+vim.opt.guifont = "Caskaydia Cove Nerd Font"
+vim.opt.signcolumn = "yes" -- always show SignColumn
+require("colors")
 -- show line numbers
 vim.opt.relativenumber = true
 vim.opt.number = true
--- font and colorshceme
-vim.opt.guifont = "Caskaydia Cove Nerd Font"
-vim.o.background = "dark"
-vim.cmd([[colorscheme gruvbox]])
-vim.opt.termguicolors = true
-vim.opt.signcolumn = "yes" -- always show SignColumn
-
-extend_hl("NvimTreeCursorLine", { ctermbg = 1 }) -- Nvim-tree line highlight
-
--- Transparency
-vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {}) -- bufferline underline between tabs
-
-local remove_backgound = {
-	"GitSignsAdd",
-	"GitSignsChange",
-	"GitSignsDelete",
-	"DiagnosticSignError",
-	"DiagnosticSignWarn",
-	"DiagnosticSignHint",
-	"DiagnosticSignInfo",
-	"SignColumn",
-	"CursorLine",
-	"CursorLineNr",
-	"WinBarNC", -- unfocused outline
-}
-for _, v in ipairs(remove_backgound) do
-	extend_hl(v, { bg = "NONE" })
-end
+vim.opt.cursorline = true

@@ -12,6 +12,8 @@ require("nvim-tree").setup({
 				{ key = "u", action = "dir_up" },
 				{ key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
 				{ key = "h", cb = tree_cb("close_node") },
+				{ key = "L", action = "cd" },
+				{ key = "<Esc>", action = "close" },
 			},
 		},
 	},

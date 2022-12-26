@@ -5,7 +5,6 @@ require("toggleterm").setup({
 	direction = "float",
 	float_opts = {
 		border = "curved",
-		winblend = 5,
 	},
 	highlights = {
 		FloatBorder = {

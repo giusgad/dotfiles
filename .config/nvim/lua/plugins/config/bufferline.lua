@@ -61,9 +61,10 @@ bufferline.setup({
 		modified_selected = {
 			fg = "#d79921",
 		},
-		indicator_selected = {
-			fg = "#ff0000",
-			blend = 100,
-		},
 	},
 })
+
+-- HIGHLIGHTING FIX
+vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { fg = "#d79921", sp = "#d79921", underline = true })
+vim.api.nvim_set_hl(0, "BufferLineCloseButtonSelected", { fg = "#d79921", sp = "#d79921", underline = true })
+vim.api.nvim_set_hl(0, "BufferLineModifiedSelected", { fg = "#d79921", sp = "#d79921", underline = true })
