@@ -51,7 +51,7 @@ end
 ### EXPORTS
 # basic settings (export)
 set fish_greeting
-set TERM "kitty"
+# set TERM "kitty"
 set -gx EDITOR "nvim"
 set -gx VISUAL "nvim"
 
@@ -65,17 +65,17 @@ set fish_color_param yellow
 # set man pages colors - see https://man.archlinux.org/man/less.1#D
 set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'
 
-### CONDA
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source
-# <<< conda initialize <<<
-
 # Run fetch tool at startup in interactive session
 if status is-interactive
     # neofetch
     /home/giuseppe/.scripts/fetch.sh
 end
+
+### CONDA
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+# <<< conda initialize <<<
 
 ### AUTOJUMP
 if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
