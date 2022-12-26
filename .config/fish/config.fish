@@ -1,28 +1,19 @@
-# set custom keybindings
+### KEYBINDINGS
+# emacs mode
 bind -k nul accept-autosuggestion
 bind \b backward-kill-word
 bind \e\[3\;5~ kill-word
 
-# basic settings (export)
-set fish_greeting
-set TERM "alacritty"
-set EDITOR "nvim"
-set VISUAL "nvim"
-
-# set autocomplete colors
-set fish_color_normal normal
-set fish_color_autosuggestion '#7d7d7d'
-set fish_color_command green
-set fish_color_error brcyan
-set fish_color_param yellow
+# vi mode keybindings
+bind -k nul --mode insert accept-autosuggestion
+bind --mode insert \b backward-kill-word
+bind --mode insert \cp up-or-search
 
 # SET EITHER DEFAULT EMACS MODE OR VI MODE
 function fish_user_key_bindings
-  fish_default_key_bindings
-  # fish_vi_key_bindings
+  # fish_default_key_bindings
+  fish_vi_key_bindings
 end
-
-# get aliases to work with sudo
 
 # bash like ! and !!
 function __history_previous_command
@@ -57,32 +48,67 @@ function _plugin-bang-bang_uninstall --on-event plugin-bang-bang_uninstall
     functions --erase _plugin-bang-bang_uninstall
 end
 
+### EXPORTS
+# basic settings (export)
+set fish_greeting
+# set TERM "kitty"
+set -gx EDITOR "nvim"
+set -gx VISUAL "nvim"
+
+# set autocomplete colors
+set fish_color_normal normal
+set fish_color_autosuggestion '#7d7d7d'
+set fish_color_command green
+set fish_color_error brcyan
+set fish_color_param yellow
+
+# set man pages colors - see https://man.archlinux.org/man/less.1#D
+set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'
+
+# Run fetch tool at startup in interactive session
+if status is-interactive
+    # neofetch
+    /home/giuseppe/.scripts/fetch.sh
+end
+
+### CONDA
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 # <<< conda initialize <<<
 
-# run neofetch at startup
-if status is-interactive
-    # commands for interactive sessions
-    neofetch
-end
-
-# autojump
+### AUTOJUMP
 if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
 
-# import aliases
+### IMPORT ALIASES
 source "$HOME/.aliases"
 
-# init starship prompt
+### STARSHIP PROMPT
 starship init fish | source
 
-# add .local/bin to path
+### PATH
+# add .local/bin
 if [ -d "$HOME/.local/bin" ]
     set PATH "$HOME/.local/bin:$PATH"
 end
 
-# keyring
-if test -n "$DESKTOP_SESSION"
-    set -x (gnome-keyring-daemon --start | string split "=")
+### SSH
+if not pgrep --full ssh-agent | string collect > /dev/null
+  eval (ssh-agent -c)
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
+  set -Ux SSH_AGENT_PID $SSH_AGENT_PID
+  set -Ux SSH_AUTH_SOCK $SSH_AUTH_SOCK
 end
+
+### ANDROID
+set -Ux ANDROID_SDK_ROOT /opt/android-sdk
+set PATH "$PATH:$ANDROID_SDK_ROOT/emulator/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/platform-tools/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
+set PATH "$PATH:$ANDROID_SDK_ROOT/tools"
+set -Ux JAVA_HOME /usr/lib/jvm/java-19-openjdk/
+set -Ux JAVA_OPTS ""
+
+### OTHER
+# fix for E79: Cannot load wildcards
+set -x SHELL /bin/bash
