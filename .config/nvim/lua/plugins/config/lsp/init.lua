@@ -13,6 +13,7 @@ require("mason-lspconfig").setup_handlers({
 			on_attach = handlers.on_attach,
 			capabilities = handlers.capabilities,
 		}
+		-- options available for each server are found here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 		local require_ok, conf_opts = pcall(require, "plugins.config.lsp.settings." .. server_name)
 		if require_ok then
 			opts = vim.tbl_deep_extend("force", conf_opts, opts)

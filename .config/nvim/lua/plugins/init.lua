@@ -63,6 +63,7 @@ require("packer").startup(function()
 	use("mfussenegger/nvim-dap")
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("jayp0521/mason-nvim-dap.nvim")
+	use({ "Weissle/persistent-breakpoints.nvim" }) -- persist breakpoints
 	use("leoluz/nvim-dap-go") -- go debugging with delve
 
 	-- AUTOCOMPLETON and DIAGNOSTICS
@@ -81,7 +82,7 @@ require("packer").startup(function()
 	-- NULL-LS
 	use("jose-elias-alvarez/null-ls.nvim") -- formatter/linter
 	use({
-		"ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
+		-- "ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
@@ -96,7 +97,7 @@ require("packer").startup(function()
 			require("trouble").setup()
 		end,
 	})
-	-- TO DO COMMENTS
+	-- TODO COMMENTS
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -106,10 +107,18 @@ require("packer").startup(function()
 	use("numToStr/Comment.nvim") -- comment with <gcc>
 	use("windwp/nvim-autopairs") -- close brackets automatically
 	use({ "akinsho/toggleterm.nvim", tag = "*" })
+	use({
+		"folke/noice.nvim",
+		requires = { -- cmdline popup and cool things
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	})
+	use("christoomey/vim-tmux-navigator")
 end)
 
 -- QUICK SETUP
-require("refactoring").setup()
+-- require("refactoring").setup()
 require("nvim-web-devicons").setup()
 require("gitsigns").setup()
 require("illuminate").configure({

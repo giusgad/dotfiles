@@ -10,6 +10,7 @@ local function map(mode, shortcut, command)
 end
 
 local opts = { noremap = true, silent = true }
+local buffer_opts = { noremap = true, silent = true, buffer = true }
 
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
 
@@ -38,8 +39,8 @@ map("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv")
 map("v", ">", ">gv")
 map("v", "<", "<gv")
 -- Move text up and down
-map("v", "<M-j>", ":m'>+1<CR>gv=gv")
-map("v", "<M-k>", ":m-2<CR>gv=gv")
+map("v", "<M-J>", ":m'>+1<CR>gv=gv")
+map("v", "<M-K>", ":m-2<CR>gv=gv")
 -- Delete selected text on paste
 map("v", "p", '"_dP')
 
@@ -60,8 +61,8 @@ map("n", "<C-Down>", ":resize +2<CR>")
 map("n", "<C-Left>", ":vertical resize -2<CR>")
 map("n", "<C-Right>", ":vertical resize +2<CR>")
 -- Move text up and down
-map("n", "<M-j>", "<Esc>:m .+1<CR>==V")
-map("n", "<M-k>", "<Esc>:m .-2<CR>==V")
+map("n", "<M-J>", "<Esc>:m .+1<CR>==V")
+map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
 -- Open nvim tree
 map("n", "<leader>e", ":NvimTreeToggle<cr>")
 -- Buffers
@@ -79,7 +80,7 @@ map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>")
 -- map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>")
 
 -- PLUGINS
--- lspsaga
+-- LSPSAGA
 map("n", "<leader>vh", "<cmd>Lspsaga lsp_finder<CR>") -- view all options
 map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>") -- code action
 map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>") -- rename
@@ -96,24 +97,34 @@ end)
 vim.keymap.set("n", "]E", function() -- jump to errors
 	require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
 end)
--- telescope
+-- TROUBLE
+vim.keymap.set("n", "<leader>ve", require("trouble").toggle)
+-- TELESCOPE
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
--- dap
-local dap = require("dap") -- TODO
+-- DAP
+local dap = require("dap")
 local dapui = require("dapui")
-vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, opts)
+local persist_bp = require("persistent-breakpoints.api")
+vim.keymap.set("n", "<leader>db", persist_bp.toggle_breakpoint, opts)
+vim.keymap.set("n", "<leader>dB", persist_bp.set_conditional_breakpoint, opts)
+vim.keymap.set("n", "<leader>dR", persist_bp.clear_all_breakpoints, opts)
 vim.keymap.set("n", "<leader>dd", dapui.toggle, opts)
 vim.keymap.set("n", "<leader>dc", dap.continue, opts)
 vim.keymap.set("n", "<leader>di", dap.step_into, opts)
 vim.keymap.set("n", "<leader>do", dap.step_over, opts)
 vim.keymap.set("n", "<leader>du", dap.step_out, opts)
--- undotree
+-- dap-go
+if vim.fn.expand("%:e") == "go" then
+	vim.keymap.set("n", "<leader>dt", require("dap-go").debug_test, buffer_opts)
+	vim.keymap.set("n", "<leader>dT", require("dap-go").debug_test, buffer_opts)
+end
+-- UNDOTREE
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
--- toggleterm
+-- TOGGLETERM
 -- <M-d> to toggle
 local term = require("toggleterm.terminal").Terminal -- terminal for lazygit
 local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })

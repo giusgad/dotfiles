@@ -1,3 +1,10 @@
+### EXPORTS
+# basic settings (export)
+set fish_greeting
+# set TERM "kitty"
+set -gx EDITOR "nvim"
+set -gx VISUAL "nvim"
+
 ### KEYBINDINGS
 # emacs mode
 bind -k nul accept-autosuggestion
@@ -14,6 +21,13 @@ function fish_user_key_bindings
   # fish_default_key_bindings
   fish_vi_key_bindings
 end
+
+# set autocomplete colors
+set fish_color_normal normal
+set fish_color_autosuggestion '#7d7d7d'
+set fish_color_command green
+set fish_color_error brcyan
+set fish_color_param yellow
 
 # bash like ! and !!
 function __history_previous_command
@@ -47,20 +61,6 @@ function _plugin-bang-bang_uninstall --on-event plugin-bang-bang_uninstall
     bind --erase --all '$'
     functions --erase _plugin-bang-bang_uninstall
 end
-
-### EXPORTS
-# basic settings (export)
-set fish_greeting
-# set TERM "kitty"
-set -gx EDITOR "nvim"
-set -gx VISUAL "nvim"
-
-# set autocomplete colors
-set fish_color_normal normal
-set fish_color_autosuggestion '#7d7d7d'
-set fish_color_command green
-set fish_color_error brcyan
-set fish_color_param yellow
 
 # set man pages colors - see https://man.archlinux.org/man/less.1#D
 set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'

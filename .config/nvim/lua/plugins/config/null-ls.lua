@@ -8,7 +8,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
 	sources = {
-		code_actions.refactoring, -- requires refactoring plugin
+		-- code_actions.refactoring, -- requires refactoring plugin
 		formatting.gofmt,
 		-- sources installed with mason are setup automatically
 	},
