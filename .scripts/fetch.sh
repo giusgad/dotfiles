@@ -2,7 +2,7 @@
 # run neofetch or pfetch based on the width of the terminal
 # the width is calculated with the output of "tput cols"
 
-if [ $(tput cols) -le 100 ] || [ $(tput lines) -le 30 ]; then
+function small {
     if [ -f "/bin/pfetch" ] ; then
         array[0]=pfetch
     fi
@@ -12,6 +12,16 @@ if [ $(tput cols) -le 100 ] || [ $(tput lines) -le 30 ]; then
     size=${#array[@]}
     index=$(($RANDOM % $size))
     exec ${array[$index]}
+}
+
+if [ $(tput cols) -le 100 ] || [ $(tput lines) -le 30 ]; then
+    small
 else
-    neofetch
+    if [ -f /bin/fastfetch ] ; then
+        fastfetch
+    elif [ -f /bin/neofetch ] ; then
+        neofetch
+    else
+        small
+    fi
 fi
