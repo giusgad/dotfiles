@@ -15,6 +15,8 @@ bind \e\[3\;5~ kill-word
 bind -k nul --mode insert accept-autosuggestion
 bind --mode insert \b backward-kill-word
 bind --mode insert \cp up-or-search
+bind --mode insert \c] 'clear; commandline -f repaint'
+bind --mode default \c] 'clear; commandline -f repaint'
 
 # SET EITHER DEFAULT EMACS MODE OR VI MODE
 function fish_user_key_bindings
