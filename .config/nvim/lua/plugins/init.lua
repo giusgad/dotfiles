@@ -1,9 +1,9 @@
---PLUGINS
 require("packer").startup(function()
 	use("wbthomason/packer.nvim")
 
-	--MINIGAME
+	-- MINIGAMES
 	use("ThePrimeagen/vim-be-good")
+	use("eandrju/cellular-automaton.nvim")
 
 	-- IMPATIENT
 	use("lewis6991/impatient.nvim")
@@ -21,6 +21,9 @@ require("packer").startup(function()
 		"nvim-lualine/lualine.nvim", --lualine
 		requires = { "kyazdani42/nvim-web-devicons", opt = true }, -- devicons
 	})
+
+	-- SESSION-MANAGER
+	use("Shatur/neovim-session-manager")
 
 	-- NERD TREE
 	use({
@@ -40,9 +43,6 @@ require("packer").startup(function()
 
 	-- GITSIGNS
 	use("lewis6991/gitsigns.nvim")
-
-	-- DASHBOARD
-	use("glepnir/dashboard-nvim")
 
 	-- TELESCOPE
 	use({
@@ -81,13 +81,13 @@ require("packer").startup(function()
 
 	-- NULL-LS
 	use("jose-elias-alvarez/null-ls.nvim") -- formatter/linter
-	use({
-		-- "ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
+	--[[ use({
+		"ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
-	})
+	}) ]]
 
 	-- TROUBLE
 	use({
@@ -108,13 +108,14 @@ require("packer").startup(function()
 	use("windwp/nvim-autopairs") -- close brackets automatically
 	use({ "akinsho/toggleterm.nvim", tag = "*" })
 	use({
-		"folke/noice.nvim",
-		requires = { -- cmdline popup and cool things
+		"folke/noice.nvim", -- cmdline popup and cool things
+		requires = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
 	})
 	use("christoomey/vim-tmux-navigator")
+	use("monaqa/dial.nvim") -- bettere increment/decrement
 end)
 
 -- QUICK SETUP

@@ -32,6 +32,12 @@ map({ "v", "n" }, "N", "Nzz")
 -- center marker after jump
 -- vim.keymap.set("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
 
+-- OTHER
+-- use sys clipboard
+vim.keymap.set({ "n", "v" }, "<leader>y", '"*y')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"*p')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"*d')
+
 -- VISUAL MODE
 -- Copy
 map("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv")
@@ -132,8 +138,15 @@ local function _lazygit_toggle()
 	lazygit:toggle()
 end
 
-vim.keymap.set({ "n", "t" }, "<leader>gg", _lazygit_toggle)
+-- vim.keymap.set({ "n", "t" }, "<leader>gg", _lazygit_toggle)
 
 for i = 1, 10, 1 do -- create separate terminals
 	map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
 end
+
+-- DIAL.NVIM
+local dial = require("dial.map")
+vim.keymap.set("n", "<C-a>", dial.inc_normal(), opts)
+vim.keymap.set("n", "<C-x>", dial.dec_normal(), opts)
+vim.keymap.set("v", "<C-a>", dial.inc_visual(), opts)
+vim.keymap.set("v", "<C-x>", dial.dec_visual(), opts)

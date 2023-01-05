@@ -20,6 +20,7 @@ vim.opt.undofile = true
 -- search
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+vim.opt.ignorecase = true -- to do case sensitve add \C
 
 -- APPEARANCE
 vim.opt.guifont = "Caskaydia Cove Nerd Font"
