@@ -15,6 +15,7 @@ require("packer").startup(function()
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- more syntax highlighting
 	-- use("nvim-treesitter/playground") -- tools
 	use("RRethy/vim-illuminate")
+	use("mrjones2014/nvim-ts-rainbow")
 
 	-- LUALINE
 	use({
@@ -115,7 +116,7 @@ require("packer").startup(function()
 		},
 	})
 	use("christoomey/vim-tmux-navigator")
-	use("monaqa/dial.nvim") -- bettere increment/decrement
+	use("chrisgrieser/nvim-various-textobjs")
 end)
 
 -- QUICK SETUP
@@ -126,6 +127,7 @@ require("illuminate").configure({
 	min_count_to_highlight = 2,
 })
 require("todo-comments").setup()
+require("various-textobjs").setup({ useDefaultKeymaps = true })
 
 -- CONFIG
 require("plugins.config")

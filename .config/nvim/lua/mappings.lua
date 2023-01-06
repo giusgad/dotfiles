@@ -93,7 +93,7 @@ map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>") -- rename
 map("n", "<leader>vd", "<cmd>Lspsaga peek_definition<CR>") -- definition in floating window
 map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show line diagnostics
 map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show cursor diagnostic
-map("n", "<leader>vo", "<cmd>LSoutlineToggle<CR>") -- outline
+map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>") -- outline
 map("n", "K", "<cmd>Lspsaga hover_doc<CR>") -- hover docs
 map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to diagnostics
 map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>") -- jump to diagnostics
@@ -143,10 +143,3 @@ end
 for i = 1, 10, 1 do -- create separate terminals
 	map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
 end
-
--- DIAL.NVIM
-local dial = require("dial.map")
-vim.keymap.set("n", "<C-a>", dial.inc_normal(), opts)
-vim.keymap.set("n", "<C-x>", dial.dec_normal(), opts)
-vim.keymap.set("v", "<C-a>", dial.inc_visual(), opts)
-vim.keymap.set("v", "<C-x>", dial.dec_visual(), opts)
