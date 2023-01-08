@@ -1,132 +1,135 @@
-require("packer").startup(function()
-	use("wbthomason/packer.nvim")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
+-- Plugins
+require("lazy").setup({
 	-- MINIGAMES
-	use("ThePrimeagen/vim-be-good")
-	use("eandrju/cellular-automaton.nvim")
-
-	-- IMPATIENT
-	use("lewis6991/impatient.nvim")
+	"ThePrimeagen/vim-be-good",
+	"eandrju/cellular-automaton.nvim",
 
 	-- THEME AND APPEARANCE
-	use("ellisonleao/gruvbox.nvim") -- gruvbox theme
+	"ellisonleao/gruvbox.nvim", -- gruvbox theme
 
 	-- SYNTAX HIGHLIGHTING
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- more syntax highlighting
-	-- use("nvim-treesitter/playground") -- tools
-	use("RRethy/vim-illuminate")
-	use("mrjones2014/nvim-ts-rainbow")
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
+	-- "nvim-treesitter/playground" -- tools,
+	"RRethy/vim-illuminate",
+	"mrjones2014/nvim-ts-rainbow",
 
 	-- LUALINE
-	use({
+	{
 		"nvim-lualine/lualine.nvim", --lualine
-		requires = { "kyazdani42/nvim-web-devicons", opt = true }, -- devicons
-	})
+		-- dependencies = { "kyazdani42/nvim-web-devicons", opt = true }, -- devicons
+	},
 
 	-- SESSION-MANAGER
-	use("Shatur/neovim-session-manager")
+	"Shatur/neovim-session-manager",
 
 	-- NERD TREE
-	use({
+	{
 		"nvim-tree/nvim-tree.lua",
-		requires = {
-			"nvim-tree/nvim-web-devicons", -- optional, for file icons
+		dependencies = {
+			{ "nvim-tree/nvim-web-devicons", config = true }, -- optional, for file icons
 		},
-	})
-	use("nvim-tree/nvim-web-devicons")
+	},
 
 	-- UNDO TREE
-	use("mbbill/undotree")
+	"mbbill/undotree",
 
 	-- BUFFERS
-	use({ "akinsho/bufferline.nvim", tag = "v3.*", requires = "nvim-tree/nvim-web-devicons" })
-	use("famiu/bufdelete.nvim")
+	{ "akinsho/bufferline.nvim", version = "v3.*", dependencies = "nvim-tree/nvim-web-devicons" },
+	"famiu/bufdelete.nvim",
 
 	-- GITSIGNS
-	use("lewis6991/gitsigns.nvim")
+	"lewis6991/gitsigns.nvim",
 
 	-- TELESCOPE
-	use({
+	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0", -- popup menu
-		requires = { { "nvim-lua/plenary.nvim" } },
-	})
+		version = "0.1.0", -- popup menu
+		dependencies = { { "nvim-lua/plenary.nvim" } },
+	},
 
 	-- LSP
-	use({
-		"williamboman/mason.nvim", -- lsp installer
-		"williamboman/mason-lspconfig.nvim", -- adapter for configuration
-		"neovim/nvim-lspconfig", -- configure lsp
-		"jayp0521/mason-null-ls.nvim", -- null-ls to mason integration
-	})
+	"williamboman/mason.nvim", -- lsp installer
+	"williamboman/mason-lspconfig.nvim", -- adapter for configuration
+	"neovim/nvim-lspconfig", -- configure lsp
+	"jayp0521/mason-null-ls.nvim", -- null-ls to mason integration
 
 	-- DEBUGGING
-	use("mfussenegger/nvim-dap")
-	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-	use("jayp0521/mason-nvim-dap.nvim")
-	use({ "Weissle/persistent-breakpoints.nvim" }) -- persist breakpoints
-	use("leoluz/nvim-dap-go") -- go debugging with delve
+	"mfussenegger/nvim-dap",
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+	"jayp0521/mason-nvim-dap.nvim",
+	"Weissle/persistent-breakpoints.nvim", -- persist breakpoints
+	"leoluz/nvim-dap-go", -- go debugging with delve
 
 	-- AUTOCOMPLETON and DIAGNOSTICS
-	use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" }) -- snippets engine - config inside cmp
-	use("rafamadriz/friendly-snippets") -- snippets source
-	use({
-		"hrsh7th/cmp-nvim-lsp", -- lsp completions
-		"hrsh7th/cmp-buffer", -- buffer completions
-		"hrsh7th/cmp-path", -- path completions
-		"hrsh7th/cmp-cmdline", -- cmdline completions
-		"hrsh7th/nvim-cmp", -- completion engine
-		"saadparwaiz1/cmp_luasnip", -- snippet completions
-	})
-	use("glepnir/lspsaga.nvim") -- show definitions, code actions etc.
+	{ "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } }, -- snippets engine - config inside cmp
+	-- "rafamadriz/friendly-snippets", -- snippets source
+	"hrsh7th/cmp-nvim-lsp", -- lsp completions
+	"hrsh7th/cmp-buffer", -- buffer completions
+	"hrsh7th/cmp-path", -- path completions
+	"hrsh7th/cmp-cmdline", -- cmdline completions
+	"hrsh7th/nvim-cmp", -- completion engine
+	"saadparwaiz1/cmp_luasnip", -- snippet completions
+	"glepnir/lspsaga.nvim", -- show definitions, code actions etc.
 
 	-- NULL-LS
-	use("jose-elias-alvarez/null-ls.nvim") -- formatter/linter
-	--[[ use({
+	"jose-elias-alvarez/null-ls.nvim", -- formatter/linter
+	--[[ {
 		"ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
-		requires = {
+		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
-	}) ]]
+	}, ]]
 
 	-- TROUBLE
-	use({
+	{
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
-		config = function()
-			require("trouble").setup()
-		end,
-	})
+		-- dependencies = "kyazdani42/nvim-web-devicons",
+		config = true,
+	},
+
 	-- TODO COMMENTS
-	use({
+	{
 		"folke/todo-comments.nvim",
-		requires = "nvim-lua/plenary.nvim",
-	})
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+	},
 
 	-- UTILITY
-	use("numToStr/Comment.nvim") -- comment with <gcc>
-	use("windwp/nvim-autopairs") -- close brackets automatically
-	use({ "akinsho/toggleterm.nvim", tag = "*" })
-	use({
+	"numToStr/Comment.nvim",
+	"windwp/nvim-autopairs", -- close brackets automatically
+	"akinsho/toggleterm.nvim",
+	{
 		"folke/noice.nvim", -- cmdline popup and cool things
-		requires = {
+		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
-	})
-	use("christoomey/vim-tmux-navigator")
-	use("chrisgrieser/nvim-various-textobjs")
-end)
+	},
+	"christoomey/vim-tmux-navigator",
+	"chrisgrieser/nvim-various-textobjs",
+})
 
 -- QUICK SETUP
 -- require("refactoring").setup()
-require("nvim-web-devicons").setup()
-require("gitsigns").setup()
 require("illuminate").configure({
 	min_count_to_highlight = 2,
 })
-require("todo-comments").setup()
+require("gitsigns").setup()
 require("various-textobjs").setup({ useDefaultKeymaps = true })
 
 -- CONFIG

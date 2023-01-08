@@ -22,3 +22,5 @@ configs.setup({
 		termcolors = { "Yellow", "Green", "Cyan", "Magenta", "Blue" }, -- table of colour name strings
 	},
 })
+
+vim.api.nvim_set_hl(0, "rainbowcol1", { ctermfg = "White" })

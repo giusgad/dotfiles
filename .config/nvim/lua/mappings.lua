@@ -13,14 +13,10 @@ local opts = { noremap = true, silent = true }
 local buffer_opts = { noremap = true, silent = true, buffer = true }
 
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
+-- LEADER is mapped in init for lazyloading to work
 
 -- remove stupid annoying thing
 map({ "n", "v" }, "q:", "<nop>")
-
--- LEADER (space)
-vim.api.nvim_set_keymap("", "<space>", "<Nop>", opts)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
 -- MOVEMENTS
 -- center cursor when going down or up by half pages
@@ -72,7 +68,7 @@ map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
 -- Open nvim tree
 map("n", "<leader>e", ":NvimTreeToggle<cr>")
 -- Buffers
-map("n", "<leader>td", ":Bdelete!<cr>")
+map("n", "<leader>td", ":Bdelete<cr>")
 map("n", "<leader>tn", ":tabnew<CR>")
 map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")

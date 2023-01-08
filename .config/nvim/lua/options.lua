@@ -14,7 +14,7 @@ vim.opt.scrolloff = 10
 -- get undos from the past
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
+vim.opt.undodir = require("plenary.path"):new(vim.fn.stdpath("data"), "undodir")
 vim.opt.undofile = true
 
 -- search
@@ -30,3 +30,4 @@ require("colors")
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
+vim.opt.showmode = false

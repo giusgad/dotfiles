@@ -1,9 +1,11 @@
 -- USEFUL PATHS
 HOME_PATH = vim.fn.expand("$HOME")
 CONFIG_PATH = vim.fn.stdpath("config")
--- impatient
-require("impatient")
+-- LEADER (space)
+vim.api.nvim_set_keymap("", "<space>", "<Nop>", { noremap = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 -- CONFIG FILES
-require("mappings")
 require("plugins")
+require("mappings")
 require("options")
