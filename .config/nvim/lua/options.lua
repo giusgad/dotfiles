@@ -14,7 +14,7 @@ vim.opt.scrolloff = 10
 -- get undos from the past
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = require("plenary.path"):new(vim.fn.stdpath("data"), "undodir")
+vim.opt.undodir = vim.fn.stdpath("data") .. "undodir"
 vim.opt.undofile = true
 
 -- search

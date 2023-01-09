@@ -14,6 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
+	-- UTILITY
+	"numToStr/Comment.nvim",
+	"windwp/nvim-autopairs", -- close brackets automatically
+	"akinsho/toggleterm.nvim",
+	{
+		"folke/noice.nvim", -- cmdline popup and cool things
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+	},
+	"christoomey/vim-tmux-navigator",
+	{ "chrisgrieser/nvim-various-textobjs", config = { useDefaultKeymaps = true } },
+
 	-- MINIGAMES
 	"ThePrimeagen/vim-be-good",
 	"eandrju/cellular-automaton.nvim",
@@ -108,29 +122,13 @@ require("lazy").setup({
 		dependencies = "nvim-lua/plenary.nvim",
 		config = true,
 	},
-
-	-- UTILITY
-	"numToStr/Comment.nvim",
-	"windwp/nvim-autopairs", -- close brackets automatically
-	"akinsho/toggleterm.nvim",
-	{
-		"folke/noice.nvim", -- cmdline popup and cool things
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
-	},
-	"christoomey/vim-tmux-navigator",
-	"chrisgrieser/nvim-various-textobjs",
 })
 
 -- QUICK SETUP
--- require("refactoring").setup()
 require("illuminate").configure({
 	min_count_to_highlight = 2,
 })
 require("gitsigns").setup()
-require("various-textobjs").setup({ useDefaultKeymaps = true })
 
 -- CONFIG
 require("plugins.config")

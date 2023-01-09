@@ -1,7 +1,16 @@
 -- require("dap").defaults.fallback.terminal_win_cmd = ""
 
 require("dapui").setup()
-require("dap-go").setup()
+require("dap-go").setup({
+	dap_configurations = { -- support for headless mode
+		{
+			type = "go",
+			name = "Attach remote",
+			mode = "remote",
+			request = "attach",
+		},
+	},
+})
 vim.api.nvim_create_autocmd("FileType", { -- hide repl buffer
 	pattern = "dap-repl",
 	callback = function(args)

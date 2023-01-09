@@ -36,7 +36,7 @@ vim.keymap.set({ "n", "v" }, "<leader>d", '"*d')
 
 -- VISUAL MODE
 -- Copy
-map("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv")
+map("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv") -- BUG: always copies the whole line
 -- Maintain selection after indentation
 map("v", ">", ">gv")
 map("v", "<", "<gv")
