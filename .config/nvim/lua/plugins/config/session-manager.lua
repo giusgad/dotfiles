@@ -1,5 +1,10 @@
 local Path = require("plenary.path")
-require("session_manager").setup({
+local session_manager_ok, session_manager = pcall(require, "session_manager")
+if not session_manager_ok then
+	return
+end
+
+session_manager.setup({
 	sessions_dir = Path:new(vim.fn.stdpath("data"), "sessions"), -- The directory where the session files will be saved.
 	path_replacer = "__", -- The character to which the path separator will be replaced for session files.
 	colon_replacer = "++", -- The character to which the colon symbol will be replaced for session files.

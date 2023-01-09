@@ -83,59 +83,78 @@ map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>")
 
 -- PLUGINS
 -- LSPSAGA
-map("n", "<leader>vh", "<cmd>Lspsaga lsp_finder<CR>") -- view all options
-map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>") -- code action
-map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>") -- rename
-map("n", "<leader>vd", "<cmd>Lspsaga peek_definition<CR>") -- definition in floating window
-map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show line diagnostics
-map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show cursor diagnostic
-map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>") -- outline
-map("n", "K", "<cmd>Lspsaga hover_doc<CR>") -- hover docs
-map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to diagnostics
-map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>") -- jump to diagnostics
-vim.keymap.set("n", "[E", function() -- jump to errors
-	require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-end)
-vim.keymap.set("n", "]E", function() -- jump to errors
-	require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-end)
+local saga_ok, _ = pcall(require, "lspsaga")
+if saga_ok then
+	map("n", "<leader>vh", "<cmd>Lspsaga lsp_finder<CR>") -- view all options
+	map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>") -- code action
+	map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>") -- rename
+	map("n", "<leader>vd", "<cmd>Lspsaga peek_definition<CR>") -- definition in floating window
+	map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show line diagnostics
+	map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show cursor diagnostic
+	map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>") -- outline
+	map("n", "K", "<cmd>Lspsaga hover_doc<CR>") -- hover docs
+	map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>") -- jump to diagnostics
+	map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>") -- jump to diagnostics
+	vim.keymap.set("n", "[E", function() -- jump to errors
+		require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+	end)
+	vim.keymap.set("n", "]E", function() -- jump to errors
+		require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+	end)
+end
 -- TROUBLE
-vim.keymap.set("n", "<leader>ve", require("trouble").toggle)
+local trouble_ok, _ = pcall(require, "trouble")
+if trouble_ok then
+	vim.keymap.set("n", "<leader>ve", require("trouble").toggle)
+end
 -- TELESCOPE
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
-vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+local ok, builtin = pcall(require, "telescope.builtin")
+if ok then
+	vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
+	vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
+	vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
+	vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+end
 -- DAP
-local dap = require("dap")
-local dapui = require("dapui")
-local persist_bp = require("persistent-breakpoints.api")
-vim.keymap.set("n", "<leader>db", persist_bp.toggle_breakpoint, opts)
-vim.keymap.set("n", "<leader>dB", persist_bp.set_conditional_breakpoint, opts)
-vim.keymap.set("n", "<leader>dR", persist_bp.clear_all_breakpoints, opts)
-vim.keymap.set("n", "<leader>dd", dapui.toggle, opts)
-vim.keymap.set("n", "<leader>dc", dap.continue, opts)
-vim.keymap.set("n", "<leader>di", dap.step_into, opts)
-vim.keymap.set("n", "<leader>do", dap.step_over, opts)
-vim.keymap.set("n", "<leader>du", dap.step_out, opts)
+local dap_ok, dap = pcall(require, "dap")
+local dapui_ok, dapui = pcall(require, "dapui")
+local persist_bp_ok, persist_bp = pcall(require, "persistent-breakpoints.api")
+if persist_bp_ok then
+	vim.keymap.set("n", "<leader>db", persist_bp.toggle_breakpoint, opts)
+	vim.keymap.set("n", "<leader>dB", persist_bp.set_conditional_breakpoint, opts)
+	vim.keymap.set("n", "<leader>dR", persist_bp.clear_all_breakpoints, opts)
+end
+if dapui_ok then
+	vim.keymap.set("n", "<leader>dd", dapui.toggle, opts)
+end
+if dap_ok then
+	vim.keymap.set("n", "<leader>dc", dap.continue, opts)
+	vim.keymap.set("n", "<leader>di", dap.step_into, opts)
+	vim.keymap.set("n", "<leader>do", dap.step_over, opts)
+	vim.keymap.set("n", "<leader>du", dap.step_out, opts)
+end
 -- dap-go
-if vim.fn.expand("%:e") == "go" then
-	vim.keymap.set("n", "<leader>dt", require("dap-go").debug_test, buffer_opts)
-	vim.keymap.set("n", "<leader>dT", require("dap-go").debug_test, buffer_opts)
+
+local dap_go_ok, dap_go = pcall(require, "dap-go")
+if vim.fn.expand("%:e") == "go" and dap_go_ok then
+	vim.keymap.set("n", "<leader>dt", dap_go.debug_test, buffer_opts)
+	vim.keymap.set("n", "<leader>dT", dap_go.debug_test, buffer_opts)
 end
 -- UNDOTREE
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- TOGGLETERM
 -- <M-d> to toggle
-local term = require("toggleterm.terminal").Terminal -- terminal for lazygit
-local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })
-local function _lazygit_toggle()
-	lazygit:toggle()
-end
+local term_ok, term = pcall(require, "toggleterm.terminal") -- terminal for lazygit
+if term_ok then
+	term = term.Terminal
+	local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })
+	local function _lazygit_toggle()
+		lazygit:toggle()
+	end
 
--- vim.keymap.set({ "n", "t" }, "<leader>gg", _lazygit_toggle)
+	vim.keymap.set({ "n", "t" }, "<leader>gg", _lazygit_toggle)
 
-for i = 1, 10, 1 do -- create separate terminals
-	map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
+	for i = 1, 10, 1 do -- create separate terminals
+		map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
+	end
 end

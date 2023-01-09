@@ -1,7 +1,5 @@
 local M = {}
 
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 M.setup = function()
 	local signs = {
 		{ name = "DiagnosticSignError", text = "" },
@@ -32,7 +30,10 @@ end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if cmp_nvim_lsp_ok then
+	M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
+end
 
 M.on_attach = function(client, bufnr)
 	-- if client.name == "clangd" then
