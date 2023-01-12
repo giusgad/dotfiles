@@ -2,7 +2,7 @@
 require("plugins.config.lsp")
 require("plugins.config.lspsaga")
 require("plugins.config.null-ls")
-require("plugins.config.cmp-nvim")
+require("plugins.config.autocomplete")
 require("plugins.config.lualine")
 require("plugins.config.telescope")
 require("plugins.config.treesitter")

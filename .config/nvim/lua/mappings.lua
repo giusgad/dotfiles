@@ -34,6 +34,20 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"*y')
 vim.keymap.set({ "n", "v" }, "<leader>p", '"*p')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"*d')
 
+-- INSERT MODE
+local cmp_ok, cmp = pcall(require, "cmp")
+if cmp_ok then
+	local function esc()
+		if cmp.visible() then
+			cmp.abort()
+		end
+		local key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+		vim.api.nvim_feedkeys(key, "n", true)
+	end
+
+	vim.keymap.set("i", "<esc>", esc, opts)
+end
+
 -- VISUAL MODE
 -- Copy
 map("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv") -- BUG: always copies the whole line

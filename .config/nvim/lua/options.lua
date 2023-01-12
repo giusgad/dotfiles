@@ -8,8 +8,8 @@ vim.opt.cindent = true
 vim.opt.wrap = false
 vim.opt.updatetime = 50
 
--- keep at least n extra lines visible while scrolling
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 10 -- keep at least n extra lines visible while scrolling
+vim.opt.mouse = "" -- disable mouse
 
 -- get undos from the past
 vim.opt.swapfile = false

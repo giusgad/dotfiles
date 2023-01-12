@@ -27,17 +27,18 @@ require("lazy").setup({
 	},
 	"christoomey/vim-tmux-navigator",
 	{ "chrisgrieser/nvim-various-textobjs", config = { useDefaultKeymaps = true } },
+	{ "kylechui/nvim-surround", version = "*", config = true },
 
 	-- MINIGAMES
 	"ThePrimeagen/vim-be-good",
 	"eandrju/cellular-automaton.nvim",
 
 	-- THEME AND APPEARANCE
-	"ellisonleao/gruvbox.nvim", -- gruvbox theme
+	{ "ellisonleao/gruvbox.nvim", priority = 1000 }, -- gruvbox theme
 
 	-- SYNTAX HIGHLIGHTING
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
-	-- "nvim-treesitter/playground" -- tools,
+	"nvim-treesitter/playground", -- tools
 	"RRethy/vim-illuminate",
 	"mrjones2014/nvim-ts-rainbow",
 
