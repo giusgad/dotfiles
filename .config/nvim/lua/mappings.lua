@@ -27,12 +27,14 @@ map({ "v", "n" }, "n", "nzz")
 map({ "v", "n" }, "N", "Nzz")
 -- center marker after jump
 -- vim.keymap.set("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
+map({ "v", "n" }, "0", "^")
+map({ "v", "n" }, "^", "0")
 
 -- OTHER
 -- use sys clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"*y')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"*p')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"*d')
+vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 
 -- INSERT MODE
 local cmp_ok, cmp = pcall(require, "cmp")

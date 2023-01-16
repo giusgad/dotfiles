@@ -11,9 +11,14 @@ vim.opt.termguicolors = true
 extend_hl("NvimTreeCursorLine", { ctermbg = 1 }) -- Nvim-tree line highlight
 extend_hl("@function.call", { link = "GruvboxAqua" }) -- differentiate variable names from strings
 
+-- PLUGINS
+-- illuminate
 vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#3c3836" })
 vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#3c3836" })
 vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
+-- indent lines
+vim.api.nvim_set_hl(0, "IndentBlanklineChar", { link = "GruvboxGray" })
+vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { link = "GruvboxYellow" })
 
 -- Transparency
 vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {}) -- bufferline underline between tabs

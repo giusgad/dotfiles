@@ -17,6 +17,13 @@ require("lazy").setup({
 	-- UTILITY
 	"numToStr/Comment.nvim",
 	"windwp/nvim-autopairs", -- close brackets automatically
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = {
+			space_char_blankline = " ",
+			show_current_context = true,
+		},
+	}, -- show indentation guides
 	"akinsho/toggleterm.nvim",
 	{
 		"folke/noice.nvim", -- cmdline popup and cool things
@@ -25,9 +32,18 @@ require("lazy").setup({
 			"rcarriga/nvim-notify",
 		},
 	},
+	"nvim-telescope/telescope-ui-select.nvim", -- input selector
 	"christoomey/vim-tmux-navigator",
 	{ "chrisgrieser/nvim-various-textobjs", config = { useDefaultKeymaps = true } },
 	{ "kylechui/nvim-surround", version = "*", config = true },
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+			require("which-key").setup()
+		end,
+	},
 
 	-- MINIGAMES
 	"ThePrimeagen/vim-be-good",
@@ -98,7 +114,7 @@ require("lazy").setup({
 	"hrsh7th/cmp-cmdline", -- cmdline completions
 	"hrsh7th/nvim-cmp", -- completion engine
 	"saadparwaiz1/cmp_luasnip", -- snippet completions
-	"glepnir/lspsaga.nvim", -- show definitions, code actions etc.
+	{ "glepnir/lspsaga.nvim", event = "BufRead" }, -- show definitions, code actions etc.
 
 	-- NULL-LS
 	"jose-elias-alvarez/null-ls.nvim", -- formatter/linter

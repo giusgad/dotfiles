@@ -24,6 +24,15 @@ configs.setup({
 		-- colors = {}, -- table of hex strings
 		termcolors = { "Yellow", "Green", "Cyan", "Magenta", "Blue" }, -- table of colour name strings
 	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<CR>",
+			node_incremental = "<CR>",
+			scope_decremental = "<S-CR>",
+			node_decremental = "<BS>",
+		},
+	},
 })
 
 vim.api.nvim_set_hl(0, "rainbowcol1", { ctermfg = "White" })
