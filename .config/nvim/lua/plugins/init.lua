@@ -14,16 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
+	-- DEV
+	{ "folke/neodev.nvim", config = true },
+	{ dir = "/mnt/shared/coding/lua/plugins/pets.nvim", lazy = false },
+
 	-- UTILITY
-	"numToStr/Comment.nvim",
+	"numToStr/Comment.nvim", -- comment lines and blocks
 	"windwp/nvim-autopairs", -- close brackets automatically
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		config = {
-			space_char_blankline = " ",
-			show_current_context = true,
-		},
-	}, -- show indentation guides
 	"akinsho/toggleterm.nvim",
 	{
 		"folke/noice.nvim", -- cmdline popup and cool things
@@ -32,7 +29,6 @@ require("lazy").setup({
 			"rcarriga/nvim-notify",
 		},
 	},
-	"nvim-telescope/telescope-ui-select.nvim", -- input selector
 	"christoomey/vim-tmux-navigator",
 	{ "chrisgrieser/nvim-various-textobjs", config = { useDefaultKeymaps = true } },
 	{ "kylechui/nvim-surround", version = "*", config = true },
@@ -51,6 +47,13 @@ require("lazy").setup({
 
 	-- THEME AND APPEARANCE
 	{ "ellisonleao/gruvbox.nvim", priority = 1000 }, -- gruvbox theme
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = {
+			space_char_blankline = " ",
+			show_current_context = true,
+		},
+	}, -- show indentation guides
 
 	-- SYNTAX HIGHLIGHTING
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
@@ -91,6 +94,7 @@ require("lazy").setup({
 		version = "0.1.0", -- popup menu
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
+	"nvim-telescope/telescope-ui-select.nvim", -- input selector
 
 	-- LSP
 	"williamboman/mason.nvim", -- lsp installer

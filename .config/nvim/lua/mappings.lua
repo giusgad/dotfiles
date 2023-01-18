@@ -49,6 +49,14 @@ if cmp_ok then
 
 	vim.keymap.set("i", "<esc>", esc, opts)
 end
+-- add undo points while typing
+map("i", "<Space>", "<C-g>u<Space>")
+map("i", "<CR>", "<C-g>u<CR>")
+map("i", ",", "<C-g>u,")
+map("i", ".", "<C-g>u.")
+map("i", "(", "<C-g>u(")
+map("i", "[", "<C-g>u[")
+map("i", "{", "<C-g>u{")
 
 -- VISUAL MODE
 -- Copy
