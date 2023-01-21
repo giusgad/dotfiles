@@ -12,16 +12,6 @@ alias cat="bat --style plain"
 # dotfiles repo
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dotss='dots status'
-alias dotsfish='dots add .config/fish/config.fish && dots commit -m'
-alias dotsqtile='dots add .config/qtile/config.py && dots commit -m'
-alias dotsaliases='dots add .aliases && dots commit -m'
-
-# Edit config files
-alias viqtile='vim $HOME/.config/qtile/config.py'
-alias vistart='vim $HOME/.config/qtile/scripts/autostart.sh'
-alias vifish='vim $HOME/.config/fish/config.fish'
-alias vialiases='vim $HOME/.aliases'
-alias vistarship='vim $HOME/.config/starship.toml'
 
 # Navigation
 alias ..='cd ..'
