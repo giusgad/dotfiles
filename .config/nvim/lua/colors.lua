@@ -19,6 +19,8 @@ vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
 -- indent lines
 vim.api.nvim_set_hl(0, "IndentBlanklineChar", { link = "GruvboxGray" })
 vim.api.nvim_set_hl(0, "IndentBlanklineContextChar", { link = "GruvboxYellow" })
+-- lualine
+vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" }) -- fix for https://github.com/nvim-lualine/lualine.nvim/issues/867
 
 -- Transparency
 vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {}) -- bufferline underline between tabs

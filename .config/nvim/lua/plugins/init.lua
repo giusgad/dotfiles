@@ -17,6 +17,7 @@ require("lazy").setup({
 	-- DEV
 	{ "folke/neodev.nvim", config = true },
 	{ dir = "/mnt/shared/coding/lua/plugins/pets.nvim", lazy = false },
+	"edluffy/hologram.nvim",
 
 	-- UTILITY
 	"numToStr/Comment.nvim", -- comment lines and blocks
@@ -24,35 +25,34 @@ require("lazy").setup({
 	"akinsho/toggleterm.nvim",
 	{
 		"folke/noice.nvim", -- cmdline popup and cool things
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
-		},
+		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 	},
-	"christoomey/vim-tmux-navigator",
-	{ "chrisgrieser/nvim-various-textobjs", config = { useDefaultKeymaps = true } },
+	{ "chrisgrieser/nvim-various-textobjs", opts = { useDefaultKeymaps = true }, config = true },
 	{ "kylechui/nvim-surround", version = "*", config = true },
 	{
 		"folke/which-key.nvim",
-		config = function()
+		config = true,
+		opts = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 			require("which-key").setup()
 		end,
 	},
+	"christoomey/vim-tmux-navigator",
 
 	-- MINIGAMES
 	"ThePrimeagen/vim-be-good",
 	"eandrju/cellular-automaton.nvim",
 
 	-- THEME AND APPEARANCE
-	{ "ellisonleao/gruvbox.nvim", priority = 1000 }, -- gruvbox theme
+	{ "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 }, -- gruvbox theme
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = {
+		opts = {
 			space_char_blankline = " ",
 			show_current_context = true,
 		},
+		config = true,
 	}, -- show indentation guides
 
 	-- SYNTAX HIGHLIGHTING
@@ -65,6 +65,8 @@ require("lazy").setup({
 	{
 		"nvim-lualine/lualine.nvim", --lualine
 		-- dependencies = { "kyazdani42/nvim-web-devicons", opt = true }, -- devicons
+		lazy = false,
+		priority = 900,
 	},
 
 	-- SESSION-MANAGER
@@ -145,11 +147,14 @@ require("lazy").setup({
 	},
 })
 
+-- CONFIG
+require("plugins.config")
+
 -- QUICK SETUP
 require("illuminate").configure({
 	min_count_to_highlight = 2,
 })
 require("gitsigns").setup()
-
--- CONFIG
-require("plugins.config")
+--[[ require("hologram").setup({
+	auto_display = true,
+}) ]]

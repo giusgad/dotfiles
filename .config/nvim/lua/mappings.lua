@@ -33,7 +33,7 @@ map({ "v", "n" }, "^", "0")
 -- OTHER
 -- use sys clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>p", '"+p')
+vim.keymap.set({ "n", "v" }, "<leader>p", 'o<esc>"+p')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
 
 -- INSERT MODE

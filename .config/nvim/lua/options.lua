@@ -25,6 +25,7 @@ vim.opt.ignorecase = true -- to do case sensitve add \C
 -- APPEARANCE
 vim.opt.guifont = "Caskaydia Cove Nerd Font"
 vim.opt.signcolumn = "yes" -- always show SignColumn
+vim.opt.laststatus = 3
 require("colors")
 -- show line numbers
 vim.opt.relativenumber = true
