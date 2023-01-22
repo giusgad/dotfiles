@@ -1,6 +1,5 @@
 #!/bin/bash
-# run neofetch or pfetch based on the width of the terminal
-# the width is calculated with the output of "tput cols"
+# run a fetch tool randomly chosen between sets based on terminal size
 
 function small {
     if [ -f "/bin/pfetch" ] ; then
@@ -21,6 +20,7 @@ if [ $(tput cols) -le 100 ]; then
     if [ $(tput lines) -le 30 ]; then
         small
     else
+        # medium fetches
         if [ -f "/bin/nitch" ] ; then
             arr+=("nitch")
         fi
@@ -34,17 +34,13 @@ if [ $(tput cols) -le 100 ]; then
     fi
 else
     arr[0]=small
+    # big fetch
     if [ -f /bin/fastfetch ] ; then
         arr[1]=fastfetch
-        size=${#arr[@]}
-        index=$(($RANDOM % $size))
-        ${arr[$index]}
     elif [ -f /bin/neofetch ] ; then
         arr[1]=neofetch
-        size=${#arr[@]}
-        index=$(($RANDOM % $size))
-        ${arr[$index]}
-    else
-        small
     fi
+    size=${#arr[@]}
+    index=$(($RANDOM % $size))
+    ${arr[$index]}
 fi
