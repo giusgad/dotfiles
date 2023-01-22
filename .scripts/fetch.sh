@@ -40,6 +40,13 @@ else
     elif [ -f /bin/neofetch ] ; then
         arr[1]=neofetch
     fi
+    # medium fetches
+    if [ -f "/bin/nitch" ] ; then
+        arr+=("nitch")
+    fi
+    if [ -f "/bin/rxfetch" ] ; then
+        arr+=("rxfetch")
+    fi
     size=${#arr[@]}
     index=$(($RANDOM % $size))
     ${arr[$index]}
