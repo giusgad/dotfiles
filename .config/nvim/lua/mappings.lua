@@ -35,23 +35,9 @@ map({ "v", "n" }, "^", "0")
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>p", 'o<esc>"+p')
 vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
-
--- INSERT MODE
-local cmp_ok, cmp = pcall(require, "cmp")
-if cmp_ok then
-	local function esc()
-		if cmp.visible() then
-			cmp.abort()
-		end
-		local key = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
-		vim.api.nvim_feedkeys(key, "n", true)
-	end
-
-	vim.keymap.set("i", "<esc>", esc, opts)
-end
 -- add undo points while typing
 map("i", "<Space>", "<C-g>u<Space>")
-map("i", "<CR>", "<C-g>u<CR>")
+-- map("i", "<CR>", "<C-g>u<CR>") -- breaks autopairs
 map("i", ",", "<C-g>u,")
 map("i", ".", "<C-g>u.")
 map("i", "(", "<C-g>u(")
@@ -76,11 +62,11 @@ map("n", "<esc>", ":noh<return><esc>")
 -- cursor history
 map("n", "<C-o>", "<C-o>zz")
 map("n", "<C-i>", "<C-i>zz")
--- Window navigation
-map("n", "<C-h>", "<C-w>h")
+-- Window navigation - now integrated with tmux navigator
+--[[ map("n", "<C-h>", "<C-w>h")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+map("n", "<C-l>", "<C-w>l") ]]
 -- Resize with arrows
 map("n", "<C-Up>", ":resize -2<CR>")
 map("n", "<C-Down>", ":resize +2<CR>")
@@ -170,13 +156,16 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- <M-d> to toggle
 local term_ok, term = pcall(require, "toggleterm.terminal") -- terminal for lazygit
 if term_ok then
-	term = term.Terminal
+	-- TODO: fix lazygit terminal bindings
+
+	--[[ term = term.Terminal
 	local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })
 	local function _lazygit_toggle()
 		lazygit:toggle()
 	end
 
-	vim.keymap.set({ "n", "t" }, "<leader>gg", _lazygit_toggle)
+	vim.keymap.set("n", "<leader>gg", _lazygit_toggle)
+	vim.keymap.set("t", "<M-d>", "_lazygit_toggle") ]]
 
 	for i = 1, 10, 1 do -- create separate terminals
 		map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")

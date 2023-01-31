@@ -39,5 +39,5 @@ local remove_backgound = {
 	"WinBarNC", -- unfocused outline
 }
 for _, v in ipairs(remove_backgound) do
-	extend_hl(v, { bg = "NONE" })
+	extend_hl(v, { bg = "bg" })
 end

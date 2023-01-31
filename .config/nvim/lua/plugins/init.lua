@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	-- DEV
 	{ "folke/neodev.nvim", config = true },
-	{ dir = "/mnt/shared/coding/lua/plugins/pets.nvim", lazy = false },
+	{ dir = "/mnt/shared/coding/lua/plugins/pets.nvim", lazy = false, config = true },
 	"edluffy/hologram.nvim",
 
 	-- UTILITY
@@ -87,7 +87,7 @@ require("lazy").setup({
 	{ "akinsho/bufferline.nvim", version = "v3.*", dependencies = "nvim-tree/nvim-web-devicons" },
 	"famiu/bufdelete.nvim",
 
-	-- GITSIGNS
+	-- GIT
 	"lewis6991/gitsigns.nvim",
 
 	-- TELESCOPE
@@ -154,7 +154,11 @@ require("plugins.config")
 require("illuminate").configure({
 	min_count_to_highlight = 2,
 })
-require("gitsigns").setup()
---[[ require("hologram").setup({
-	auto_display = true,
-}) ]]
+require("gitsigns").setup({
+	worktrees = {
+		{
+			toplevel = vim.env.HOME,
+			gitdir = vim.env.HOME .. "/.dotfiles/",
+		},
+	},
+})
