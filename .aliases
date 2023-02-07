@@ -1,5 +1,3 @@
-# ~/.aliases
-
 # My aliases
 # alias clear='/bin/clear; neofetch'
 alias clear='/bin/clear; $HOME/.scripts/fetch.sh'
@@ -11,6 +9,7 @@ alias cat="bat --style plain"
 # dotfiles repo
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dotss='dots status'
+alias lazydots='lazygit --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # Navigation
 alias ..='cd ..'
