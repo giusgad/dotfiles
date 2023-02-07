@@ -156,17 +156,17 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- <M-d> to toggle
 local term_ok, term = pcall(require, "toggleterm.terminal") -- terminal for lazygit
 if term_ok then
-	-- TODO: fix lazygit terminal bindings
-
-	--[[ term = term.Terminal
+	term = term.Terminal
+	-- lazygit terminal
 	local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })
 	local function _lazygit_toggle()
 		lazygit:toggle()
 	end
 
 	vim.keymap.set("n", "<leader>gg", _lazygit_toggle)
-	vim.keymap.set("t", "<M-d>", "_lazygit_toggle") ]]
+	vim.keymap.set("t", "<M-k>", _lazygit_toggle)
 
+	-- numbered terminals
 	for i = 1, 10, 1 do -- create separate terminals
 		map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
 	end
