@@ -112,11 +112,13 @@ if saga_ok then
 		require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
 	end)
 end
+
 -- TROUBLE
 local trouble_ok, _ = pcall(require, "trouble")
 if trouble_ok then
 	vim.keymap.set("n", "<leader>ve", require("trouble").toggle)
 end
+
 -- TELESCOPE
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
@@ -125,6 +127,7 @@ if ok then
 	vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 	vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
 end
+
 -- DAP
 local dap_ok, dap = pcall(require, "dap")
 local dapui_ok, dapui = pcall(require, "dapui")
@@ -144,14 +147,15 @@ if dap_ok then
 	vim.keymap.set("n", "<leader>du", dap.step_out, opts)
 end
 -- dap-go
-
 local dap_go_ok, dap_go = pcall(require, "dap-go")
 if vim.fn.expand("%:e") == "go" and dap_go_ok then
 	vim.keymap.set("n", "<leader>dt", dap_go.debug_test, buffer_opts)
 	vim.keymap.set("n", "<leader>dT", dap_go.debug_test, buffer_opts)
 end
+
 -- UNDOTREE
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 -- TOGGLETERM
 -- <M-d> to toggle
 local term_ok, term = pcall(require, "toggleterm.terminal") -- terminal for lazygit
@@ -171,5 +175,15 @@ if term_ok then
 		map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
 	end
 end
+
 -- SESSION MANAGER
 map("n", "<leader>sl", ":SessionManager load_session<CR>")
+
+-- BUFFERLINE
+local bufferline_ok = pcall(require, "bufferline")
+if bufferline_ok then
+	map("n", "<S-h>", ":BufferLineCyclePrev<CR>")
+	map("n", "<S-l>", ":BufferLineCycleNext<CR>")
+	map("n", "<leader>th", ":BufferLineMovePrev<CR>")
+	map("n", "<leader>tl", ":BufferLineMoveNext<CR>")
+end
