@@ -171,3 +171,5 @@ if term_ok then
 		map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>")
 	end
 end
+-- SESSION MANAGER
+map("n", "<leader>sl", ":SessionManager load_session<CR>")
