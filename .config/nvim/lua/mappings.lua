@@ -1,4 +1,5 @@
--- FUNCTIONS
+-- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
+-- LEADER is mapped in init for lazyloading to work
 local function map(mode, shortcut, command)
 	if type(mode) == "string" then
 		vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = true })
@@ -11,9 +12,6 @@ end
 
 local opts = { noremap = true, silent = true }
 local buffer_opts = { noremap = true, silent = true, buffer = true }
-
--- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
--- LEADER is mapped in init for lazyloading to work
 
 -- remove stupid annoying thing
 map({ "n", "v" }, "q:", "<nop>")
@@ -34,7 +32,9 @@ map({ "v", "n" }, "^", "0")
 -- use sys clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
 vim.keymap.set({ "n", "v" }, "<leader>p", 'o<esc>"+p')
-vim.keymap.set({ "n", "v" }, "<leader>d", '"+d')
+-- delete to nil register
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>D", '"_D')
 -- add undo points while typing
 map("i", "<Space>", "<C-g>u<Space>")
 -- map("i", "<CR>", "<C-g>u<CR>") -- breaks autopairs
@@ -133,24 +133,24 @@ local dap_ok, dap = pcall(require, "dap")
 local dapui_ok, dapui = pcall(require, "dapui")
 local persist_bp_ok, persist_bp = pcall(require, "persistent-breakpoints.api")
 if persist_bp_ok then
-	vim.keymap.set("n", "<leader>db", persist_bp.toggle_breakpoint, opts)
-	vim.keymap.set("n", "<leader>dB", persist_bp.set_conditional_breakpoint, opts)
-	vim.keymap.set("n", "<leader>dR", persist_bp.clear_all_breakpoints, opts)
+	vim.keymap.set("n", "<leader>bb", persist_bp.toggle_breakpoint, opts)
+	vim.keymap.set("n", "<leader>bB", persist_bp.set_conditional_breakpoint, opts)
+	vim.keymap.set("n", "<leader>bR", persist_bp.clear_all_breakpoints, opts)
 end
 if dapui_ok then
-	vim.keymap.set("n", "<leader>dd", dapui.toggle, opts)
+	vim.keymap.set("n", "<leader>bv", dapui.toggle, opts)
 end
 if dap_ok then
-	vim.keymap.set("n", "<leader>dc", dap.continue, opts)
-	vim.keymap.set("n", "<leader>di", dap.step_into, opts)
-	vim.keymap.set("n", "<leader>do", dap.step_over, opts)
-	vim.keymap.set("n", "<leader>du", dap.step_out, opts)
+	vim.keymap.set("n", "<leader>bc", dap.continue, opts)
+	vim.keymap.set("n", "<leader>bi", dap.step_into, opts)
+	vim.keymap.set("n", "<leader>bo", dap.step_over, opts)
+	vim.keymap.set("n", "<leader>bu", dap.step_out, opts)
 end
 -- dap-go
 local dap_go_ok, dap_go = pcall(require, "dap-go")
 if vim.fn.expand("%:e") == "go" and dap_go_ok then
-	vim.keymap.set("n", "<leader>dt", dap_go.debug_test, buffer_opts)
-	vim.keymap.set("n", "<leader>dT", dap_go.debug_test, buffer_opts)
+	vim.keymap.set("n", "<leader>bt", dap_go.debug_test, buffer_opts)
+	vim.keymap.set("n", "<leader>bT", dap_go.debug_test, buffer_opts)
 end
 
 -- UNDOTREE
@@ -186,4 +186,25 @@ if bufferline_ok then
 	map("n", "<S-l>", ":BufferLineCycleNext<CR>")
 	map("n", "<leader>th", ":BufferLineMovePrev<CR>")
 	map("n", "<leader>tl", ":BufferLineMoveNext<CR>")
+end
+
+-- DIAL
+local dial_ok, dial = pcall(require, "dial.map")
+if dial_ok then
+	vim.keymap.set("n", "<C-a>", dial.inc_normal(), opts)
+	vim.keymap.set("n", "<C-x>", dial.dec_normal(), opts)
+	vim.keymap.set("v", "<C-a>", dial.inc_visual(), opts)
+	vim.keymap.set("v", "<C-x>", dial.dec_visual(), opts)
+	vim.keymap.set("v", "g<C-a>", dial.inc_gvisual(), opts)
+	vim.keymap.set("v", "g<C-x>", dial.dec_gvisual(), opts)
+end
+
+-- PETS
+
+local pets_ok = pcall(require, "pets")
+if pets_ok then
+	map("n", "<leader>PP", ":PetsPauseToggle<CR>")
+	map("n", "<leader>PH", ":PetsHideToggle<CR>")
+	map("n", "<leader>PS", ":PetsSleepToggle<CR>")
+	vim.keymap.set("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>", opts)
 end

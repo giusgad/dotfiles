@@ -15,9 +15,21 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require("lazy").setup({
 	-- DEV
-	{ "folke/neodev.nvim", config = true },
-	{ dir = "/mnt/shared/coding/lua/plugins/pets.nvim", lazy = false, config = true },
-	"edluffy/hologram.nvim",
+	{
+		"folke/neodev.nvim",
+		config = true,
+		options = {
+			override = function(root_dir, options)
+				options.library.enabled = true
+			end,
+		},
+	},
+	{
+		"giusgad/pets.nvim",
+		dependencies = { "MunifTanjim/nui.nvim", { "edluffy/hologram.nvim", dev = false } },
+		lazy = false,
+		dev = true,
+	},
 
 	-- UTILITY
 	"numToStr/Comment.nvim", -- comment lines and blocks
@@ -39,6 +51,7 @@ require("lazy").setup({
 		end,
 	},
 	"christoomey/vim-tmux-navigator",
+	"monaqa/dial.nvim",
 
 	-- MINIGAMES
 	"ThePrimeagen/vim-be-good",
@@ -145,6 +158,8 @@ require("lazy").setup({
 		dependencies = "nvim-lua/plenary.nvim",
 		config = true,
 	},
+}, {
+	dev = { path = "/mnt/shared/coding/lua/plugins/" },
 })
 
 -- CONFIG
@@ -161,4 +176,13 @@ require("gitsigns").setup({
 			gitdir = vim.env.HOME .. "/.dotfiles/",
 		},
 	},
+})
+
+require("session_manager").setup({
+	autoload_mode = require("session_manager.config").AutoloadMode.CurrentDir,
+})
+
+-- vim.api.nvim_set_hl(0, "pets_popup", { link = "Normal" })
+require("pets").setup({
+	row = 5,
 })
