@@ -6,6 +6,7 @@ vim.opt.autoindent = true
 
 vim.opt.wrap = false
 vim.opt.updatetime = 50
+vim.opt.autoread = true
 
 vim.opt.scrolloff = 10 -- keep at least n extra lines visible while scrolling
 vim.opt.mouse = "" -- disable mouse

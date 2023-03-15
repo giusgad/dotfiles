@@ -1,0 +1,59 @@
+$aqua: #689d6a;
+$blue: #458488;
+$purple: #b16286;
+$green: #98971a;
+$yellow: #d79921;
+$fg: #ebdbb2;
+$bg: #282828;
+
+@function random-color() {
+  $colors: $aqua, $blue, $purple, $green;
+  $random-index: random(length($colors));
+  @return nth($colors, $random-index);
+}
+
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-family: Caskaydia Cove Nerd Font;
+  color: $fg;
+}
+
+.floating {
+  padding: 3px 10px;
+  background-color: $bg;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 15px;
+}
+
+.section {
+  @for $i from 1 through length(&)+1 {
+    &:nth-child(#{$i}) {
+      background-color: random-color();
+    }
+  }
+  padding: 2px 10px;
+  margin: 0px 5px;
+  border-radius: 15px;
+}
+
+.battery-charging {
+    @extend .section;
+    background-color: $blue;
+}
+.battery-discharging {
+    @extend .section;
+    background-color: $yellow;
+}
+
+.cal-box {
+  background-color: green;
+}
+
+.time {
+  font-size:16;
+}
+
+.logo {
+    padding-left: 2px;
+}

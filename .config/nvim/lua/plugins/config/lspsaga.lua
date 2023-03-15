@@ -7,6 +7,7 @@ saga.setup({
 	ui = {
 		theme = "round",
 		border = "rounded", -- can be single,double,rounded,solid,shadow
+		title = true,
 		winblend = 0,
 		code_action = "",
 		colors = {
@@ -46,8 +47,10 @@ saga.setup({
 		quit = "<esc>",
 	},
 	code_action = {
-		quit = "<esc>",
-		exec = "<cr>",
+		keys = {
+			quit = "<esc>",
+			exec = "<cr>",
+		},
 	},
 	lightbulb = {
 		enable = true,

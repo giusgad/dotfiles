@@ -35,17 +35,4 @@ if cmp_nvim_lsp_ok then
 	M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 end
 
-M.on_attach = function(client, bufnr)
-	-- if client.name == "clangd" then
-	-- 	client.server_capabilities.offsetEncoding = { "utf-16" }
-	-- end
-
-	--[[ local status_ok, illuminate = pcall(require, "illuminate")
-	if not status_ok then
-		return
-	end
-
-	illuminate.on_attach(client) ]]
-end
-
 return M

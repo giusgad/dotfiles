@@ -9,11 +9,10 @@ if luasnip_ok then
 	require("luasnip/loaders/from_vscode").lazy_load()
 end
 
-local check_backspace =
-	function() -- made for supertab source:https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/cmp.lua
-		local col = vim.fn.col(".") - 1
-		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-	end
+local check_backspace = function() -- made for supertab source:https://github.com/LunarVim/Neovim-from-scratch/blob/master/lua/user/cmp.lua
+	local col = vim.fn.col(".") - 1
+	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+end
 
 cmp.setup({
 	snippet = {
@@ -71,11 +70,6 @@ cmp.setup({
 			"s",
 		}),
 	}),
-	window = {
-
-		-- completion = cmp.config.window.bordered(),
-		-- documentation = cmp.config.window.bordered(),
-	},
 	formatting = {
 		format = function(entry, vim_item)
 			-- Kind icons

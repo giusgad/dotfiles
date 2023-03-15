@@ -94,6 +94,9 @@ starship init fish | source
 if [ -d "$HOME/.local/bin" ]
     set PATH "$HOME/.local/bin:$PATH"
 end
+if [ -d "$HOME/.cargo/bin" ]
+    set PATH "$HOME/.cargo/bin:$PATH"
+end
 
 ### SSH
 if not pgrep --full ssh-agent | string collect > /dev/null

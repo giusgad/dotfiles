@@ -6,7 +6,6 @@
 		vim.bo.expandtab = false
 	end,
 }) ]]
-
 -- open help in vsplit
 vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
 	pattern = "*.txt",
@@ -20,6 +19,16 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
 -- check for changes when leaving terminal (for lazygit)
 vim.api.nvim_create_autocmd("TermLeave", {
 	callback = function()
-		vim.cmd("e")
+		if not vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), "modified") then
+			vim.cmd("e")
+		end
+	end,
+})
+
+-- autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+	pattern = "*.rs",
+	callback = function()
+		vim.cmd.write()
 	end,
 })

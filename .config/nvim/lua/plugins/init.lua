@@ -18,15 +18,15 @@ require("lazy").setup({
 	{
 		"folke/neodev.nvim",
 		config = true,
-		options = {
-			override = function(root_dir, options)
+		opts = {
+			override = function(_, options)
 				options.library.enabled = true
 			end,
 		},
 	},
 	{
 		"giusgad/pets.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", { "edluffy/hologram.nvim", dev = false } },
+		dependencies = { "MunifTanjim/nui.nvim", { "giusgad/hologram.nvim", dev = false } },
 		lazy = false,
 		dev = true,
 	},
@@ -35,6 +35,14 @@ require("lazy").setup({
 	"numToStr/Comment.nvim", -- comment lines and blocks
 	"windwp/nvim-autopairs", -- close brackets automatically
 	"akinsho/toggleterm.nvim",
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = true,
+		opts = function()
+			vim.o.termguicolors = true
+			require("colorizer").setup()
+		end,
+	},
 	{
 		"folke/noice.nvim", -- cmdline popup and cool things
 		dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -85,6 +93,24 @@ require("lazy").setup({
 	-- SESSION-MANAGER
 	"Shatur/neovim-session-manager",
 
+	-- MARKDOWN
+	{
+		"epwalsh/obsidian.nvim",
+		config = true,
+		opts = { dir = "/mnt/shared/obsidian/vault/", completion = { nvim_cmp = true }, disable_frontmatter = true },
+		ft = "markdown",
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		build = "cd app && npm install",
+		config = function()
+			vim.g.mkdp_filetypes = {
+				"markdown",
+			}
+		end,
+		ft = "markdown",
+	},
+
 	-- NERD TREE
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -97,7 +123,11 @@ require("lazy").setup({
 	"mbbill/undotree",
 
 	-- BUFFERS
-	{ "akinsho/bufferline.nvim", version = "v3.*", dependencies = "nvim-tree/nvim-web-devicons" },
+	{
+		"akinsho/bufferline.nvim",
+		version = "v3.*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+	},
 	"famiu/bufdelete.nvim",
 
 	-- GIT
@@ -116,6 +146,8 @@ require("lazy").setup({
 	"williamboman/mason-lspconfig.nvim", -- adapter for configuration
 	"neovim/nvim-lspconfig", -- configure lsp
 	"jayp0521/mason-null-ls.nvim", -- null-ls to mason integration
+	-- yuck
+	"elkowar/yuck.vim",
 
 	-- DEBUGGING
 	"mfussenegger/nvim-dap",
@@ -158,8 +190,18 @@ require("lazy").setup({
 		dependencies = "nvim-lua/plenary.nvim",
 		config = true,
 	},
+
+	-- LEAP
+	{
+		"ggandor/leap.nvim",
+		dependencies = { "tpope/vim-repeat" },
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	},
+	{ "ggandor/flit.nvim", config = true },
 }, {
-	dev = { path = "/mnt/shared/coding/lua/plugins/" },
+	dev = { path = "/home/giuseppe/coding/lua/plugins/" },
 })
 
 -- CONFIG
@@ -184,5 +226,12 @@ require("session_manager").setup({
 
 -- vim.api.nvim_set_hl(0, "pets_popup", { link = "Normal" })
 require("pets").setup({
-	row = 5,
+	row = 6,
+	default_pet = "slime",
+	default_style = "green",
+	random = true,
+	popup = {
+		-- winblend = 10,
+	},
 })
+-- require("hologram").setup({ auto_display = true })

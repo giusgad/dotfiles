@@ -1,0 +1,130 @@
+; #### WIDGETS ####
+; WORKSPACES
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
+      :class "workspaces-widget"
+      :halign "start"
+    (box :space-evenly true
+      (label :text "${workspaces}${current_workspace}" :visible false)
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            (label :text "${workspace.id == current_workspace ? " " : (workspace.windows > 0 ? " " : " ")}")
+            ;   
+          )
+        )
+      )
+    )
+  )
+)
+
+; BATTERY
+(defwidget bat []
+  (box
+    :class "section"
+    (label
+      :class "bat"		
+      :text "${battery-icon} ${battery-percent}%"
+    )
+  )
+)
+(defpoll battery-icon :interval "1s"	"scripts/battery icon")
+(defpoll battery-percent :interval "1s" :initial -1 "scripts/battery percent")
+
+; DATE AND TIME
+(defwidget clock []
+  (box
+    :class "time" 
+    (button
+      :onclick "scripts/popup calendar"	
+      time)
+  )
+)
+(defpoll time :interval "1s" "date '+%H:%M'")
+
+(defwidget cal []
+  (box :class "floating" 
+    (calendar
+      :class "cal" 
+      :day calendar_day 
+      :month calendar_month 
+      :year calendar_year
+      :show-details true
+      :show-heading true
+    )
+  )
+)
+(defpoll calendar_day :interval "10h" "date '+%d'")
+(defpoll calendar_month :interval "12h" "$(($(date +%m)-1))")
+(defpoll calendar_year :interval "12h" "date '+%Y'")
+
+(defwidget right []
+  (box
+    :class "floating"
+    :halign "end"
+    :space-evenly false
+    :spacing 10
+    (bat)
+    (label
+      :text "test")
+  )
+)
+
+(defwidget left []
+  (box
+    :halign "start"
+    :class "floating"
+    :space-evenly false
+    (box
+      :class "section"
+      (label
+        :class "logo"
+        :text " "
+      )
+    )
+    (box
+      :class "section"
+      (clock)
+    )
+  )
+)
+
+; BAR - everything together
+(defwidget bar []
+  (box
+    :class "bar"
+    (left)
+    (box
+      :class "floating"
+      :halign "center"
+      (workspaces)
+    )
+    (right)
+  )
+)
+
+; #### WINDOWS ####
+(defwindow bar
+  :monitor 0
+  :geometry (geometry
+    :x "0%"
+    :y "3px"
+    :width "100%"
+    :height "30px"
+    :anchor "top center")
+  :stacking "fg"
+  :exclusive true
+  :focusable false
+  (bar)
+)
+(defwindow calendar
+  :monitor 0
+    :geometry (geometry 					
+      :x "70px" 
+      :y "0px" 
+      :width "270px" 
+      :height "60px")
+  (cal)
+)

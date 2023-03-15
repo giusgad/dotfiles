@@ -83,7 +83,7 @@ map("n", "<leader>tn", ":tabnew<CR>")
 map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")
 -- LSP
-map("n", "<leader>jD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz") -- TODO zz not working
+map("n", "<leader>jD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz") -- TODO: zz not working
 map("n", "<leader>jd", "<cmd>lua vim.lsp.buf.definition()<CR>zz")
 map("n", "<leader>f<space>", ":lua vim.lsp.buf.format()<CR>")
 map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>")
@@ -113,10 +113,24 @@ if saga_ok then
 	end)
 end
 
+-- GITSIGNS
+local gs_ok, gs = pcall(require, "gitsigns")
+if gs_ok then
+	vim.keymap.set("n", "<leader>gp", gs.preview_hunk, opts)
+	vim.keymap.set("n", "<leader>gb", function()
+		gs.blame_line({ full = true })
+	end, opts)
+	vim.keymap.set("n", "<leader>gl", gs.toggle_current_line_blame, opts)
+	vim.keymap.set("n", "<leader>gd", gs.diffthis, opts)
+	vim.keymap.set("n", "<leader>gD", function()
+		gs.diffthis("~")
+	end, opts)
+	vim.keymap.set("n", "<leader>gr", gs.toggle_deleted, opts)
+end
 -- TROUBLE
 local trouble_ok, _ = pcall(require, "trouble")
 if trouble_ok then
-	vim.keymap.set("n", "<leader>ve", require("trouble").toggle)
+	vim.keymap.set("n", "<leader>vt", require("trouble").toggle)
 end
 
 -- TELESCOPE
@@ -200,7 +214,6 @@ if dial_ok then
 end
 
 -- PETS
-
 local pets_ok = pcall(require, "pets")
 if pets_ok then
 	map("n", "<leader>PP", ":PetsPauseToggle<CR>")
@@ -208,3 +221,6 @@ if pets_ok then
 	map("n", "<leader>PS", ":PetsSleepToggle<CR>")
 	vim.keymap.set("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>", opts)
 end
+
+-- LEAP
+vim.keymap.del({ "x", "o" }, "x") -- remove keymapping in visual mode
