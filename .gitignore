@@ -1,3 +1,4 @@
 /.config/nvim/lazy-lock.json
 /.config/nvim/plugin/
 /.config/nvim/lua/.luarc.json
+/.config/eww/locks

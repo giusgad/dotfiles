@@ -1,0 +1,32 @@
+(defwidget volume []
+  (eventbox
+    :onhover "eww update volume-open=true"
+    :onhoverlost "eww update volume-open=false"
+    :onclick "pamixer --toggle-mute"
+    (box
+      :class "volume"
+      :space-evenly false
+      (label
+        :text "${volume-icon} ${current-volume}%"
+      )
+      (revealer
+        :reveal volume-open
+        :transition "slideright"
+        :duration "200ms"
+        (scale
+          :class "slider"
+          :value current-volume 
+          :onchange { volume-open ? "pamixer --allow-boost --set-volume {}" : "" }
+          :timeout "1s"
+          :round-digits 0
+          :orientation "h"
+          :max 151 
+          :min 0
+        )
+      )
+    )
+  )
+)
+(defvar volume-open false)
+(defpoll current-volume :interval "1s" "scripts/volume volume")
+(defpoll volume-icon :interval "1s" "scripts/volume icon")

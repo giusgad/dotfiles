@@ -1,0 +1,35 @@
+(defwidget bat []
+  (eventbox
+    :onhover "eww update battery-reveal=true"
+    :onhoverlost "eww update battery-reveal=false"
+    (box
+      :class "battery-${battery-status}"
+      :space-evenly false
+      (overlay
+        (label
+          :class "bat"		
+          :text "${battery-icon} ${battery-percent}%"
+        )
+        (button
+          :onclick "eww update battery-reveal=${ battery-reveal ? false : true }"
+        )
+      )
+      (revealer
+        :transition "slideright"
+        :duration "300ms"
+        :reveal {battery-reveal}
+        (box
+          :class "battery-time"
+          (label
+            :text "${battery-time}"
+          )
+        )
+      )
+    )
+  )
+)
+(defvar battery-reveal false)
+(defpoll battery-icon :interval "1s" "scripts/battery icon")
+(defpoll battery-time :interval "1s" "scripts/battery time")
+(defpoll battery-percent :interval "1s" :initial -1 "scripts/battery percent")
+(defpoll battery-status :interval "1s" :initial -1 "scripts/battery status")

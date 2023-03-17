@@ -1,59 +1,104 @@
-$aqua: #689d6a;
-$blue: #458488;
-$purple: #b16286;
-$green: #98971a;
-$yellow: #d79921;
+$aqua-dark: #689d6a;
+$blue-dark: #458488;
+$purple-dark: #b16286;
+$green-dark: #98971a;
+$yellow-dark: #d79921;
+$red-dark: #cc241d;
+$aqua-light: #8ec07c;
+$blue-light: #83a598;
+$purple-light: #d3869b;
+$green-light: #b8bb26;
+$yellow-light: #fabd2f;
+$red-light: #fb4934;
 $fg: #ebdbb2;
 $bg: #282828;
 
 @function random-color() {
-  $colors: $aqua, $blue, $purple, $green;
+  $colors: $aqua-dark, $blue-dark, $purple-dark, $green-dark;
   $random-index: random(length($colors));
   @return nth($colors, $random-index);
 }
 
-* {
-  all: unset; //Unsets everything so you can style everything from scratch
-  font-family: Caskaydia Cove Nerd Font;
-  color: $fg;
-}
-
-.floating {
+@mixin section {
   padding: 3px 10px;
   background-color: $bg;
-  margin-left: 5px;
-  margin-right: 5px;
   border-radius: 15px;
 }
 
-.section {
-  @for $i from 1 through length(&)+1 {
-    &:nth-child(#{$i}) {
-      background-color: random-color();
-    }
-  }
+@mixin bubble {
   padding: 2px 10px;
   margin: 0px 5px;
   border-radius: 15px;
 }
 
-.battery-charging {
-    @extend .section;
-    background-color: $blue;
-}
-.battery-discharging {
-    @extend .section;
-    background-color: $yellow;
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-family: Caskaydia Cove Nerd Font;
+  font-size: 16;
+  color: $fg;
 }
 
-.cal-box {
-  background-color: green;
+tooltip {
+  @include section;
+  border: 2px solid random-color();
+  // font-size: 18px;
 }
 
-.time {
-  font-size:16;
+scale trough {
+  all: unset;
+  background-color: $fg;
+  border-radius: 5px;
+  min-height: 10px;
+  min-width: 80px;
+  margin-left: 5px;
 }
 
 .logo {
-    padding-left: 2px;
+  @include bubble;
+  background-color: $blue-dark;
+  padding-left: 8px;
+  padding-right: 15px;
+}
+
+.clock {
+  @include bubble;
+  background-color: $purple-dark;
+}
+.brightness {
+    @include bubble;
+    background-color: $green-dark;
+}
+.slider trough highlight {
+  background-color: $yellow-dark;
+  border-radius: 5px;
+}
+
+.volume {
+    @include bubble;
+    background-color: $aqua-dark;
+}
+
+.floating {
+  @include section;
+  margin: 0px 5px;
+}
+
+.battery-Charging {
+    @include bubble;
+    background-color: $aqua-dark;
+}
+.battery-Discharging {
+    @include bubble;
+    background-color: $yellow-dark;
+}
+.battery-conservation {
+  margin-left: 10px;
+}
+.battery-time {
+  margin-left: 10px;
+}
+
+
+.cal-box {
+  background-color: green;
 }

@@ -1,4 +1,8 @@
 ; #### WIDGETS ####
+(include "./widgets/battery.yuck")
+(include "./widgets/brightness.yuck")
+(include "./widgets/volume.yuck")
+
 ; WORKSPACES
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
@@ -19,19 +23,6 @@
     )
   )
 )
-
-; BATTERY
-(defwidget bat []
-  (box
-    :class "section"
-    (label
-      :class "bat"		
-      :text "${battery-icon} ${battery-percent}%"
-    )
-  )
-)
-(defpoll battery-icon :interval "1s"	"scripts/battery icon")
-(defpoll battery-percent :interval "1s" :initial -1 "scripts/battery percent")
 
 ; DATE AND TIME
 (defwidget clock []
@@ -60,34 +51,34 @@
 (defpoll calendar_month :interval "12h" "$(($(date +%m)-1))")
 (defpoll calendar_year :interval "12h" "date '+%Y'")
 
-(defwidget right []
-  (box
-    :class "floating"
-    :halign "end"
-    :space-evenly false
-    :spacing 10
-    (bat)
-    (label
-      :text "test")
-  )
-)
-
 (defwidget left []
   (box
     :halign "start"
     :class "floating"
     :space-evenly false
+    :spacing 0
     (box
-      :class "section"
+      :class "logo"
       (label
-        :class "logo"
-        :text " "
+        :text ""
       )
     )
     (box
-      :class "section"
+      :class "clock"
       (clock)
     )
+  )
+)
+
+(defwidget right []
+  (box
+    :class "floating"
+    :halign "end"
+    :space-evenly false
+    :spacing 0
+    (bat)
+    (brightness)
+    (volume)
   )
 )
 

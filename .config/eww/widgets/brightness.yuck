@@ -1,0 +1,30 @@
+(defwidget brightness []
+  (eventbox
+    :onhover "eww update bright-open=true"
+    :onhoverlost "eww update bright-open=false"
+    (box
+      :class "brightness"
+      :space-evenly false
+      (label
+        :text "󰃠 ${current-brightness}%"
+      )
+      (revealer
+        :reveal bright-open
+        :transition "slideright"
+        :duration "200ms"
+        (scale
+          :class "slider"
+          :value current-brightness 
+          :onchange { bright-open ? "brightnessctl set {}%" : "" }
+          :timeout "1s"
+          :round-digits 0
+          :orientation "h"
+          :max 101 
+          :min 0
+        )
+      )
+    )
+  )
+)
+(defvar bright-open false)
+(defpoll current-brightness :interval "1s" "brightnessctl -m -d amdgpu_bl0 | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")

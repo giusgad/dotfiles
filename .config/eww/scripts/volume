@@ -1,0 +1,29 @@
+#!/bin/sh
+
+volume() {
+    volume=$(pamixer --get-volume)
+    echo $volume
+}
+
+icon () {
+
+    if [ "$(pamixer --get-mute)" = "true" ]; then
+        echo "󰖁"
+        exit
+    fi
+    volume=$(volume)
+
+    if [ $volume -ge 80 ]; then
+        icon="󰕾"
+    elif [ $volume -ge 30 ]; then
+        icon="󰖀"
+    else
+        icon="󰕿"
+    fi
+
+    echo $icon
+}
+
+[[ "$1" = "icon" ]] && icon && exit
+[[ "$1" = "volume" ]] && volume && exit
+exit

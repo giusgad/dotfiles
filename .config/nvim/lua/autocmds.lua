@@ -1,11 +1,11 @@
--- indentation
---[[ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = "*.lua",
+-- indentation to 2 spaces
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	pattern = { "*.scss", "*.css" },
 	callback = function()
-        vim.bo.shiftwidth = 2
+		vim.bo.shiftwidth = 2
 		vim.bo.expandtab = false
 	end,
-}) ]]
+})
 -- open help in vsplit
 vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
 	pattern = "*.txt",

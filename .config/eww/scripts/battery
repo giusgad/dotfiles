@@ -5,8 +5,6 @@ per="$(cat "$bat/capacity")"
 
 icon() {
 
-    [ $(cat "$bat/status") = Charging ] && echo "" && exit
-
     if [ "$per" -gt "90" ]; then
         icon=""
     elif [ "$per" -gt "80" ]; then
@@ -28,15 +26,27 @@ icon() {
     elif [ "$per" -gt "0" ]; then
         icon=""
     else
-        echo  && exit
+        icon=""
     fi
-    echo "$icon"
+
+    if [ $(cat "$bat/status") = Charging ]; then
+        icon="${icon}"
+    fi
+    echo $icon
 }
 
 percent() {
     echo $per
 }
 
+time_left=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep time)
+
+time_left() {
+    echo $time_left
+}
+
 [ "$1" = "icon" ] && icon && exit
 [ "$1" = "percent" ] && percent && exit
+[ "$1" = "time" ] && time_left && exit
+[ "$1" = "status" ] && echo $(cat "$bat/status") && exit
 exit

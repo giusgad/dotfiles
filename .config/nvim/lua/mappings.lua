@@ -15,6 +15,8 @@ local buffer_opts = { noremap = true, silent = true, buffer = true }
 
 -- remove stupid annoying thing
 map({ "n", "v" }, "q:", "<nop>")
+-- remap <C-w> for buffers
+map("n", "<C-q>", "<C-w>")
 
 -- MOVEMENTS
 -- center cursor when going down or up by half pages
@@ -79,9 +81,12 @@ map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
 map("n", "<leader>e", ":NvimTreeToggle<cr>")
 -- Buffers
 map("n", "<leader>td", ":Bdelete<cr>")
+map("n", "<C-w>", ":Bdelete<cr>")
 map("n", "<leader>tn", ":tabnew<CR>")
 map("n", "<S-l>", ":bnext<CR>")
 map("n", "<S-h>", ":bprevious<CR>")
+map("n", "<C-Tab>", ":bnext<CR>")
+map("n", "<C-S-Tab>", ":bprevious<CR>")
 -- LSP
 map("n", "<leader>jD", "<cmd>lua vim.lsp.buf.declaration()<CR>zz") -- TODO: zz not working
 map("n", "<leader>jd", "<cmd>lua vim.lsp.buf.definition()<CR>zz")
