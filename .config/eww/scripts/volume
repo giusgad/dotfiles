@@ -21,9 +21,21 @@ icon () {
         icon="󰕿"
     fi
 
+    if [ "$(bluetooth)" = "true" ]; then
+        icon="󰥰$icon"
+    fi
     echo $icon
+}
+
+bluetooth() {
+    if [ ! "$(pamixer --get-default-sink | grep bluez)" = "" ]; then
+        echo true
+    else
+        echo false
+    fi
 }
 
 [[ "$1" = "icon" ]] && icon && exit
 [[ "$1" = "volume" ]] && volume && exit
+[[ "$1" = "bluetooth-status" ]] && bluetooth && exit
 exit

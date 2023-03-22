@@ -1,0 +1,26 @@
+(include "./widgets/cp/wifi.yuck")
+(include "./widgets/cp/bluetooth.yuck")
+
+(defwidget control []
+  (eventbox
+    :onhoverlost "/home/giuseppe/.scripts/eww_toggle.sh cp off"
+    (box
+      :class "control-panel"
+      :space-evenly false
+      :valign "start"
+      :orientation "v"
+      (wifi)
+      (bluetooth)
+    )
+  )
+)
+
+(defwindow cp
+  :monitor 0
+    :geometry (geometry
+      :x "80%"
+      :y "0px"
+      :width "20%"
+      :height "90%")
+  (control)
+)

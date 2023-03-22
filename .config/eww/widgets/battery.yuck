@@ -7,7 +7,6 @@
       :space-evenly false
       (overlay
         (label
-          :class "bat"		
           :text "${battery-icon} ${battery-percent}%"
         )
         (button

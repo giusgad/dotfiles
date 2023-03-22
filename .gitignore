@@ -2,3 +2,4 @@
 /.config/nvim/plugin/
 /.config/nvim/lua/.luarc.json
 /.config/eww/locks
+/.config/fish/fish_variables

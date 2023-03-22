@@ -1,0 +1,8 @@
+#!/bin/bash
+
+app_icon() {
+
+}
+
+[ "$1" = icon ] && app_icon && exit
+exit

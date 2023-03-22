@@ -1,0 +1,57 @@
+(defwidget dropdown [class title icon click-event dropdown-var var-name entries-json menu-click-event more-event]
+  (box
+    :orientation "v"
+    :space-evenly false
+    :class class
+    (box
+      :space-evenly false
+      (label :text icon :class "dropdown-icon")
+      (button :onclick click-event :hexpand true
+        (label :text title :limit-width 20)
+      )
+      (button
+        :onclick "eww update ${var-name}=${!dropdown-var}"
+        :halign "end"
+        (label :text "${dropdown-var ? "" : ""}"
+        :class "dropdown-button"
+        )
+      )
+    )
+    (revealer
+      :reveal dropdown-var
+      :transition "slidedown"
+      :duration "500ms"
+      (box
+        :space-evenly false
+        :orientation "v"
+        (box
+          :orientation "v"
+          :class "menu"
+          :space-evenly false
+          (for entry in entries-json
+            (entry :icon icon :text entry :event menu-click-event)
+          )
+        )
+        (button :onclick more-event :style "margin-top: 10px;" "more 󰇘")
+      )
+    )
+  )
+)
+
+(defwidget entry [text icon event]
+  (button
+    :onclick "${event} ${text}"
+    (box
+      :class "menu-entry"
+      :space-evenly false
+      (label
+        :text text
+        :hexpand true
+        :limit-width 20
+      )
+      (label
+        :text icon
+      )
+    )
+  )
+)

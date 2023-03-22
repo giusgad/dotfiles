@@ -1,0 +1,22 @@
+(defwidget bluetooth []
+  (dropdown
+    :class "bluetooth-dropdown-${bluetooth-status}"
+    :click-event "bluetooth toggle"
+    :dropdown-var bluetooth-show
+    :var-name "bluetooth-show"
+    :title "${bluetooth-status=="on" ? "" : "Bluetooth: off"}${bluetooth-device}"
+    :icon ""
+    :entries-json bluetooth-available-devices
+    :menu-click-event "scripts/bluetooth connect"
+    :more-event "bluedevil-wizard &"
+  )
+)
+
+(defvar bluetooth-show false)
+(defpoll bluetooth-status :interval "1s" "scripts/bluetooth status")
+(defpoll bluetooth-device :interval "1s" "scripts/bluetooth get-device")
+(defpoll bluetooth-available-devices
+  :run-while cp-window-active
+  :interval "10s"
+  "scripts/bluetooth devices"
+)

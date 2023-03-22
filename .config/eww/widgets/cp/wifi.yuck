@@ -1,0 +1,24 @@
+(include "./widgets/cp/dropdown.yuck")
+
+(defwidget wifi []
+  (dropdown
+    :class "wifi-dropdown-${wifi-status}"
+    :click-event "wifi toggle"
+    :dropdown-var wifi-show
+    :var-name "wifi-show"
+    :title "${wifi-status=="on" ? "" : "Wi-Fi: off"}${wifi-network}"
+    :icon "󰖩"
+    :entries-json wifi-available-networks
+    :menu-click-event "nmcli device wifi connect"
+    :more-event "kitty nmtui &"
+  )
+)
+
+(defvar wifi-show false)
+(defpoll wifi-status :interval "1s" "scripts/wifi status")
+(defpoll wifi-network :interval "1s" "scripts/wifi get-network")
+(defpoll wifi-available-networks
+  :run-while cp-window-active
+  :interval "10s"
+  "scripts/wifi networks"
+)

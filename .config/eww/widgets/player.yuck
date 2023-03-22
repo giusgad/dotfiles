@@ -1,0 +1,12 @@
+(defwidget player-bar []
+  (box
+    :class "bubble"
+    :visible {playing != ""}
+    (label
+      :text playing
+      :limit-width 40
+    )
+  )
+)
+
+(defpoll playing :interval "1s" "playerctl metadata --format '{{ title }} - {{ artist }}'")

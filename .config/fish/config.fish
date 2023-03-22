@@ -15,7 +15,7 @@ bind \e\[3\;5~ kill-word
 bind -k nul --mode insert accept-autosuggestion
 bind --mode insert \b backward-kill-word
 bind --mode insert \cp up-or-search
-bind --mode insert \co down-or-search 
+bind --mode insert \cn down-or-search 
 bind --mode insert \c] 'clear; commandline -f repaint'
 bind --mode default \c] 'clear; commandline -f repaint'
 
@@ -51,19 +51,9 @@ function __history_previous_command_arguments
     commandline -i '$'
   end
 end
-bind ! __history_previous_command
-bind '$' __history_previous_command_arguments
 
-if test "$fish_key_bindings" = 'fish_vi_key_bindings'
-    bind --mode insert ! __history_previous_command
-    bind --mode insert '$' __history_previous_command_arguments
-end
-
-function _plugin-bang-bang_uninstall --on-event plugin-bang-bang_uninstall
-    bind --erase --all !
-    bind --erase --all '$'
-    functions --erase _plugin-bang-bang_uninstall
-end
+bind --mode insert ! __history_previous_command
+bind --mode insert '$' __history_previous_command_arguments
 
 # set man pages colors - see https://man.archlinux.org/man/less.1#D
 set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'

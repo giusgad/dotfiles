@@ -2,16 +2,20 @@
 (include "./widgets/battery.yuck")
 (include "./widgets/brightness.yuck")
 (include "./widgets/volume.yuck")
+(include "./control_panel.yuck")
+(include "./widgets/player.yuck")
+
+(defvar cp-window-active false)
 
 ; WORKSPACES
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
 (defwidget workspaces []
   (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
-      :class "workspaces-widget"
       :halign "start"
     (box :space-evenly true
-      (label :text "${workspaces}${current_workspace}" :visible false)
+      :class "workspaces"
+      ; (label :text "${workspaces}${current_workspace}" :visible false)
       (for workspace in workspaces
         (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
           (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
@@ -21,6 +25,24 @@
         )
       )
     )
+  )
+)
+
+; TRAY
+(defwidget tray []
+  (box
+    :class "tray"
+    :space-evenly false
+    (button
+      :class "tray-element"
+      :onclick "wifi toggle"
+      :tooltip " ${wifi-network=="" ? "Wi-fi off" : wifi-network} "
+      "${wifi-status=="on" ? "󰖩" : "󰖪"}" )
+    (button
+      :class "tray-element"
+      :onclick "bluetooth toggle"
+      :tooltip " ${bluetooth-device=="" ? "Bluetooth off" : bluetooth-device} "
+      "${bluetooth-status=="on" ? "󰂯" : "󰂲"}" )
   )
 )
 
@@ -51,6 +73,7 @@
 (defpoll calendar_month :interval "12h" "$(($(date +%m)-1))")
 (defpoll calendar_year :interval "12h" "date '+%Y'")
 
+; FLOATS
 (defwidget left []
   (box
     :halign "start"
@@ -63,10 +86,21 @@
         :text ""
       )
     )
+    (workspaces)
+  )
+)
+
+(defwidget center []
+  (box
+    :halign "center"
+    :class "floating"
+    :space-evenly false
+    :spacing 0
     (box
       :class "clock"
       (clock)
     )
+    (player-bar)
   )
 )
 
@@ -79,19 +113,21 @@
     (bat)
     (brightness)
     (volume)
+    (tray)
+    (button
+      :class "bubble"
+      :onclick "~/.scripts/eww_toggle.sh cp"
+      "󰇘"
+    )
   )
 )
 
 ; BAR - everything together
 (defwidget bar []
-  (box
+  (centerbox
     :class "bar"
     (left)
-    (box
-      :class "floating"
-      :halign "center"
-      (workspaces)
-    )
+    (center)
     (right)
   )
 )

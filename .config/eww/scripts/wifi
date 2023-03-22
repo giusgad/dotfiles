@@ -1,0 +1,33 @@
+#/bin/bash
+
+get_status() {
+    wifi | awk '{print $3}'
+}
+
+get_network() {
+    if [ $(get_status) = on ]; then
+        state=$(nmcli device status | grep wifi | awk '{print $3}')
+        if [ "$state" = "connected" ]; then
+            nmcli device status | grep wifi | awk '{print $4}'
+        else
+            nmcli device status | grep wifi | awk '{print $3}'
+        fi
+    fi
+}
+
+available_networks() {
+    if [ ! $(get_status) = "on" ]; then
+        exit
+    fi
+    active=$(get_network)
+    # remove active and duplicates and limit to 10 lines
+    networks=$(nmcli -g SSID device wifi list | awk '!a[$0]++' | sed "s/${active}//" | grep -v '^[[:blank:]]*$' | head -n 10)
+    networks=$(sed 's/.*/"&"/' <<< "$networks" | tr '\n' ',')
+    networks="[${networks%,}]"
+    echo $networks
+}
+
+[ "$1" = "status" ] && get_status && exit
+[ "$1" = "get-network" ] && get_network && exit
+[ "$1" = "networks" ] && available_networks && exit
+exit

@@ -4,7 +4,7 @@
     :onhoverlost "eww update volume-open=false"
     :onclick "pamixer --toggle-mute"
     (box
-      :class "volume"
+      :class "${volume-bluetooth == "false" ? "volume" : "volume-bluetooth"}"
       :space-evenly false
       (label
         :text "${volume-icon} ${current-volume}%"
@@ -30,3 +30,4 @@
 (defvar volume-open false)
 (defpoll current-volume :interval "1s" "scripts/volume volume")
 (defpoll volume-icon :interval "1s" "scripts/volume icon")
+(defpoll volume-bluetooth :interval "2s" "scripts/volume bluetooth-status")

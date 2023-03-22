@@ -97,7 +97,7 @@ require("lazy").setup({
 	{
 		"epwalsh/obsidian.nvim",
 		config = true,
-		opts = { dir = "/mnt/shared/obsidian/vault/", completion = { nvim_cmp = true }, disable_frontmatter = true },
+		opts = { dir = "~/Documents/obsidian/vault/", completion = { nvim_cmp = true }, disable_frontmatter = true },
 		ft = "markdown",
 	},
 	{
