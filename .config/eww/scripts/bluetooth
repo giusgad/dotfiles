@@ -11,9 +11,6 @@ get_device() {
             device="Not connected"
         fi
         icon=$(bluetoothctl info F4:4E:FD:00:08:67 | grep Icon | awk '{print $2}')
-        if [ "$icon" = "audio-headset" ]; then
-            device="󰥰 $device"
-        fi
     fi
     echo $device
 }

@@ -28,7 +28,7 @@ require("lazy").setup({
 		"giusgad/pets.nvim",
 		dependencies = { "MunifTanjim/nui.nvim", { "giusgad/hologram.nvim", dev = false } },
 		lazy = false,
-		dev = true,
+		dev = false,
 	},
 
 	-- UTILITY
