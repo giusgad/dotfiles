@@ -97,6 +97,11 @@ map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>")
 -- map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>")
 
 -- PLUGINS
+-- NOTIFY
+local notify_ok, notify = pcall(require, "notify")
+if notify_ok then
+	vim.keymap.set({ "n", "v" }, "<leader>h", notify.dismiss)
+end
 -- LSPSAGA
 local saga_ok, _ = pcall(require, "lspsaga")
 if saga_ok then
