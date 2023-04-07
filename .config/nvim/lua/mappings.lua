@@ -18,6 +18,9 @@ map({ "n", "v" }, "q:", "<nop>")
 -- remap <C-w> for buffers
 map("n", "<C-q>", "<C-w>")
 
+-- TERM
+vim.keymap.set("t", "<C-esc>", "<C-\\><C-n>", opts)
+
 -- MOVEMENTS
 -- center cursor when going down or up by half pages
 map({ "v", "n" }, "<C-d>", "<C-d>zz")
@@ -29,6 +32,7 @@ map({ "v", "n" }, "N", "Nzz")
 -- vim.keymap.set("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
 map({ "v", "n" }, "0", "^")
 map({ "v", "n" }, "^", "0")
+map({ "v", "n" }, "<C-%>", "$%")
 
 -- OTHER
 -- use sys clipboard

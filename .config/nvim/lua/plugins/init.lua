@@ -199,7 +199,7 @@ require("lazy").setup({
 			require("leap").add_default_mappings()
 		end,
 	},
-	{ "ggandor/flit.nvim", config = true },
+	-- { "ggandor/flit.nvim", config = true, dependencies = { "tpope/vim-repeat" } },
 }, {
 	dev = { path = "/home/giuseppe/coding/lua/plugins/" },
 })

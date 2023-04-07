@@ -75,11 +75,14 @@ scale trough {
 
 .clock {
   @include bubble;
-  background-color: $purple-dark;
+  background-color: $yellow-dark;
 }
 
 .workspaces {
   padding: 2px 5px;
+}
+.workspace-entry {
+  padding: 0px 0.25em;
 }
 
 .brightness {

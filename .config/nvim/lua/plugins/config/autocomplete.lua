@@ -14,6 +14,8 @@ local check_backspace = function() -- made for supertab source:https://github.co
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
 end
 
+vim.api.nvim_set_hl(0, "CmpPmenu", { link = "GruvboxGray" })
+
 cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
@@ -86,6 +88,14 @@ cmp.setup({
 			return vim_item
 		end,
 		max_height = 3,
+	},
+	window = {
+		documentation = cmp.config.window.bordered({
+			winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+		}),
+		completion = cmp.config.window.bordered({
+			winhighlight = "Normal:CmpPmenu,CmpPmenu:PmenuSel,Search:None",
+		}),
 	},
 })
 

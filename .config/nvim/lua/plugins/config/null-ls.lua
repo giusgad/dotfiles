@@ -17,6 +17,7 @@ null_ls.setup({
 		formatting.gofmt,
 		-- sources installed with mason are setup automatically
 		code_actions.gitsigns,
+		formatting.prettierd.with({ extra_args = { "--no-semi" } }),
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = function(client, bufnr)

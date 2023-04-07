@@ -41,7 +41,13 @@ percent() {
 time_left=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep time)
 
 time_left() {
-    echo $time_left
+    time="${time_left#*:}"
+    title="${time_left%%:*}"
+    minutes=$(echo "${time#*.}"|awk '{print $1}')
+    minutes=$(echo "60*0.$minutes"|bc)
+    minutes="${minutes%%.*}m"
+    time="${time%%.*}h"
+    echo $title:$time $minutes
 }
 
 [ "$1" = "icon" ] && icon && exit

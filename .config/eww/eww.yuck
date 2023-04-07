@@ -18,8 +18,10 @@
       ; (label :text "${workspaces}${current_workspace}" :visible false)
       (for workspace in workspaces
         (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
-          (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
-            (label :text "${workspace.id == current_workspace ? " " : (workspace.windows > 0 ? " " : " ")}")
+          (box
+            ;; :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+            :class "workspace-entry"
+            (label :text "${workspace.id == current_workspace ? "" : (workspace.windows > 0 ? "" : "")}")
             ;   
           )
         )

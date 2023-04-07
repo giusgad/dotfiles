@@ -23,7 +23,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true -- to do case sensitve add \C
 
 -- APPEARANCE
-vim.opt.guifont = "Caskaydia Cove Nerd Font"
+-- vim.opt.guifont = "Caskaydia Cove Nerd Font" -- set by terminal
 vim.opt.signcolumn = "yes" -- always show SignColumn
 vim.opt.laststatus = 3
 require("colors")
