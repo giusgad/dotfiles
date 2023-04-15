@@ -53,21 +53,19 @@
   (box
     :class "time" 
     (button
-      :onclick "scripts/popup calendar"	
+      :onclick "~/.scripts/eww_toggle.sh calendar"	
       time)
   )
 )
 (defpoll time :interval "1s" "date '+%H:%M'")
 
 (defwidget cal []
-  (box :class "floating" 
+  (box :class "calendar-window" 
     (calendar
-      :class "cal" 
+      :class "calendar" 
       :day calendar_day 
       :month calendar_month 
       :year calendar_year
-      :show-details true
-      :show-heading true
     )
   )
 )
@@ -151,8 +149,8 @@
 (defwindow calendar
   :monitor 0
     :geometry (geometry 					
-      :x "70px" 
-      :y "0px" 
+      :x "40%" 
+      :y "5px" 
       :width "270px" 
       :height "60px")
   (cal)

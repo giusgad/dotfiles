@@ -109,12 +109,12 @@ scale trough {
 }
 
 .battery-Charging {
-    @include bubble;
-    background-color: $aqua-dark;
+  @include bubble;
+  background-color: $aqua-dark;
 }
 .battery-Discharging {
-    @include bubble;
-    background-color: $yellow-dark;
+  @include bubble;
+  background-color: $yellow-dark;
 }
 .battery-Full {
   @include bubble;
@@ -139,8 +139,17 @@ scale trough {
 
 // CALENDAR //
 
-.cal-box {
-  background-color: green;
+.calendar-window {
+  background-color: $bg;
+  padding: 15px;
+  border-radius: 15px;
+}
+.calendar {
+  border: 1px solid $yellow-dark;
+  border-radius: 15px;
+}
+.calendar:selected {
+  background-color: $gray;
 }
 
 // CONTROL PANEL //
