@@ -3,7 +3,7 @@
     :onhover "eww update battery-reveal=true"
     :onhoverlost "eww update battery-reveal=false"
     (box
-      :class "battery-${battery-status}"
+      :class {battery-percent>15 ? "battery-${battery-status}" : "battery-low"}
       :space-evenly false
       (overlay
         (label

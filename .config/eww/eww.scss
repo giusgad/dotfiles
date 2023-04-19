@@ -127,6 +127,10 @@ scale trough {
 .battery-time {
   margin-left: 10px;
 }
+.battery-low {
+  @include bubble;
+  background-color: $red-light;
+}
 
 .tray {
   @include bubble;

@@ -43,11 +43,16 @@ time_left=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep time)
 time_left() {
     time="${time_left#*:}"
     title="${time_left%%:*}"
-    minutes=$(echo "${time#*.}"|awk '{print $1}')
-    minutes=$(echo "60*0.$minutes"|bc)
-    minutes="${minutes%%.*}m"
-    time="${time%%.*}h"
-    echo $title:$time $minutes
+    if [[ $time == *"hours"* ]]; then
+        minutes=$(echo "${time#*.}"|awk '{print $1}')
+        minutes=$(echo "60*0.$minutes"|bc)
+        minutes="${minutes%%.*}m"
+        time="${time%%.*}h"
+        echo $title:$time $minutes
+    else
+        minutes=${time%%.*}
+        echo $title: $minutes minutes
+    fi
 }
 
 [ "$1" = "icon" ] && icon && exit
