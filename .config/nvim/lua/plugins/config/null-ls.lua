@@ -15,8 +15,8 @@ null_ls.setup({
 	sources = {
 		-- code_actions.refactoring, -- requires refactoring plugin
 		formatting.gofmt,
+		code_actions.rust_analyzer,
 		-- sources installed with mason are setup automatically
-		code_actions.gitsigns,
 		formatting.prettierd.with({ extra_args = { "--no-semi" } }),
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
@@ -30,9 +30,9 @@ null_ls.setup({
 					vim.lsp.buf.format({
 						bufnr = bufnr,
 						-- use null-ls as default formatter without asking
-						--[[ filter = function(client)
-							return client.name == "null-ls"
-						end, ]]
+						-- filter = function(client)
+						-- 	return client.name == "null-ls"
+						-- end,
 					})
 				end,
 			})
