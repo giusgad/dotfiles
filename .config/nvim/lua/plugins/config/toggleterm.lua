@@ -12,9 +12,11 @@ toggleterm.setup({
 	},
 	highlights = {
 		FloatBorder = {
+			Normal = { link = "Normal" },
+			NormalFloat = { link = "Normal" },
 			guifg = "#d79921",
 		},
 	},
-	-- shade_terminals = false,
+	shade_terminals = false,
 	-- shading_factor = 100,
 })

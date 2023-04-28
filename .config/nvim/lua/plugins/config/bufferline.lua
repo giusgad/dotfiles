@@ -21,13 +21,18 @@ bufferline.setup({
         -- close_icon = '',
         left_trunc_marker = "",
         right_trunc_marker = "",
-
+        name_formatter = function(buf)
+            if vim.startswith(buf.name, "index") or vim.startswith(buf.name, "page") then
+                name = string.match(buf.path, ".*[\\/](.-)[\\/](.-)$")
+                return name .. "/" .. buf.name
+            end
+            return buf.name
+        end,
         max_name_length = 30,
         max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
         tab_size = 21,
         diagnostics = false, -- | "nvim_lsp" | "coc",
         diagnostics_update_in_insert = false,
-
         offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
         show_buffer_icons = false,
         -- color_icons = false,

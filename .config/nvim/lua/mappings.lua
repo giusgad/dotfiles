@@ -235,6 +235,3 @@ if pets_ok then
 	map("n", "<leader>PS", ":PetsSleepToggle<CR>")
 	vim.keymap.set("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>", opts)
 end
-
--- LEAP
-vim.keymap.del({ "x", "o" }, "x") -- remove keymapping in visual mode
