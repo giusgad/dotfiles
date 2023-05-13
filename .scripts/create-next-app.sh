@@ -6,12 +6,14 @@ npx create-next-app $1 --ts --app
 cd $1
 rm -r public/*
 rm -r app/*
+rm -r src/*
 rm README.md
-mkdir styles
-mkdir components
+mkdir src/styles
+mkdir src/app
+# mkdir components
 
-echo "*{margin:0;padding:0;box-sizing:none;}body,html{max-width:100vw;}a{text-decoration:none;color:inherit;}" > styles/globals.scss
-prettier -w styles/globals.scss #> /dev/null
+echo "*{margin:0;padding:0;box-sizing:none;}body,html{max-width:100vw;}a{text-decoration:none;color:inherit;}" > src/styles/globals.scss
+prettier -w src/styles/globals.scss #> /dev/null
 
 echo 'import "@/styles/globals.scss"
 
@@ -33,17 +35,17 @@ export default function RootLayout({
 		</html>
 	)
 }
-' > app/layout.tsx
+' > src/app/layout.tsx
 echo 'export default function Home() {
   return (
     <>
     <h1>CONTENT HERE</h1>
     </>
   )
-}' > app/page.tsx
+}' > src/app/page.tsx
 
-prettier -w app/*
+prettier -w src/app/*
 
 npm i sass
 
-echo "\nNext app created and cleaned up :)"
+echo "Next app created and cleaned up :)"
