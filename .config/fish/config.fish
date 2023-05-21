@@ -73,8 +73,11 @@ alias anaconda='eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $arg
 ### AUTOJUMP
 if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
 
-### IMPORT ALIASES
+### ALIASES
 source "$HOME/.aliases"
+function mvk
+    mkdir $argv[1]; mv -t $argv
+end
 
 ### STARSHIP PROMPT
 starship init fish | source
