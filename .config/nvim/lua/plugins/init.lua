@@ -159,13 +159,14 @@ require("lazy").setup({
     {
         "saecki/crates.nvim",
         config = true,
-        options = {
+        opts = {
             null_ls = {
                 enabled = true,
             },
         },
     },
     { "simrat39/rust-tools.nvim", ft = { "rust", "toml" }, config = true },
+    { "windwp/nvim-ts-autotag", config = true, main = "nvim-ts-autotag" },
 
     -- DEBUGGING
     "mfussenegger/nvim-dap",
