@@ -60,6 +60,7 @@ require("lazy").setup({
     },
     "christoomey/vim-tmux-navigator",
     "monaqa/dial.nvim",
+    { "ziontee113/color-picker.nvim", config = true },
     -- { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } }, -- fold
 
     -- MINIGAMES
@@ -81,7 +82,7 @@ require("lazy").setup({
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
     "nvim-treesitter/playground", -- tools
     "RRethy/vim-illuminate",
-    "mrjones2014/nvim-ts-rainbow",
+    "HiPhish/rainbow-delimiters.nvim",
 
     -- LUALINE
     {
