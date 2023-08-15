@@ -6,11 +6,11 @@ get_status() {
 
 get_network() {
     if [ $(get_status) = on ]; then
-        state=$(nmcli device status | grep wifi | awk '{print $3}')
+        state=$(nmcli device status | grep "wifi " | awk '{print $3}')
         if [ "$state" = "connected" ]; then
-            nmcli device status | grep wifi | awk '{$1=$2=$3="";print substr($0,4)}'
+            nmcli device status | grep "wifi " | awk '{$1=$2=$3="";print substr($0,4)}'
         else
-            nmcli device status | grep wifi | awk '{print $3}'
+            nmcli device status | grep "wifi " | awk '{print $3}'
         fi
     fi
 }
