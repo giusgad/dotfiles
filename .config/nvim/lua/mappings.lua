@@ -111,7 +111,7 @@ local saga_ok, _ = pcall(require, "lspsaga")
 if saga_ok then
     map("n", "<leader>vh", "<cmd>Lspsaga finder<CR>") -- view all options
     map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>") -- code action
-    map("n", "<leader>vr", "<cmd>Lspsaga rename ++project<CR>") -- rename
+    map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>") -- rename
     map("n", "<leader>vd", "<cmd>Lspsaga peek_definition<CR>") -- definition in floating window
     map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>") -- show line diagnostics
     map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>") -- show cursor diagnostic
