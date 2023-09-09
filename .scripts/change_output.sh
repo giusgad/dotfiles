@@ -14,10 +14,12 @@ function setCard() {
   fi
 
   NEW_SINK=$(pacmd list-sinks | awk '/index:/ {print $1 $2 $3} /name:/ {print $0};' | grep -m1 -B1 $1 | grep index | awk '{print $1}' | cut -d ":" -f2)
-  SINK=$(pacmd set-default-sink $NEW_SINK)
+  pacmd set-default-sink $NEW_SINK
   INPUT=$(pacmd list-sink-inputs | grep index | awk '{print $2}')
 
-  pacmd move-sink-input $INPUT $NEW_SINK
+  for i in $INPUT; do
+    pacmd move-sink-input $i $NEW_SINK
+  done
   echo "Moving input: $INPUT to sink: $NEW_SINK";
   echo "Setting default sink to: $NEW_SINK";
 
@@ -39,22 +41,6 @@ function toggleSinks() {
     else
       setCard $CARD1
     fi
-}
-
-
-function showHelp() {
-  echo "------------------------------------"
-  echo "AUDIO SINK SWITCHER"
-  echo " "
-  echo "$0 [options]"
-  echo " "
-  echo "options:"
-  echo "-h  --help        What you are looking at.."
-  echo "-g, --gaming      Sets Gaming headset as output device"
-  echo "-s, --speakers    Sets Speakers as output device"
-  echo "-t, --toggle      Toggles the different output devices"
-  echo " "
-  echo "------------------------------------"
 }
 
 # check args length
