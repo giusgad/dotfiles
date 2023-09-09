@@ -58,9 +58,11 @@ saga.setup({
         },
     },
     rename = {
-        quit = "<C-c>",
-        exec = "<cr>",
-        in_select = true,
+        keys = {
+            quit = "<C-c>",
+            exec = "<cr>",
+            in_select = true,
+        },
     },
     outline = {
         win_position = "right",
@@ -85,7 +87,7 @@ saga.setup({
     symbol_in_winbar = {
         -- top outline
         enable = true,
-        separator = " ",
+        separator = "",
         show_file = true,
         hide_keyword = true,
         folder_level = 2,
