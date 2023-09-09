@@ -23,6 +23,7 @@ require("lazy").setup({
                 options.library.enabled = true
             end,
         },
+        ft = "lua",
     },
     {
         "giusgad/pets.nvim",
@@ -35,14 +36,6 @@ require("lazy").setup({
     "numToStr/Comment.nvim", -- comment lines and blocks
     "windwp/nvim-autopairs", -- close brackets automatically
     "akinsho/toggleterm.nvim",
-    {
-        "norcalli/nvim-colorizer.lua",
-        config = true,
-        opts = function()
-            vim.o.termguicolors = true
-            require("colorizer").setup()
-        end,
-    },
     {
         "folke/noice.nvim", -- cmdline popup and cool things
         dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
@@ -60,12 +53,12 @@ require("lazy").setup({
     },
     "christoomey/vim-tmux-navigator",
     "monaqa/dial.nvim",
-    { "ziontee113/color-picker.nvim", config = true },
-    -- { "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } }, -- fold
-
-    -- MINIGAMES
-    "ThePrimeagen/vim-be-good",
-    "eandrju/cellular-automaton.nvim",
+    {
+        "stevearc/dressing.nvim",
+        opts = {},
+    },
+    "ThePrimeagen/harpoon",
+    "tpope/vim-fugitive",
 
     -- THEME AND APPEARANCE
     { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 }, -- gruvbox theme
@@ -83,6 +76,14 @@ require("lazy").setup({
     "nvim-treesitter/playground", -- tools
     "RRethy/vim-illuminate",
     "HiPhish/rainbow-delimiters.nvim",
+    {
+        "norcalli/nvim-colorizer.lua",
+        config = true,
+        opts = function()
+            vim.o.termguicolors = true
+            require("colorizer").setup()
+        end,
+    },
 
     -- LUALINE
     {
@@ -125,11 +126,11 @@ require("lazy").setup({
     "mbbill/undotree",
 
     -- BUFFERS
-    {
+    --[[ {
         "akinsho/bufferline.nvim",
         version = "v3.*",
         dependencies = "nvim-tree/nvim-web-devicons",
-    },
+    }, ]]
     "famiu/bufdelete.nvim",
 
     -- GIT
@@ -244,4 +245,3 @@ require("pets").setup({
         -- winblend = 10,
     },
 })
--- require("hologram").setup({ auto_display = true })
