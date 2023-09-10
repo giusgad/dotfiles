@@ -125,14 +125,6 @@ require("lazy").setup({
     -- UNDO TREE
     "mbbill/undotree",
 
-    -- BUFFERS
-    --[[ {
-        "akinsho/bufferline.nvim",
-        version = "v3.*",
-        dependencies = "nvim-tree/nvim-web-devicons",
-    }, ]]
-    "famiu/bufdelete.nvim",
-
     -- GIT
     "lewis6991/gitsigns.nvim",
 

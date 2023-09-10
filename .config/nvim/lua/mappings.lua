@@ -81,11 +81,11 @@ vim.keymap.set("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>", opts)
 -- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",opts)
 -- vim.keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",opts)
 -- vim.keymap.set("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",opts)
-
--- Buffers
-vim.keymap.set("n", "<leader>td", ":Bdelete<cr>", opts)
-vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
-vim.keymap.set("n", "<S-h>", ":bprevious<CR>", opts)
+-- tabs
+vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", opts)
+vim.keymap.set("n", "<leader>th", ":tabprevious<CR>", opts)
+vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", opts)
+vim.keymap.set("n", "<leader>td", ":bdelete<CR>", opts)
 
 -- PLUGINS
 -- HARPOON
