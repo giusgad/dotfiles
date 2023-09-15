@@ -14,7 +14,3 @@ Linux config files including themes and funcionality.
   - **file manager**: ranger
 - **notification daemon**: dunst
 - **AUR helper**: paru
-
-# Ricer
-Ricer is a basic python script that changes all theming options in the system based on the files placed in [configs](https://github.com/giuseppegadola/dotfiles/tree/main/ricer/configs).
-This only works with the config files in this repo, if using for others it needs to be adapted.
