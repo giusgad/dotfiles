@@ -1,0 +1,10 @@
+[alias]     # command aliases
+b = "build"
+br = "build --release"
+t = "test -- --nocapture"
+tq = "test"
+r = "run"
+rr = "run --release"
+
+[build]
+incremental=true

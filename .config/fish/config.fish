@@ -105,7 +105,7 @@ set PATH "$PATH:$ANDROID_SDK_ROOT/emulator/"
 set PATH "$PATH:$ANDROID_SDK_ROOT/platform-tools/"
 set PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
 set PATH "$PATH:$ANDROID_SDK_ROOT/tools"
-set -Ux JAVA_HOME /usr/lib/jvm/java-19-openjdk/
+set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
 set -Ux JAVA_OPTS ""
 
 ### OTHER
