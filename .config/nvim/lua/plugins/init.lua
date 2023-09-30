@@ -41,7 +41,7 @@ require("lazy").setup({
         dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     },
     { "chrisgrieser/nvim-various-textobjs", opts = { useDefaultKeymaps = true }, config = true },
-    { "kylechui/nvim-surround",             version = "*",                       config = true },
+    { "kylechui/nvim-surround", version = "*", config = true },
     {
         "folke/which-key.nvim",
         config = true,
@@ -61,19 +61,26 @@ require("lazy").setup({
     "tpope/vim-fugitive",
 
     -- THEME AND APPEARANCE
-    { "ellisonleao/gruvbox.nvim",        lazy = false,       priority = 1000 }, -- gruvbox theme
+    { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 }, -- gruvbox theme
     {
         "lukas-reineke/indent-blankline.nvim",
-        opts = {
-            space_char_blankline = " ",
-            show_current_context = true,
-        },
-        config = true,
+
+        config = function()
+            vim.api.nvim_set_hl(0, "IblScope", { link = "GruvboxYellow" })
+            require("ibl").setup({
+                debounce = 100,
+                scope = {
+                    show_start = false,
+                    show_end = false,
+                    include = { node_type = { rust = { "use_list" }, lua = { "table_constructor" } } },
+                },
+            })
+        end,
     }, -- show indentation guides
 
     -- SYNTAX HIGHLIGHTING
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
-    "nvim-treesitter/playground",                               -- tools
+    "nvim-treesitter/playground", -- tools
     "RRethy/vim-illuminate",
     "HiPhish/rainbow-delimiters.nvim",
     {
@@ -137,9 +144,9 @@ require("lazy").setup({
     "nvim-telescope/telescope-ui-select.nvim", -- input selector
 
     -- LSP
-    "williamboman/mason.nvim",           -- lsp installer
+    "williamboman/mason.nvim", -- lsp installer
     "williamboman/mason-lspconfig.nvim", -- adapter for configuration
-    "neovim/nvim-lspconfig",             -- configure lsp
+    "neovim/nvim-lspconfig", -- configure lsp
     {
         "jay-babu/mason-null-ls.nvim",
         dependencies = {
@@ -176,18 +183,18 @@ require("lazy").setup({
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
     "jayp0521/mason-nvim-dap.nvim",
     "Weissle/persistent-breakpoints.nvim", -- persist breakpoints
-    "leoluz/nvim-dap-go",                  -- go debugging with delve
+    "leoluz/nvim-dap-go", -- go debugging with delve
 
     -- AUTOCOMPLETON and DIAGNOSTICS
-    { "L3MON4D3/LuaSnip",     dependencies = { "rafamadriz/friendly-snippets" } }, -- snippets engine - config inside cmp
+    { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } }, -- snippets engine - config inside cmp
     -- "rafamadriz/friendly-snippets", -- snippets source
-    "hrsh7th/cmp-nvim-lsp",                                                    -- lsp completions
-    "hrsh7th/cmp-buffer",                                                      -- buffer completions
-    "hrsh7th/cmp-path",                                                        -- path completions
-    "hrsh7th/cmp-cmdline",                                                     -- cmdline completions
-    "hrsh7th/nvim-cmp",                                                        -- completion engine
-    "saadparwaiz1/cmp_luasnip",                                                -- snippet completions
-    { "glepnir/lspsaga.nvim", event = "BufRead" },                             -- show definitions, code actions etc.
+    "hrsh7th/cmp-nvim-lsp", -- lsp completions
+    "hrsh7th/cmp-buffer", -- buffer completions
+    "hrsh7th/cmp-path", -- path completions
+    "hrsh7th/cmp-cmdline", -- cmdline completions
+    "hrsh7th/nvim-cmp", -- completion engine
+    "saadparwaiz1/cmp_luasnip", -- snippet completions
+    { "glepnir/lspsaga.nvim", event = "BufRead" }, -- show definitions, code actions etc.
 
     -- NULL-LS
     "jose-elias-alvarez/null-ls.nvim", -- formatter/linter
