@@ -132,10 +132,6 @@ end
 local gs_ok, gs = pcall(require, "gitsigns")
 if gs_ok then
     vim.keymap.set("n", "<leader>gp", gs.preview_hunk, opts)
-    vim.keymap.set("n", "<leader>gb", function()
-        gs.blame_line({ full = true })
-    end, opts)
-    vim.keymap.set("n", "<leader>gl", gs.toggle_current_line_blame, opts)
     vim.keymap.set("n", "<leader>gd", gs.diffthis, opts)
     vim.keymap.set("n", "<leader>gD", function()
         gs.diffthis("~")
@@ -160,6 +156,9 @@ if ok then
     vim.keymap.set("n", "<leader>fh", builtin.buffers, opts)
     vim.keymap.set("n", "<leader>fn", ":Telescope notify<CR>", opts)
     vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
+    -- worktrees
+    vim.keymap.set("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, opts)
+    vim.keymap.set("n", "<leader>gtn", require("telescope").extensions.git_worktree.create_git_worktree, opts)
 end
 
 -- DAP

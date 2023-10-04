@@ -53,30 +53,12 @@ require("lazy").setup({
     },
     "christoomey/vim-tmux-navigator",
     "monaqa/dial.nvim",
-    {
-        "stevearc/dressing.nvim",
-        opts = {},
-    },
+    { "stevearc/dressing.nvim", config = true },
     "ThePrimeagen/harpoon",
-    "tpope/vim-fugitive",
 
     -- THEME AND APPEARANCE
     { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 }, -- gruvbox theme
-    {
-        "lukas-reineke/indent-blankline.nvim",
-
-        config = function()
-            vim.api.nvim_set_hl(0, "IblScope", { link = "GruvboxYellow" })
-            require("ibl").setup({
-                debounce = 100,
-                scope = {
-                    show_start = false,
-                    show_end = false,
-                    include = { node_type = { rust = { "use_list" }, lua = { "table_constructor" } } },
-                },
-            })
-        end,
-    }, -- show indentation guides
+    { "lukas-reineke/indent-blankline.nvim", config = require("plugins.config.indent") }, -- show indentation guides
 
     -- SYNTAX HIGHLIGHTING
     { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- more syntax highlighting
@@ -133,7 +115,9 @@ require("lazy").setup({
     "mbbill/undotree",
 
     -- GIT
+    "tpope/vim-fugitive",
     "lewis6991/gitsigns.nvim",
+    "ThePrimeagen/git-worktree.nvim",
 
     -- TELESCOPE
     {
@@ -198,27 +182,12 @@ require("lazy").setup({
 
     -- NULL-LS
     "jose-elias-alvarez/null-ls.nvim", -- formatter/linter
-    --[[ {
-		"ThePrimeagen/refactoring.nvim", -- refactoring for go/python/js
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	}, ]]
 
     -- TROUBLE
-    {
-        "folke/trouble.nvim",
-        -- dependencies = "kyazdani42/nvim-web-devicons",
-        config = true,
-    },
+    { "folke/trouble.nvim", config = true },
 
     -- TODO COMMENTS
-    {
-        "folke/todo-comments.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-        config = true,
-    },
+    { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
 }, {
     dev = { path = "/home/giuseppe/coding/lua/plugins/" },
 })

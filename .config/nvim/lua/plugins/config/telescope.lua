@@ -13,4 +13,5 @@ require("telescope").setup({
     },
 })
 
-require("telescope").load_extension("ui-select")
+telescope.load_extension("ui-select")
+telescope.load_extension("git_worktree")
