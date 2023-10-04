@@ -53,6 +53,7 @@ require("lazy").setup({
     },
     "christoomey/vim-tmux-navigator",
     "monaqa/dial.nvim",
+    "andymass/vim-matchup",
     { "stevearc/dressing.nvim", config = true },
     "ThePrimeagen/harpoon",
 
@@ -160,6 +161,17 @@ require("lazy").setup({
                 on_attach = require("plugins.config.handlers").on_attach,
             },
         },
+    },
+    -- java
+    {
+        "mfussenegger/nvim-jdtls",
+        config = function()
+            require("jdtls").start_or_attach({
+                cmd = { "/home/giuseppe/.local/share/nvim/mason/bin/jdtls" },
+                root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+            })
+        end,
+        ft = "java",
     },
 
     -- DEBUGGING

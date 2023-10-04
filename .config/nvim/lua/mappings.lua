@@ -1,3 +1,7 @@
+local function map(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
+end
+
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
 -- LEADER is mapped in init for lazyloading to work
 
@@ -5,160 +9,162 @@ local opts = { noremap = true, silent = true }
 local buffer_opts = { noremap = true, silent = true, buffer = true }
 
 -- remove stupid annoying thing
-vim.keymap.set({ "n", "v" }, "q:", "<nop>", opts)
+map({ "n", "v" }, "q:", "<nop>")
 -- remap <C-w> for buffers
-vim.keymap.set("n", "<C-q>", "<C-w>", opts)
+map("n", "<C-q>", "<C-w>")
 
 -- TERM
-vim.keymap.set("t", "<C-esc>", "<C-\\><C-n>", opts)
+map("t", "<C-esc>", "<C-\\><C-n>")
 
 -- MOVEMENTS
 -- center cursor when going down or up by half pages
-vim.keymap.set({ "v", "n" }, "<C-d>", "<C-d>zz", opts)
-vim.keymap.set({ "v", "n" }, "<C-u>", "<C-u>zz", opts)
+map({ "v", "n" }, "<C-d>", "<C-d>zz")
+map({ "v", "n" }, "<C-u>", "<C-u>zz")
 -- center cursor when searching
-vim.keymap.set({ "v", "n" }, "n", "nzz", opts)
-vim.keymap.set({ "v", "n" }, "N", "Nzz", opts)
+map({ "v", "n" }, "n", "nzz")
+map({ "v", "n" }, "N", "Nzz")
 -- center marker after jump
--- vim.keymap.set("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
-vim.keymap.set({ "v", "n" }, "0", "^", opts)
-vim.keymap.set({ "v", "n" }, "^", "0", opts)
-vim.keymap.set({ "v", "n" }, "<C-%>", "$%", opts)
+-- map("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
+map({ "v", "n" }, "0", "^")
+map({ "v", "n" }, "^", "0")
+map({ "v", "n" }, "<C-%>", "$%")
 
 -- OTHER
 -- use sys clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set({ "n", "v" }, "<leader>p", 'o<esc>"+p')
+map({ "n", "v" }, "<leader>y", '"+y', "copy to system clipboard")
+map({ "n", "v" }, "<leader>p", '"+p', "paste from sysstem clipboard")
 -- delete to nil register
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
-vim.keymap.set({ "n", "v" }, "<leader>D", '"_D')
+map({ "n", "v" }, "<leader>d", '"_d')
+map({ "n", "v" }, "<leader>D", '"_D')
 -- add undo points while typing
-vim.keymap.set("i", "<Space>", "<C-g>u<Space>", opts)
--- vim.keymap.set("i", "<CR>", "<C-g>u<CR>",opts) -- breaks autopairs
-vim.keymap.set("i", ",", "<C-g>u,", opts)
-vim.keymap.set("i", ".", "<C-g>u.", opts)
-vim.keymap.set("i", "(", "<C-g>u(", opts)
-vim.keymap.set("i", "[", "<C-g>u[", opts)
-vim.keymap.set("i", "{", "<C-g>u{", opts)
+local chars = { "<Space>", ",", ".", "(", "[", "{", ":", ";" }
+for _, c in ipairs(chars) do
+    map("i", c, "<C-g>u" .. c)
+end
 
 -- VISUAL MODE
--- Copy
-vim.keymap.set("v", "<C-C>", ":w !xclip -i -sel c<CR><CR>gv", opts) -- BUG: always copies the whole line
 -- Maintain selection after indentation
-vim.keymap.set("v", ">", ">gv", opts)
-vim.keymap.set("v", "<", "<gv", opts)
+map("v", ">", ">gv")
+map("v", "<", "<gv")
 -- Move text up and down
-vim.keymap.set("v", "<M-J>", ":m'>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "<M-K>", ":m-2<CR>gv=gv", opts)
+map("v", "<M-J>", ":m'>+1<CR>gv=gv")
+map("v", "<M-K>", ":m-2<CR>gv=gv")
 -- Delete selected text on paste
-vim.keymap.set("v", "p", '"_dP', opts)
+map("v", "p", '"_dP')
 
 -- NORMAL MODE
 -- remove highlights with esc
-vim.keymap.set("n", "<esc>", ":noh<return><esc>", opts)
+map("n", "<esc>", ":noh<return><esc>")
 -- cursor history
-vim.keymap.set("n", "<C-o>", "<C-o>zz", opts)
-vim.keymap.set("n", "<C-i>", "<C-i>zz", opts)
+map("n", "<C-o>", "<C-o>zz")
+map("n", "<C-i>", "<C-i>zz")
 -- Window navigation - now integrated with tmux navigator
---[[ vim.keymap.set("n", "<C-h>", "<C-w>h",opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j",opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k",opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l",opts) ]]
+--[[ map("n", "<C-h>", "<C-w>h",opts)
+map("n", "<C-j>", "<C-w>j",opts)
+map("n", "<C-k>", "<C-w>k",opts)
+map("n", "<C-l>", "<C-w>l",opts) ]]
 -- Resize with arrows
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+map("n", "<C-Up>", ":resize -2<CR>")
+map("n", "<C-Down>", ":resize +2<CR>")
+map("n", "<C-Left>", ":vertical resize -2<CR>")
+map("n", "<C-Right>", ":vertical resize +2<CR>")
 -- Move text up and down
-vim.keymap.set("n", "<M-J>", "<Esc>:m .+1<CR>==V", opts)
-vim.keymap.set("n", "<M-K>", "<Esc>:m .-2<CR>==V", opts)
+map("n", "<M-J>", "<Esc>:m .+1<CR>==V")
+map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
 -- Open nvim tree
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+map("n", "<leader>e", ":NvimTreeToggle<cr>", "nvim tree")
 -- LSP
-vim.keymap.set("n", "<leader>vd", ":lua vim.lsp.buf.definition()<CR> zz", opts)
-vim.keymap.set("n", "<leader>vi", ":lua vim.lsp.buf.implementation()<CR> zz", opts)
-vim.keymap.set("n", "<leader>f<space>", ":lua vim.lsp.buf.format()<CR>", opts)
-vim.keymap.set("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>", opts)
--- vim.keymap.set("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",opts)
--- vim.keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",opts)
--- vim.keymap.set("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",opts)
+map("n", "<leader>vd", ":lua vim.lsp.buf.definition()<CR> zz", "lsp go to definition")
+map("n", "<leader>vi", ":lua vim.lsp.buf.implementation()<CR> zz", "lsp go to implementation")
+map("n", "<leader>f<space>", ":lua vim.lsp.buf.format()<CR>", "lsp format")
+map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>", "lsp format")
+-- map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",opts)
+-- map("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",opts)
+-- map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",opts)
 -- tabs
-vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", opts)
-vim.keymap.set("n", "<leader>th", ":tabprevious<CR>", opts)
-vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", opts)
-vim.keymap.set("n", "<leader>td", ":bdelete<CR>", opts)
+map("n", "<leader>tn", ":tabnew<CR>", "new tab")
+map("n", "<leader>th", ":tabprevious<CR>", "prev tab")
+map("n", "<leader>tl", ":tabnext<CR>", "next tab")
+map("n", "<leader>td", ":bdelete<CR>", "delete tab")
 
 -- PLUGINS
 -- HARPOON
 local ok, mark = pcall(require, "harpoon.mark")
 if ok then
     local ui = require("harpoon.ui")
-    vim.keymap.set("n", "<leader>a", mark.add_file)
-    vim.keymap.set("n", "<C-f>", ui.toggle_quick_menu)
+    map("n", "<leader>a", mark.add_file, "add to harpoon")
+    map("n", "<C-f>", ui.toggle_quick_menu)
     -- stylua: ignore start
-    vim.keymap.set("n", "<leader>h", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<leader>j", function() ui.nav_file(2) end)
-    vim.keymap.set("n", "<leader>k", function() ui.nav_file(3) end)
-    vim.keymap.set("n", "<leader>l", function() ui.nav_file(4) end)
+    map("n", "<leader>h", function() ui.nav_file(1) end, "harpoon jump")
+    map("n", "<leader>j", function() ui.nav_file(2) end, "harpoon jump")
+    map("n", "<leader>k", function() ui.nav_file(3) end, "harpoon jump")
+    map("n", "<leader>l", function() ui.nav_file(4) end, "harpoon jump")
     -- stylua: ignore end
 end
 -- NOTIFY
 local notify_ok, notify = pcall(require, "notify")
 if notify_ok then
-    vim.keymap.set({ "n", "v" }, "<leader>n", notify.dismiss)
+    map({ "n", "v" }, "<leader>n", notify.dismiss)
 end
 -- LSPSAGA
 local saga_ok, _ = pcall(require, "lspsaga")
 if saga_ok then
-    vim.keymap.set("n", "<leader>vh", "<cmd>Lspsaga finder<CR>", opts) -- view all options
-    vim.keymap.set({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>", opts) -- code action
-    vim.keymap.set("n", "<leader>vr", "<cmd>Lspsaga rename<CR>", opts) -- rename
-    vim.keymap.set("n", "<leader>vD", "<cmd>Lspsaga peek_definition<CR>", opts) -- definition in floating window
-    vim.keymap.set("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show line diagnostics
-    vim.keymap.set("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show cursor diagnostic
-    vim.keymap.set("n", "<leader>vo", "<cmd>Lspsaga outline<CR>", opts) -- outline
-    vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- hover docs
-    vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to diagnostics
-    vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to diagnostics
-    vim.keymap.set("n", "[E", function() -- jump to errors
+    map("n", "<leader>vh", "<cmd>Lspsaga finder<CR>", "lsp show references") -- view all options
+    map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>", "lsp code action") -- code action
+    map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>", "lsp rename") -- rename
+    map("n", "<leader>vD", "<cmd>Lspsaga peek_definition<CR>", "lsp peek definition") -- definition in floating window
+    map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>", "lsp line diagnostics") -- show line diagnostics
+    map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "lsp cursor diagnostics") -- show cursor diagnostic
+    map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>", "lsp outline") -- outline
+    map("n", "K", "<cmd>Lspsaga hover_doc<CR>", "hover doc") -- hover docs
+    map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "prev diagnostic") -- jump to diagnostics
+    map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", "next diagnostic") -- jump to diagnostics
+    map("n", "[E", function() -- jump to errors
         require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-    end)
-    vim.keymap.set("n", "]E", function() -- jump to errors
+    end, "prev error")
+    map("n", "]E", function() -- jump to errors
         require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-    end)
+    end, "next error")
 end
 
 -- GITSIGNS
 local gs_ok, gs = pcall(require, "gitsigns")
 if gs_ok then
-    vim.keymap.set("n", "<leader>gp", gs.preview_hunk, opts)
-    vim.keymap.set("n", "<leader>gd", gs.diffthis, opts)
-    vim.keymap.set("n", "<leader>gD", function()
-        gs.diffthis("~")
-    end, opts)
-    vim.keymap.set("n", "<leader>gr", gs.toggle_deleted, opts)
+    map("n", "<leader>gp", gs.preview_hunk, "git preview hunk")
+    map("n", "<leader>gd", gs.diffthis, "git diff")
+    map("n", "<leader>gD", function()
+        local branch = vim.fn.input({ prompt = "branch to diff against:", default = "main", cancelreturn = "main" })
+        gs.diffthis(branch)
+    end, "git diff on custom branch")
+    map("n", "<leader>gr", gs.reset_hunk, "git reset hunk")
+    map("n", "<leader>gR", gs.reset_buffer, "git reset buffer")
+    map("n", "<leader>gh", gs.stage_hunk, "git stage hunk")
+    map("n", "<leader>gs", gs.stage_buffer, "git stage buffer")
+    map("n", "<leader>gv", gs.toggle_deleted, "git view deleted")
+    map("n", "[h", gs.prev_hunk, "git prev hunk")
+    map("n", "]h", gs.next_hunk, "git next hunk")
 end
 -- TROUBLE
 local trouble_ok, _ = pcall(require, "trouble")
 if trouble_ok then
-    vim.keymap.set("n", "<leader>vt", require("trouble").toggle)
+    map("n", "<leader>vt", require("trouble").toggle, "lsp show all errors (trouble)")
 end
 
 -- TELESCOPE
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
-    vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
-    vim.keymap.set("n", "<leader>fe", builtin.diagnostics, opts)
-    vim.keymap.set("n", "<leader>fE", function()
+    map("n", "<leader>ff", builtin.find_files, "telescope find files")
+    map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics")
+    map("n", "<leader>fE", function()
         builtin.diagnostics({ bufnr = 0 })
-    end, opts)
-    vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
-    vim.keymap.set("n", "<leader>fh", builtin.buffers, opts)
-    vim.keymap.set("n", "<leader>fn", ":Telescope notify<CR>", opts)
-    vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", opts)
+    end, "telescope buffer diagnostics")
+    map("n", "<leader>fg", builtin.live_grep, "telescope grep")
+    map("n", "<leader>fh", builtin.buffers, "telescope buffers")
+    map("n", "<leader>fn", ":Telescope notify<CR>", "telescope notifications")
+    map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope TODOs")
     -- worktrees
-    vim.keymap.set("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, opts)
-    vim.keymap.set("n", "<leader>gtn", require("telescope").extensions.git_worktree.create_git_worktree, opts)
+    map("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, "git worktree list/switch")
+    map("n", "<leader>gtn", require("telescope").extensions.git_worktree.create_git_worktree, "git worktree add/new")
 end
 
 -- DAP
@@ -166,18 +172,18 @@ local dap_ok, dap = pcall(require, "dap")
 local dapui_ok, dapui = pcall(require, "dapui")
 local persist_bp_ok, persist_bp = pcall(require, "persistent-breakpoints.api")
 if persist_bp_ok then
-    vim.keymap.set("n", "<leader>bb", persist_bp.toggle_breakpoint, opts)
-    vim.keymap.set("n", "<leader>bB", persist_bp.set_conditional_breakpoint, opts)
-    vim.keymap.set("n", "<leader>bR", persist_bp.clear_all_breakpoints, opts)
+    map("n", "<leader>bb", persist_bp.toggle_breakpoint, "dap toggle breakpoint")
+    map("n", "<leader>bB", persist_bp.set_conditional_breakpoint, "dap conditional breakpoint")
+    map("n", "<leader>bR", persist_bp.clear_all_breakpoints, "dap remove all breakpoints")
 end
 if dapui_ok then
-    vim.keymap.set("n", "<leader>bv", dapui.toggle, opts)
+    map("n", "<leader>bv", dapui.toggle)
 end
 if dap_ok then
-    vim.keymap.set("n", "<leader>bc", dap.continue, opts)
-    vim.keymap.set("n", "<leader>bi", dap.step_into, opts)
-    vim.keymap.set("n", "<leader>bo", dap.step_over, opts)
-    vim.keymap.set("n", "<leader>bu", dap.step_out, opts)
+    map("n", "<leader>bc", dap.continue, "dap continue")
+    map("n", "<leader>bi", dap.step_into, "dap step into")
+    map("n", "<leader>bo", dap.step_over, "dap step over")
+    map("n", "<leader>bu", dap.step_out, "dap step out")
 end
 -- dap-go
 local dap_go_ok, dap_go = pcall(require, "dap-go")
@@ -187,7 +193,7 @@ if vim.fn.expand("%:e") == "go" and dap_go_ok then
 end
 
 -- UNDOTREE
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+map("n", "<leader>u", vim.cmd.UndotreeToggle, "undo tree")
 
 -- TOGGLETERM
 -- <M-d> to toggle
@@ -200,43 +206,43 @@ if term_ok then
         lazygit:toggle()
     end
 
-    vim.keymap.set("n", "<leader>gg", _lazygit_toggle)
-    vim.keymap.set("t", "<M-k>", _lazygit_toggle)
+    map("n", "<leader>gg", _lazygit_toggle, "lazygit term")
+    map("t", "<M-k>", _lazygit_toggle)
 
     -- numbered terminals
     for i = 1, 10, 1 do -- create separate terminals
-        vim.keymap.set("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>", opts)
+        map("n", "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>", "open new term id:" .. i)
     end
 end
 
 -- SESSION MANAGER
-vim.keymap.set("n", "<leader>sl", ":SessionManager load_session<CR>", opts)
+map("n", "<leader>sl", ":SessionManager load_session<CR>", "session load")
 
 -- BUFFERLINE
 local bufferline_ok = pcall(require, "bufferline")
 if bufferline_ok then
-    vim.keymap.set("n", "<S-h>", ":BufferLineCyclePrev<CR>", opts)
-    vim.keymap.set("n", "<S-l>", ":BufferLineCycleNext<CR>", opts)
-    vim.keymap.set("n", "<leader>th", ":BufferLineMovePrev<CR>", opts)
-    vim.keymap.set("n", "<leader>tl", ":BufferLineMoveNext<CR>", opts)
+    map("n", "<S-h>", ":BufferLineCyclePrev<CR>")
+    map("n", "<S-l>", ":BufferLineCycleNext<CR>")
+    map("n", "<leader>th", ":BufferLineMovePrev<CR>")
+    map("n", "<leader>tl", ":BufferLineMoveNext<CR>")
 end
 
 -- DIAL
 local dial_ok, dial = pcall(require, "dial.map")
 if dial_ok then
-    vim.keymap.set("n", "<C-a>", dial.inc_normal(), opts)
-    vim.keymap.set("n", "<C-x>", dial.dec_normal(), opts)
-    vim.keymap.set("v", "<C-a>", dial.inc_visual(), opts)
-    vim.keymap.set("v", "<C-x>", dial.dec_visual(), opts)
-    vim.keymap.set("v", "g<C-a>", dial.inc_gvisual(), opts)
-    vim.keymap.set("v", "g<C-x>", dial.dec_gvisual(), opts)
+    map("n", "<C-a>", dial.inc_normal())
+    map("n", "<C-x>", dial.dec_normal())
+    map("v", "<C-a>", dial.inc_visual())
+    map("v", "<C-x>", dial.dec_visual())
+    map("v", "g<C-a>", dial.inc_gvisual())
+    map("v", "g<C-x>", dial.dec_gvisual())
 end
 
 -- PETS
 local pets_ok = pcall(require, "pets")
 if pets_ok then
-    vim.keymap.set("n", "<leader>PP", ":PetsPauseToggle<CR>", opts)
-    vim.keymap.set("n", "<leader>PH", ":PetsHideToggle<CR>", opts)
-    vim.keymap.set("n", "<leader>PS", ":PetsSleepToggle<CR>", opts)
-    vim.keymap.set("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>", opts)
+    map("n", "<leader>PP", ":PetsPauseToggle<CR>")
+    map("n", "<leader>PH", ":PetsHideToggle<CR>")
+    map("n", "<leader>PS", ":PetsSleepToggle<CR>")
+    map("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>")
 end
