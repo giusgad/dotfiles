@@ -22,6 +22,7 @@ null_ls.setup({
     sources = {
         -- code_actions.refactoring, -- requires refactoring plugin
         formatting.gofmt,
+        formatting.rustfmt,
         -- sources installed with mason are setup automatically
         formatting.prettierd.with({ extra_args = { "--no-semi" } }),
     },

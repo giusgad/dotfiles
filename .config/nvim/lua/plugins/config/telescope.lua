@@ -6,12 +6,15 @@ end
 require("telescope").setup({
     extensions = {
         ["ui-select"] = {
-            require("telescope.themes").get_dropdown({
-                -- even more opts
-            }),
+            require("telescope.themes").get_dropdown(),
+        },
+        file_browser = {
+            hijack_netrw = true,
+            -- mappings = { ["i"] = { }, ["n"] = { }, },
         },
     },
 })
 
 telescope.load_extension("ui-select")
 telescope.load_extension("git_worktree")
+telescope.load_extension("file_browser")

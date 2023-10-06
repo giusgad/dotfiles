@@ -5,7 +5,6 @@ end
 -- normal_mode = "n", insert_mode = "i", visual_mode = "v", visual_block_mode = "x", term_mode = "t", command_mode = "c",
 -- LEADER is mapped in init for lazyloading to work
 
-local opts = { noremap = true, silent = true }
 local buffer_opts = { noremap = true, silent = true, buffer = true }
 
 -- remove stupid annoying thing
@@ -15,6 +14,7 @@ map("n", "<C-q>", "<C-w>")
 
 -- TERM
 map("t", "<C-esc>", "<C-\\><C-n>")
+map("t", "<M-v>", "<C-\\><C-n>")
 
 -- MOVEMENTS
 -- center cursor when going down or up by half pages
@@ -71,8 +71,6 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 -- Move text up and down
 map("n", "<M-J>", "<Esc>:m .+1<CR>==V")
 map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
--- Open nvim tree
-map("n", "<leader>e", ":NvimTreeToggle<cr>", "nvim tree")
 -- LSP
 map("n", "<leader>vd", ":lua vim.lsp.buf.definition()<CR> zz", "lsp go to definition")
 map("n", "<leader>vi", ":lua vim.lsp.buf.implementation()<CR> zz", "lsp go to implementation")
@@ -154,6 +152,7 @@ end
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
     map("n", "<leader>ff", builtin.find_files, "telescope find files")
+    map("n", "<leader>fb", ":Telescope file_browser<CR>", "telescope find files")
     map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics")
     map("n", "<leader>fE", function()
         builtin.diagnostics({ bufnr = 0 })

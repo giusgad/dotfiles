@@ -104,14 +104,6 @@ require("lazy").setup({
         ft = "markdown",
     },
 
-    -- NERD TREE
-    {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = {
-            { "nvim-tree/nvim-web-devicons", config = true }, -- optional, for file icons
-        },
-    },
-
     -- UNDO TREE
     "mbbill/undotree",
 
@@ -127,6 +119,7 @@ require("lazy").setup({
         dependencies = { { "nvim-lua/plenary.nvim" } },
     },
     "nvim-telescope/telescope-ui-select.nvim", -- input selector
+    { "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
     -- LSP
     "williamboman/mason.nvim", -- lsp installer

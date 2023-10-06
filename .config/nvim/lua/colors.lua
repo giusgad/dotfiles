@@ -8,8 +8,7 @@ vim.o.background = "dark"
 vim.cmd.colorscheme("gruvbox")
 vim.opt.termguicolors = true
 
-extend_hl("NvimTreeCursorLine", { ctermbg = 1 }) -- Nvim-tree line highlight
-extend_hl("@function.call", { link = "GruvboxAqua" }) -- differentiate variable names from strings
+-- extend_hl("@function.call", { link = "GruvboxAqua" }) -- differentiate variable names from strings
 
 -- floating windows
 vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
