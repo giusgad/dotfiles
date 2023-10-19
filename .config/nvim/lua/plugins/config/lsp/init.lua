@@ -27,7 +27,7 @@ mason_lspconfig.setup_handlers({
             on_attach = handlers.on_attach,
             capabilities = handlers.capabilities,
         }
-        if server_name == "rust_analyzer" or server_name == "jdtls" then
+        if server_name == "rust_analyzer" then
             return
         end
         -- options available for each server are found here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md

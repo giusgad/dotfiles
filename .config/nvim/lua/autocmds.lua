@@ -1,6 +1,6 @@
 -- indentation to 2 spaces
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json" },
+    pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json", "*.java" },
     callback = function()
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
@@ -22,13 +22,5 @@ vim.api.nvim_create_autocmd("TermLeave", {
         if not vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), "modified") then
             vim.cmd("e")
         end
-    end,
-})
-
--- autosave
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-    pattern = "*.rs",
-    callback = function()
-        vim.cmd.write()
     end,
 })

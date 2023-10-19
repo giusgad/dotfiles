@@ -22,8 +22,6 @@ vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
 vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" }) -- fix for https://github.com/nvim-lualine/lualine.nvim/issues/867
 
 -- Transparency
-vim.api.nvim_set_hl(0, "BufferlineIndicatorSelected", {}) -- bufferline underline between tabs
-
 local remove_backgound = {
     "GitSignsAdd",
     "GitSignsChange",

@@ -245,3 +245,10 @@ if pets_ok then
     map("n", "<leader>PS", ":PetsSleepToggle<CR>")
     map("n", "<leader>PN", ":PetsNew " .. "gino" .. "<CR>")
 end
+
+-- NABLA
+local nabla_ok, nabla = pcall(require, "nabla")
+if nabla_ok then
+    map("n", "<leader>mp", nabla.popup)
+    map("n", "<leader>mv", nabla.toggle_virt)
+end

@@ -58,7 +58,7 @@ require("lazy").setup({
     "ThePrimeagen/harpoon",
 
     -- THEME AND APPEARANCE
-    { "ellisonleao/gruvbox.nvim", lazy = false, priority = 1000 }, -- gruvbox theme
+    { "ellisonleao/gruvbox.nvim", priority = 1000, config = true }, -- gruvbox theme
     { "lukas-reineke/indent-blankline.nvim", config = require("plugins.config.indent") }, -- show indentation guides
 
     -- SYNTAX HIGHLIGHTING
@@ -86,7 +86,7 @@ require("lazy").setup({
     -- SESSION-MANAGER
     "Shatur/neovim-session-manager",
 
-    -- MARKDOWN
+    -- MARKDOWN/LATEX
     {
         "epwalsh/obsidian.nvim",
         config = true,
@@ -103,6 +103,7 @@ require("lazy").setup({
         end,
         ft = "markdown",
     },
+    { "jbyuki/nabla.nvim", ft = "markdown" },
 
     -- UNDO TREE
     "mbbill/undotree",
@@ -139,11 +140,12 @@ require("lazy").setup({
         main = "nvim-ts-autotag",
     },
     -- yuck
-    "elkowar/yuck.vim",
+    { "elkowar/yuck.vim", ft = "yuck" },
     -- rust
     {
         "saecki/crates.nvim",
         config = true,
+        ft = "toml",
     },
     {
         "simrat39/rust-tools.nvim",
@@ -155,24 +157,13 @@ require("lazy").setup({
             },
         },
     },
-    -- java
-    {
-        "mfussenegger/nvim-jdtls",
-        config = function()
-            require("jdtls").start_or_attach({
-                cmd = { "/home/giuseppe/.local/share/nvim/mason/bin/jdtls" },
-                root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
-            })
-        end,
-        ft = "java",
-    },
 
     -- DEBUGGING
     "mfussenegger/nvim-dap",
     { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
     "jayp0521/mason-nvim-dap.nvim",
     "Weissle/persistent-breakpoints.nvim", -- persist breakpoints
-    "leoluz/nvim-dap-go", -- go debugging with delve
+    { "leoluz/nvim-dap-go", ft = "go" }, -- go debugging with delve
 
     -- AUTOCOMPLETON and DIAGNOSTICS
     { "L3MON4D3/LuaSnip", dependencies = { "rafamadriz/friendly-snippets" } }, -- snippets engine - config inside cmp
@@ -219,7 +210,7 @@ require("session_manager").setup({
 
 -- vim.api.nvim_set_hl(0, "pets_popup", { link = "Normal" })
 require("pets").setup({
-    row = 6,
+    row = 7,
     default_pet = "slime",
     default_style = "green",
     random = true,
