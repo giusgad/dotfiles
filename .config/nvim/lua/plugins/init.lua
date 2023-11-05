@@ -116,7 +116,6 @@ require("lazy").setup({
     -- TELESCOPE
     {
         "nvim-telescope/telescope.nvim",
-        version = "0.1.0", -- popup menu
         dependencies = { { "nvim-lua/plenary.nvim" } },
     },
     "nvim-telescope/telescope-ui-select.nvim", -- input selector
@@ -218,3 +217,6 @@ require("pets").setup({
         -- winblend = 10,
     },
 })
+
+-- markdown preview
+vim.g.mkdp_markdown_css = vim.fn.expand("~/.config/nvim/lua/markdown.css")

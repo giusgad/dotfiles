@@ -1,4 +1,4 @@
-[alias]     # command aliases
+[alias] # command aliases
 b = "build"
 br = "build --release"
 t = "test -- --nocapture"
@@ -7,4 +7,7 @@ r = "run"
 rr = "run --release"
 
 [build]
-incremental=true
+incremental = true
+
+[term]
+color = "always"

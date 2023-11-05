@@ -22,7 +22,9 @@ vim.opt.hlsearch = true
 vim.opt.incsearch = true
 vim.opt.ignorecase = true -- to do case sensitve add \C
 
+-- spellchecking
 vim.opt.spell = true
+vim.opt.spelllang = "en_us,it"
 
 -- APPEARANCE
 -- vim.opt.guifont = "Caskaydia Cove Nerd Font" -- set by terminal
