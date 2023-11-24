@@ -72,10 +72,15 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 map("n", "<M-J>", "<Esc>:m .+1<CR>==V")
 map("n", "<M-K>", "<Esc>:m .-2<CR>==V")
 -- LSP
-map("n", "<leader>vd", ":lua vim.lsp.buf.definition()<CR> zz", "lsp go to definition")
-map("n", "<leader>vi", ":lua vim.lsp.buf.implementation()<CR> zz", "lsp go to implementation")
+map("n", "<leader>vd", ":lua vim.lsp.buf.definition()<CR> zz", "lsp go to [D]efinition")
+map("n", "<leader>vi", ":lua vim.lsp.buf.implementation()<CR> zz", "lsp go to [I]mplementation")
 map("n", "<leader>f<space>", ":lua vim.lsp.buf.format()<CR>", "lsp format")
-map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>", "lsp format")
+map("n", "<leader>vf", ":lua vim.lsp.buf.format()<CR>", "lsp [F]ormat")
+map("n", "<leader>vh", function()
+    local enabled = vim.lsp.inlay_hint.is_enabled()
+    vim.lsp.inlay_hint.enable(0, not enabled)
+    vim.notify("inlay hints enabled: " .. tostring(not enabled), vim.log.levels.INFO, { title = "LSP" })
+end, "lsp show inlay [H]ints")
 -- map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",opts)
 -- map("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",opts)
 -- map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",opts)
@@ -107,13 +112,13 @@ end
 -- LSPSAGA
 local saga_ok, _ = pcall(require, "lspsaga")
 if saga_ok then
-    map("n", "<leader>vh", "<cmd>Lspsaga finder<CR>", "lsp show references") -- view all options
-    map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>", "lsp code action") -- code action
-    map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>", "lsp rename") -- rename
-    map("n", "<leader>vD", "<cmd>Lspsaga peek_definition<CR>", "lsp peek definition") -- definition in floating window
-    map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>", "lsp line diagnostics") -- show line diagnostics
-    map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "lsp cursor diagnostics") -- show cursor diagnostic
-    map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>", "lsp outline") -- outline
+    map("n", "<leader>vu", "<cmd>Lspsaga finder<CR>", "lsp show references ([U]sed)") -- view all options
+    map({ "n", "v" }, "<leader>va", "<cmd>Lspsaga code_action<CR>", "lsp code [A]ction") -- code action
+    map("n", "<leader>vr", "<cmd>Lspsaga rename<CR>", "lsp [R]ename") -- rename
+    map("n", "<leader>vD", "<cmd>Lspsaga peek_definition<CR>", "lsp peek [D]efinition") -- definition in floating window
+    map("n", "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>", "lsp [L]ine diagnostics") -- show line diagnostics
+    map("n", "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "lsp [C]ursor diagnostics") -- show cursor diagnostic
+    map("n", "<leader>vo", "<cmd>Lspsaga outline<CR>", "lsp [O]utline") -- outline
     map("n", "K", "<cmd>Lspsaga hover_doc<CR>", "hover doc") -- hover docs
     map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "prev diagnostic") -- jump to diagnostics
     map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", "next diagnostic") -- jump to diagnostics
@@ -128,42 +133,47 @@ end
 -- GITSIGNS
 local gs_ok, gs = pcall(require, "gitsigns")
 if gs_ok then
-    map("n", "<leader>gp", gs.preview_hunk, "git preview hunk")
-    map("n", "<leader>gd", gs.diffthis, "git diff")
+    map("n", "<leader>gp", gs.preview_hunk, "git [P]review hunk")
+    map("n", "<leader>gd", gs.diffthis, "git [D]iff")
     map("n", "<leader>gD", function()
         local branch = vim.fn.input({ prompt = "branch to diff against:", default = "main", cancelreturn = "main" })
         gs.diffthis(branch)
-    end, "git diff on custom branch")
-    map("n", "<leader>gr", gs.reset_hunk, "git reset hunk")
-    map("n", "<leader>gR", gs.reset_buffer, "git reset buffer")
-    map("n", "<leader>gh", gs.stage_hunk, "git stage hunk")
-    map("n", "<leader>gs", gs.stage_buffer, "git stage buffer")
-    map("n", "<leader>gv", gs.toggle_deleted, "git view deleted")
+    end, "git [D]iff on custom branch")
+    map("n", "<leader>gr", gs.reset_hunk, "git [R]eset hunk")
+    map("n", "<leader>gR", gs.reset_buffer, "git [R]eset buffer")
+    map("n", "<leader>gh", gs.stage_hunk, "git [S]tage hunk")
+    map("n", "<leader>gs", gs.stage_buffer, "git [S]tage buffer")
+    map("n", "<leader>gv", gs.toggle_deleted, "git [V]iew deleted")
     map("n", "[h", gs.prev_hunk, "git prev hunk")
     map("n", "]h", gs.next_hunk, "git next hunk")
 end
 -- TROUBLE
 local trouble_ok, _ = pcall(require, "trouble")
 if trouble_ok then
-    map("n", "<leader>vt", require("trouble").toggle, "lsp show all errors (trouble)")
+    map("n", "<leader>vt", require("trouble").toggle, "lsp show all errors ([T]rouble)")
 end
 
 -- TELESCOPE
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
-    map("n", "<leader>ff", builtin.find_files, "telescope find files")
-    map("n", "<leader>fb", ":Telescope file_browser<CR>", "telescope find files")
-    map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics")
+    map("n", "<leader>ff", builtin.find_files, "telescope [F]ind [F]iles")
+    map("n", "<leader>fb", ":Telescope file_browser<CR>", "telescope [F]ile [B]rowser")
+    map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics ([E]rrors)")
     map("n", "<leader>fE", function()
         builtin.diagnostics({ bufnr = 0 })
     end, "telescope buffer diagnostics")
-    map("n", "<leader>fg", builtin.live_grep, "telescope grep")
-    map("n", "<leader>fh", builtin.buffers, "telescope buffers")
-    map("n", "<leader>fn", ":Telescope notify<CR>", "telescope notifications")
-    map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope TODOs")
+    map("n", "<leader>fg", builtin.live_grep, "telescope [G]rep")
+    map("n", "<leader>fh", builtin.buffers, "telescope buffers ([H]arpoon)")
+    map("n", "<leader>fn", ":Telescope notify<CR>", "telescope [N]otifications")
+    map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope [T]ODOs")
     -- worktrees
-    map("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, "git worktree list/switch")
-    map("n", "<leader>gtn", require("telescope").extensions.git_worktree.create_git_worktree, "git worktree add/new")
+    map("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, "git work[T]ree [L]ist/switch")
+    map(
+        "n",
+        "<leader>gtn",
+        require("telescope").extensions.git_worktree.create_git_worktree,
+        "git work[T]ree add/[N]ew"
+    )
 end
 
 -- DAP
@@ -171,18 +181,18 @@ local dap_ok, dap = pcall(require, "dap")
 local dapui_ok, dapui = pcall(require, "dapui")
 local persist_bp_ok, persist_bp = pcall(require, "persistent-breakpoints.api")
 if persist_bp_ok then
-    map("n", "<leader>bb", persist_bp.toggle_breakpoint, "dap toggle breakpoint")
-    map("n", "<leader>bB", persist_bp.set_conditional_breakpoint, "dap conditional breakpoint")
-    map("n", "<leader>bR", persist_bp.clear_all_breakpoints, "dap remove all breakpoints")
+    map("n", "<leader>bb", persist_bp.toggle_breakpoint, "dap toggle [B]reakpoint")
+    map("n", "<leader>bB", persist_bp.set_conditional_breakpoint, "dap conditional [B]reakpoint")
+    map("n", "<leader>bR", persist_bp.clear_all_breakpoints, "dap [R]emove all [B]reakpoints")
 end
 if dapui_ok then
     map("n", "<leader>bv", dapui.toggle)
 end
 if dap_ok then
-    map("n", "<leader>bc", dap.continue, "dap continue")
-    map("n", "<leader>bi", dap.step_into, "dap step into")
-    map("n", "<leader>bo", dap.step_over, "dap step over")
-    map("n", "<leader>bu", dap.step_out, "dap step out")
+    map("n", "<leader>bc", dap.continue, "dap [C]ontinue")
+    map("n", "<leader>bi", dap.step_into, "dap step [I]nto")
+    map("n", "<leader>bo", dap.step_over, "dap step [O]ver")
+    map("n", "<leader>bu", dap.step_out, "dap step o[U]t")
 end
 -- dap-go
 local dap_go_ok, dap_go = pcall(require, "dap-go")
@@ -215,7 +225,7 @@ if term_ok then
 end
 
 -- SESSION MANAGER
-map("n", "<leader>sl", ":SessionManager load_session<CR>", "session load")
+map("n", "<leader>sl", ":SessionManager load_session<CR>", "[S]ession [L]oad")
 
 -- BUFFERLINE
 local bufferline_ok = pcall(require, "bufferline")

@@ -3,6 +3,8 @@ if not configs_ok then
     return
 end
 
+vim.treesitter.language.register("wgsl_bevy", "wgsl")
+
 local rainbow_okay, rainbow_delimiters = pcall(require, "rainbow-delimiters")
 if rainbow_okay then
     vim.g.rainbow_delimiters = {

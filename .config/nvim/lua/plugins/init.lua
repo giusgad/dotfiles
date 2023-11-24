@@ -90,7 +90,24 @@ require("lazy").setup({
     {
         "epwalsh/obsidian.nvim",
         config = true,
-        opts = { dir = "~/Documents/obsidian/vault/", completion = { nvim_cmp = true }, disable_frontmatter = true },
+        opts = {
+            dir = "~/Documents/obsidian/vault/",
+            completion = { nvim_cmp = true },
+            disable_frontmatter = true,
+            overwrite_mappings = true,
+            mappings = {
+                ["gf"] = {
+                    action = function()
+                        return require("obsidian").util.gf_passthrough()
+                    end,
+                    opts = {
+                        noremap = false,
+                        expr = true,
+                        buffer = true,
+                    },
+                },
+            },
+        },
         ft = "markdown",
     },
     {
@@ -146,16 +163,7 @@ require("lazy").setup({
         config = true,
         ft = "toml",
     },
-    {
-        "simrat39/rust-tools.nvim",
-        ft = { "rust", "toml" },
-        opts = {
-            server = {
-                settings = { ["rust-analyzer"] = require("plugins.config.lsp.settings.rust-analyzer") },
-                on_attach = require("plugins.config.handlers").on_attach,
-            },
-        },
-    },
+    { "mrcjkb/rustaceanvim", ft = { "rust" } },
 
     -- DEBUGGING
     "mfussenegger/nvim-dap",
@@ -174,6 +182,14 @@ require("lazy").setup({
     "hrsh7th/nvim-cmp", -- completion engine
     "saadparwaiz1/cmp_luasnip", -- snippet completions
     { "glepnir/lspsaga.nvim", event = "BufRead" }, -- show definitions, code actions etc.
+    {
+        "Exafunction/codeium.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
+        },
+        config = true,
+    },
 
     -- NULL-LS
     "jose-elias-alvarez/null-ls.nvim", -- formatter/linter
@@ -220,3 +236,13 @@ require("pets").setup({
 
 -- markdown preview
 vim.g.mkdp_markdown_css = vim.fn.expand("~/.config/nvim/lua/markdown.css")
+
+vim.g.rustaceanvim = {
+    server = {
+        on_attach = require("plugins.config.handlers").on_attach,
+        settings = {
+            -- rust-analyzer language server configuratio
+            ["rust-analyzer"] = require("plugins.config.lsp.settings.rust-analyzer"),
+        },
+    },
+}

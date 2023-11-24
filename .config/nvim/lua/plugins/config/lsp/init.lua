@@ -24,8 +24,8 @@ handlers.setup()
 mason_lspconfig.setup_handlers({
     function(server_name)
         local opts = {
-            on_attach = handlers.on_attach,
-            capabilities = handlers.capabilities,
+            --[[ on_attach = handlers.on_attach,
+            capabilities = handlers.capabilities, ]]
         }
         if server_name == "rust_analyzer" then
             return

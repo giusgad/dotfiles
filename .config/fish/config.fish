@@ -67,7 +67,7 @@ end
 ### CONDA
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-alias anaconda='eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
+# alias anaconda='eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
 # <<< conda initialize <<<
 
 ### AUTOJUMP
@@ -107,6 +107,9 @@ set PATH "$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/"
 set PATH "$PATH:$ANDROID_SDK_ROOT/tools"
 set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
 set -Ux JAVA_OPTS ""
+
+## bob (nvim version manager)
+set PATH "$PATH:$HOME/.local/share/bob/nightly/nvim-linux64/bin/"
 
 ### OTHER
 # fix for E79: Cannot load wildcards
