@@ -262,3 +262,8 @@ if nabla_ok then
     map("n", "<leader>mp", nabla.popup)
     map("n", "<leader>mv", nabla.toggle_virt)
 end
+
+local oil_ok = pcall(require,"oil")
+if oil_ok then
+    map("n", "<leader>o", ":Oil<CR>")
+end
