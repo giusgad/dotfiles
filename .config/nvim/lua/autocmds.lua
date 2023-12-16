@@ -25,9 +25,4 @@ vim.api.nvim_create_autocmd("TermLeave", {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    pattern = "*.wgsl",
-    callback = function()
-        vim.bo.filetype = "wgsl"
-    end,
-})
+vim.filetype.add({ extension = { wgsl = "wgsl" } })

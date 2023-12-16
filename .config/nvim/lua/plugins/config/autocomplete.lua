@@ -3,6 +3,10 @@ local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then
     return
 end
+local pairs_ok, pairs = pcall(require, "nvim-autopairs.completion.cmp")
+if pairs_ok then
+    cmp.event:on("confirm_done", pairs.on_confirm_done())
+end
 
 local luasnip_ok, luasnip = pcall(require, "luasnip")
 if luasnip_ok then
@@ -17,6 +21,9 @@ end
 vim.api.nvim_set_hl(0, "CmpPmenu", { link = "GruvboxGray" })
 
 cmp.setup({
+    experimental = {
+        ghost_text = { hlgroup = "Comment" },
+    },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)

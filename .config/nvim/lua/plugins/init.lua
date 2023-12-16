@@ -94,7 +94,6 @@ require("lazy").setup({
             dir = "~/Documents/obsidian/vault/",
             completion = { nvim_cmp = true },
             disable_frontmatter = true,
-            overwrite_mappings = true,
             mappings = {
                 ["gf"] = {
                     action = function()
