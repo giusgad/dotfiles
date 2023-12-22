@@ -1,9 +1,6 @@
 # My aliases
-# alias clear='/bin/clear; neofetch'
 alias clear='/bin/clear; $HOME/.scripts/fetch.sh'
-alias pclear='/bin/clear; pfetch'
 alias ta='tmux attach -t'
-alias piskel='/home/giuseppe/piskel/piskel &'
 
 alias cat="bat --style plain"
 
