@@ -5,11 +5,14 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 
 vim.opt.wrap = false
+vim.opt.linebreak = true -- don't wrap in the middle of words
 vim.opt.updatetime = 50
 vim.opt.autoread = true
 
 vim.opt.scrolloff = 10 -- keep at least n extra lines visible while scrolling
 vim.opt.mouse = "" -- disable mouse
+
+vim.opt.shell = "/usr/bin/fish"
 
 -- get undos from the past
 vim.opt.swapfile = false

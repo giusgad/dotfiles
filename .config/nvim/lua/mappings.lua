@@ -36,11 +36,15 @@ map({ "n", "v" }, "<leader>p", '"+p', "paste from sysstem clipboard")
 -- delete to nil register
 map({ "n", "v" }, "<leader>d", '"_d')
 map({ "n", "v" }, "<leader>D", '"_D')
+
+-- INSERT MODE
 -- add undo points while typing
 local chars = { "<Space>", ",", ".", "(", "[", "{", ":", ";" }
 for _, c in ipairs(chars) do
 	map("i", c, "<C-g>u" .. c)
 end
+-- fix latest typo
+map("i", "<C-l>", "<c-g>u<Esc>[s1z=`]a<c-g>u")
 
 -- VISUAL MODE
 -- Maintain selection after indentation
@@ -53,6 +57,8 @@ map("v", "<M-K>", ":m-2<CR>gv=gv")
 map("v", "p", '"_dP')
 
 -- NORMAL MODE
+-- toggle scratch buffer
+map("n", "<m-n>", ":new<bar>setlocal bt=nofile<cr>")
 -- remove highlights with esc
 map("n", "<esc>", ":noh<return><esc>")
 -- cursor history
@@ -159,6 +165,7 @@ if ok then
 	map("n", "<leader>ff", builtin.find_files, "telescope [F]ind [F]iles")
 	map("n", "<leader>fb", ":Telescope file_browser<CR>", "telescope [F]ile [B]rowser")
 	map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics ([E]rrors)")
+	map("n", "<leader>fm", builtin.marks, "telescope [M]arks")
 	map("n", "<leader>fE", function()
 		builtin.diagnostics({ bufnr = 0 })
 	end, "telescope buffer diagnostics")
