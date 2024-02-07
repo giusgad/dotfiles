@@ -25,8 +25,16 @@ map({ "v", "n" }, "n", "nzz")
 map({ "v", "n" }, "N", "Nzz")
 -- center marker after jump
 -- map("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
-map({ "v", "n" }, "0", "^")
-map({ "v", "n" }, "^", "0")
+local function zero()
+	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+	local ind = vim.fn.indent(row)
+	if ind == col then
+		vim.api.nvim_win_set_cursor(0, { row, 0 })
+	else
+		vim.api.nvim_win_set_cursor(0, { row, ind })
+	end
+end
+map({ "v", "n" }, "0", zero)
 map({ "v", "n" }, "<C-%>", "$%")
 
 -- OTHER
