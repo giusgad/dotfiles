@@ -135,7 +135,6 @@ require("lazy").setup({
 		dependencies = { { "nvim-lua/plenary.nvim" } },
 	},
 	"nvim-telescope/telescope-ui-select.nvim", -- input selector
-	{ "nvim-telescope/telescope-file-browser.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
 	{
 		"stevearc/oil.nvim",
@@ -201,10 +200,7 @@ require("lazy").setup({
 	},
 
 	-- NULL-LS
-	"jose-elias-alvarez/null-ls.nvim", -- formatter/linter
-
-	-- TROUBLE
-	{ "folke/trouble.nvim", config = true },
+	"nvimtools/none-ls.nvim", -- formatter/linter
 
 	-- TODO COMMENTS
 	{ "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },

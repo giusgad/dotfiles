@@ -171,14 +171,13 @@ end
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
 	map("n", "<leader>ff", builtin.find_files, "telescope [F]ind [F]iles")
-	map("n", "<leader>fb", ":Telescope file_browser<CR>", "telescope [F]ile [B]rowser")
 	map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics ([E]rrors)")
 	map("n", "<leader>fm", builtin.marks, "telescope [M]arks")
 	map("n", "<leader>fE", function()
 		builtin.diagnostics({ bufnr = 0 })
 	end, "telescope buffer diagnostics")
 	map("n", "<leader>fg", builtin.live_grep, "telescope [G]rep")
-	map("n", "<leader>fh", builtin.buffers, "telescope buffers ([H]arpoon)")
+	map("n", "<leader>fb", builtin.buffers, "telescope [B]uffers")
 	map("n", "<leader>fn", ":Telescope notify<CR>", "telescope [N]otifications")
 	map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope [T]ODOs")
 	-- worktrees
