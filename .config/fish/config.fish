@@ -70,9 +70,6 @@ end
 # alias anaconda='eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
 # <<< conda initialize <<<
 
-### AUTOJUMP
-if test -f /home/giuseppe/.autojump/share/autojump/autojump.fish; . /home/giuseppe/.autojump/share/autojump/autojump.fish; end
-
 ### ALIASES
 source "$HOME/.aliases"
 function mvk
@@ -90,6 +87,7 @@ end
 if [ -d "$HOME/.cargo/bin" ]
     set PATH "$HOME/.cargo/bin:$PATH"
 end
+set PATH "$GOPATH/bin:$PATH"
 
 ### SSH
 if not pgrep --full ssh-agent | string collect > /dev/null
@@ -114,3 +112,6 @@ set PATH "$PATH:$HOME/.local/share/bob/nightly/nvim-linux64/bin/"
 ### OTHER
 # fix for E79: Cannot load wildcards
 set -x SHELL /bin/bash
+
+## zoxide (autojump)
+zoxide init fish | source
