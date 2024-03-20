@@ -161,6 +161,15 @@ if gs_ok then
 	map("n", "[h", gs.prev_hunk, "git prev hunk")
 	map("n", "]h", gs.next_hunk, "git next hunk")
 end
+-- NEOGIT
+local ng_ok, neogit = pcall(require, "neogit")
+if ng_ok then
+	map("n", "<leader>gg", neogit.open, "Open neo[G]it")
+	map("n", "<leader>gl", function()
+		neogit.open({ "log" })
+	end, "Open [G]it [Log]")
+end
+
 -- TROUBLE
 local trouble_ok, _ = pcall(require, "trouble")
 if trouble_ok then
@@ -229,7 +238,7 @@ if term_ok then
 		lazygit:toggle()
 	end
 
-	map("n", "<leader>gg", _lazygit_toggle, "lazygit term")
+	map("n", "<leader>lg", _lazygit_toggle, "[L]azy[G]it term")
 	map("t", "<M-k>", _lazygit_toggle)
 
 	-- numbered terminals

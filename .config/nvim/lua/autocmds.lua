@@ -1,6 +1,6 @@
 -- indentation to 2 spaces
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json", "*.java" },
+	pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json", "*.java", "*.c" },
 	callback = function()
 		vim.bo.shiftwidth = 2
 		vim.bo.tabstop = 2
