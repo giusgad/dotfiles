@@ -22,7 +22,7 @@ function randomInDir() {
     done
 }
 
-swww init > /dev/null
+swww-daemon --format xrgb > /dev/null
 
 while swww init&>/dev/null; do
     sleep 1
