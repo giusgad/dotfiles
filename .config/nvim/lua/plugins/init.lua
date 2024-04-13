@@ -218,6 +218,7 @@ require("lazy").setup({
 })
 
 -- CONFIG
+vim.g.undotree_WindowLayout = 2
 require("plugins.config")
 
 -- QUICK SETUP

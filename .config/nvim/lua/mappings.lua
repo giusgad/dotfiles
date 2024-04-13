@@ -17,14 +17,12 @@ map("t", "<C-esc>", "<C-\\><C-n>")
 map("t", "<M-v>", "<C-\\><C-n>")
 
 -- MOVEMENTS
--- center cursor when going down or up by half pages
-map({ "v", "n" }, "<C-d>", "<C-d>zz")
-map({ "v", "n" }, "<C-u>", "<C-u>zz")
--- center cursor when searching
-map({ "v", "n" }, "n", "nzz")
-map({ "v", "n" }, "N", "Nzz")
--- center marker after jump
--- map("n", "'", "\"'\" . nr2char(getchar()) . 'zz'") TODO
+-- center after movement
+local zz_binds = { "<C-d>", "<C-u>", "n", "N", "<C-o>", "<C-i>" }
+for _, c in ipairs(zz_binds) do
+	map({ "v", "n" }, c, c .. "zz")
+end
+
 local function zero()
 	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
 	local ind = vim.fn.indent(row)
@@ -61,17 +59,12 @@ map("v", "<", "<gv")
 -- Move text up and down
 map("v", "<M-J>", ":m'>+1<CR>gv=gv")
 map("v", "<M-K>", ":m-2<CR>gv=gv")
--- Delete selected text on paste
-map("v", "p", '"_dP')
 
 -- NORMAL MODE
 -- toggle scratch buffer
 map("n", "<m-n>", ":new<bar>setlocal bt=nofile<cr>")
 -- remove highlights with esc
 map("n", "<esc>", ":noh<return><esc>")
--- cursor history
-map("n", "<C-o>", "<C-o>zz")
-map("n", "<C-i>", "<C-i>zz")
 -- Window navigation - now integrated with tmux navigator
 --[[ map("n", "<C-h>", "<C-w>h",opts)
 map("n", "<C-j>", "<C-w>j",opts)
@@ -189,6 +182,7 @@ if ok then
 	map("n", "<leader>fb", builtin.buffers, "telescope [B]uffers")
 	map("n", "<leader>fn", ":Telescope notify<CR>", "telescope [N]otifications")
 	map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope [T]ODOs")
+	map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, "telescope LSP [S]ymbols")
 	-- worktrees
 	map("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, "git work[T]ree [L]ist/switch")
 	map(

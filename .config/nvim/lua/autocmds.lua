@@ -25,4 +25,4 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
     end,
 }) ]]
 
-vim.filetype.add({ extension = { wgsl = "wgsl" } })
+vim.filetype.add({ extension = { wgsl = "wgsl", ampl = "ampl" } })
