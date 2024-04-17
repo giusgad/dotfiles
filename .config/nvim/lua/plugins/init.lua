@@ -67,12 +67,10 @@ require("lazy").setup({
 	"RRethy/vim-illuminate",
 	"HiPhish/rainbow-delimiters.nvim",
 	{
-		"norcalli/nvim-colorizer.lua",
-		config = true,
-		opts = function()
-			vim.o.termguicolors = true
-			require("colorizer").setup()
-		end,
+		"NvChad/nvim-colorizer.lua",
+		main = "colorizer",
+		opts = { user_default_options = { mode = "virtualtext" } },
+		ft = { "css", "scss" },
 	},
 
 	-- LUALINE
