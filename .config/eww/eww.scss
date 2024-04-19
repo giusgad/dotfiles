@@ -17,7 +17,8 @@ $gray: #7c6f64;
 
 @function random-color() {
   $colors: $aqua-dark, $blue-dark, $purple-dark, $green-dark;
-  $random-index: random(length($colors));
+  // $random-index: random(length($colors)); // TODO: add
+  $random-index: 2;
   @return nth($colors, $random-index);
 }
 
@@ -81,6 +82,7 @@ scale trough {
 .workspaces {
   padding: 2px 5px;
 }
+
 .workspace-entry {
   padding: 0px 0.25em;
 }
@@ -89,6 +91,7 @@ scale trough {
   @include bubble;
   background-color: $green-dark;
 }
+
 .slider trough highlight {
   background-color: $yellow-dark;
   border-radius: 5px;
@@ -98,6 +101,7 @@ scale trough {
   @include bubble;
   background-color: $purple-dark;
 }
+
 .volume-bluetooth {
   @include bubble;
   background-color: $blue-dark;
@@ -112,21 +116,26 @@ scale trough {
   @include bubble;
   background-color: $aqua-dark;
 }
+
 .battery-Discharging {
   @include bubble;
   background-color: $yellow-dark;
 }
+
 .battery-Full {
   @include bubble;
   background-color: $green-dark;
 }
+
 .battery-Not {
   @include bubble;
   background-color: $blue-dark;
 }
+
 .battery-time {
   margin-left: 10px;
 }
+
 .battery-low {
   @include bubble;
   background-color: $red-light;
@@ -136,6 +145,7 @@ scale trough {
   @include bubble;
   background-color: $aqua-dark;
 }
+
 .tray-element {
   margin: 0px 1px;
   padding-top: 1px;
@@ -148,10 +158,12 @@ scale trough {
   padding: 15px;
   border-radius: 15px;
 }
+
 .calendar {
   border: 1px solid $yellow-dark;
   border-radius: 15px;
 }
+
 .calendar:selected {
   background-color: $gray;
 }
@@ -181,6 +193,7 @@ scale trough {
   margin-top: 10px;
   padding: 5px;
 }
+
 .menu-entry {
   margin: 5px 0px;
 }
@@ -189,6 +202,7 @@ scale trough {
   @include dropdown;
   background-color: $purple-dark;
 }
+
 .wifi-dropdown-off {
   @include dropdown;
   background-color: $gray;
@@ -198,6 +212,7 @@ scale trough {
   @include dropdown;
   background-color: $blue-dark;
 }
+
 .bluetooth-dropdown-off {
   @include dropdown;
   background-color: $gray;

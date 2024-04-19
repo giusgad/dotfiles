@@ -100,7 +100,7 @@
       :class "clock"
       (clock)
     )
-    (player-bar)
+    ;; (player-bar)
   )
 )
 

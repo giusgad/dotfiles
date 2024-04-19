@@ -148,8 +148,8 @@ if gs_ok then
 	end, "git [D]iff on custom branch")
 	map("n", "<leader>gr", gs.reset_hunk, "git [R]eset hunk")
 	map("n", "<leader>gR", gs.reset_buffer, "git [R]eset buffer")
-	map("n", "<leader>gh", gs.stage_hunk, "git [S]tage hunk")
-	map("n", "<leader>gs", gs.stage_buffer, "git [S]tage buffer")
+	map("n", "<leader>gh", gs.stage_hunk, "git stage [H]unk")
+	map("n", "<leader>gS", gs.stage_buffer, "git [S]tage buffer")
 	map("n", "<leader>gv", gs.toggle_deleted, "git [V]iew deleted")
 	map("n", "[h", gs.prev_hunk, "git prev hunk")
 	map("n", "]h", gs.next_hunk, "git next hunk")
@@ -173,6 +173,9 @@ end
 local ok, builtin = pcall(require, "telescope.builtin")
 if ok then
 	map("n", "<leader>ff", builtin.find_files, "telescope [F]ind [F]iles")
+	map("n", "<leader>fF", function()
+		builtin.find_files({ hidden = true, no_ignore = true })
+	end, "telescope [F]ind [F]iles")
 	map("n", "<leader>fe", builtin.diagnostics, "telescope diagnostics ([E]rrors)")
 	map("n", "<leader>fm", builtin.marks, "telescope [M]arks")
 	map("n", "<leader>fE", function()
@@ -183,7 +186,7 @@ if ok then
 	map("n", "<leader>fn", ":Telescope notify<CR>", "telescope [N]otifications")
 	map("n", "<leader>ft", ":TodoTelescope<CR>", "telescope [T]ODOs")
 	map("n", "<leader>fs", builtin.lsp_dynamic_workspace_symbols, "telescope LSP [S]ymbols")
-	-- worktrees
+	-- git
 	map("n", "<leader>gtl", require("telescope").extensions.git_worktree.git_worktrees, "git work[T]ree [L]ist/switch")
 	map(
 		"n",
@@ -191,6 +194,7 @@ if ok then
 		require("telescope").extensions.git_worktree.create_git_worktree,
 		"git work[T]ree add/[N]ew"
 	)
+	map("n", "<leader>gs", builtin.git_status, "telescope [G]it [S]tatus")
 end
 
 -- DAP
