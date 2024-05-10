@@ -107,7 +107,7 @@ set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
 set -Ux JAVA_OPTS ""
 
 ## bob (nvim version manager)
-set PATH "$PATH:$HOME/.local/share/bob/nightly/nvim-linux64/bin/"
+set PATH "$PATH:$HOME/.local/share/bob/nvim-bin"
 
 ### OTHER
 # fix for E79: Cannot load wildcards

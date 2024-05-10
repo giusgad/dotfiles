@@ -4,7 +4,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 	callback = function()
 		vim.bo.shiftwidth = 2
 		vim.bo.tabstop = 2
-		vim.bo.expandtab = false
 	end,
 })
 -- open help in vsplit

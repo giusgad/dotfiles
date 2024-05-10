@@ -126,6 +126,7 @@ require("lazy").setup({
 	-- "tpope/vim-fugitive",
 	{
 		"NeogitOrg/neogit",
+		branch = "nightly",
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
 			"sindrets/diffview.nvim", -- optional - Diff integration
@@ -161,13 +162,12 @@ require("lazy").setup({
 		"jay-babu/mason-null-ls.nvim",
 		dependencies = {
 			"williamboman/mason.nvim",
-			"jose-elias-alvarez/null-ls.nvim",
 		},
 	}, -- null-ls to mason integration
 	{
 		"windwp/nvim-ts-autotag",
 		config = true,
-		ft = { "ts", "tsx" },
+		ft = { "typescriptreact" },
 		main = "nvim-ts-autotag",
 	},
 	-- yuck
