@@ -19,6 +19,7 @@ null_ls.setup({
 		formatting.stylua,
 		-- sources installed with mason are setup automatically
 		formatting.prettierd,
+		formatting.sql_formatter,
 	},
 	-- you can reuse a shared lspconfig on_attach callback here
 	on_attach = require("plugins.config.handlers").on_attach,

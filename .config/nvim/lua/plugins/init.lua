@@ -31,6 +31,12 @@ require("lazy").setup({
 		lazy = false,
 		dev = false,
 	},
+	{
+		"giusgad/hologram.nvim",
+		lazy = false,
+		ft = { "markdown" },
+		opts = { auto_display = true },
+	},
 
 	-- UTILITY
 	"numToStr/Comment.nvim", -- comment lines and blocks
@@ -167,7 +173,7 @@ require("lazy").setup({
 	{
 		"windwp/nvim-ts-autotag",
 		config = true,
-		ft = { "typescriptreact" },
+		ft = { "typescriptreact", "php" },
 		main = "nvim-ts-autotag",
 	},
 	-- yuck
