@@ -19,6 +19,10 @@ if rainbow_okay then
 	}
 end
 
+local function disable_plugin(_, bufnr)
+	return vim.api.nvim_buf_line_count(bufnr) > 2000
+end
+
 configs.setup({
 	ensure_installed = { "" }, -- A list of parser names, or "all"
 	sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -27,12 +31,13 @@ configs.setup({
 	autopairs = { enable = true },
 	highlight = {
 		enable = true, -- `false` will disable the whole extension
-		disable = { "all" }, -- list of language that will be disabled
+		disable = disable_plugin,
 		additional_vim_regex_highlighting = true,
 	},
-	indent = { enable = true, disable = { "" } },
+	indent = { enable = true, disable = disable_plugin },
 	rainbow = {
 		enable = true,
+		disable = disable_plugin,
 		-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
 		extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
 		max_file_lines = nil, -- Do not enable for files with more than n lines, int

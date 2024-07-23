@@ -23,22 +23,14 @@ for _, c in ipairs(zz_binds) do
 	map({ "v", "n" }, c, c .. "zz")
 end
 
-local function zero()
-	local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-	local ind = vim.fn.indent(row)
-	if ind == col then
-		vim.api.nvim_win_set_cursor(0, { row, 0 })
-	else
-		vim.api.nvim_win_set_cursor(0, { row, ind })
-	end
-end
-map({ "v", "n" }, "0", zero)
-map({ "v", "n" }, "<C-%>", "$%")
+-- switch some default mappings
+map({ "v", "n" }, "0", "^")
+map({ "v", "n" }, "^", "0")
 
 -- OTHER
 -- use sys clipboard
 map({ "n", "v" }, "<leader>y", '"+y', "copy to system clipboard")
-map({ "n", "v" }, "<leader>p", '"+p', "paste from sysstem clipboard")
+map({ "n", "v" }, "<leader>p", '"+p', "paste from system clipboard")
 -- delete to nil register
 map({ "n", "v" }, "<leader>d", '"_d')
 map({ "n", "v" }, "<leader>D", '"_D')
@@ -87,7 +79,11 @@ map("n", "<leader>vh", function()
 	local enabled = vim.lsp.inlay_hint.is_enabled()
 	vim.lsp.inlay_hint.enable(not enabled)
 	vim.notify("inlay hints enabled: " .. tostring(not enabled), vim.log.levels.INFO, { title = "LSP" })
-end, "lsp show inlay [H]ints")
+end, "lsp toggle inlay [H]ints")
+map("n", "<leader>vv", function()
+	local enabled = vim.diagnostic.config().virtual_text
+	vim.diagnostic.config({ virtual_text = not enabled })
+end, "lsp toggle [V]irtual text")
 -- map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>",opts)
 -- map("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",opts)
 -- map("n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",opts)
@@ -151,6 +147,8 @@ if gs_ok then
 	map("n", "<leader>gh", gs.stage_hunk, "git stage [H]unk")
 	map("n", "<leader>gS", gs.stage_buffer, "git [S]tage buffer")
 	map("n", "<leader>gv", gs.toggle_deleted, "git [V]iew deleted")
+	map("n", "<leader>gb", gs.blame_line, "git [B]lame line")
+	map("n", "<leader>gB", gs.blame, "git [B]lame file")
 	map("n", "[h", gs.prev_hunk, "git prev hunk")
 	map("n", "]h", gs.next_hunk, "git next hunk")
 end
@@ -231,7 +229,7 @@ local term_ok, term = pcall(require, "toggleterm.terminal") -- terminal for lazy
 if term_ok then
 	term = term.Terminal
 	-- lazygit terminal
-	local lazygit = term:new({ cmd = "lazygit", direction = "float", hidden = true })
+	local lazygit = term:new({ cmd = "lazygit", hidden = true })
 	local function _lazygit_toggle()
 		lazygit:toggle()
 	end

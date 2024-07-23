@@ -31,12 +31,12 @@ require("lazy").setup({
 		lazy = false,
 		dev = false,
 	},
-	{
+	--[[ {
 		"giusgad/hologram.nvim",
 		lazy = false,
 		ft = { "markdown" },
 		opts = { auto_display = true },
-	},
+	}, ]]
 
 	-- UTILITY
 	"numToStr/Comment.nvim", -- comment lines and blocks
@@ -132,7 +132,6 @@ require("lazy").setup({
 	-- "tpope/vim-fugitive",
 	{
 		"NeogitOrg/neogit",
-		branch = "nightly",
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
 			"sindrets/diffview.nvim", -- optional - Diff integration

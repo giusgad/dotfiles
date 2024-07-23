@@ -6,7 +6,7 @@ toggleterm.setup({
 	open_mapping = "<M-d>",
 	shell = "/usr/bin/fish",
 	size = 15,
-	direction = "float",
+	direction = "tab",
 	float_opts = {
 		border = "curved",
 	},
