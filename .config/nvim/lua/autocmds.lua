@@ -1,18 +1,18 @@
 -- indentation to 2 spaces
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-	pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json", "*.java", "*.c", "*.sql" },
-	callback = function()
-		vim.bo.shiftwidth = 2
-		vim.bo.tabstop = 2
-	end,
+    pattern = { "*.scss", "*.css", "*.ts*", "*.js*", "*.json", "*.java", "*.c", "*.sql", "*.lua" },
+    callback = function()
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+    end,
 })
 -- open help in vsplit
 vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
-	callback = function()
-		if vim.bo.filetype == "help" or vim.bo.filetype == "fugitive" then
-			vim.cmd.wincmd("L")
-		end
-	end,
+    callback = function()
+        if vim.bo.filetype == "help" or vim.bo.filetype == "fugitive" then
+            vim.cmd.wincmd("L")
+        end
+    end,
 })
 
 -- check for changes when leaving terminal (for lazygit)
