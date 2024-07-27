@@ -48,13 +48,40 @@ return {
     "monaqa/dial.nvim",
     opts = function()
       local augend = require("dial.augend")
+      local weekdays = augend.constant.new({
+        elements = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" },
+        word = true,
+        cyclic = true,
+      })
+
+      local months = augend.constant.new({
+        elements = {
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        },
+        word = true,
+        cyclic = true,
+      })
       return {
         -- default augends used when no group name is specified
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
           augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-          augend.date.alias["%Y/%m/%d"], -- date (2022/02/19, etc.)
+          augend.date.alias["%Y-%m-%d"],
+          augend.date.alias["%d/%m/%Y"],
           augend.constant.alias.bool, -- boolean value (true <-> false)
+          weekdays,
+          months,
         },
       }
     end,

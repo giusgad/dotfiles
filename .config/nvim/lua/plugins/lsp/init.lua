@@ -5,9 +5,10 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       { "williamboman/mason-lspconfig.nvim", config = function() end }, -- adapter for configuration
-    },                                                                  -- lsp installer
+    }, -- lsp installer
     config = function()
       local handlers = require("plugins.lsp.handlers")
+      handlers.setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           local opts = {

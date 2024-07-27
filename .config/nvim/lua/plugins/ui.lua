@@ -38,12 +38,12 @@ return {
           section_separators = { left = "", right = "" },
         },
         sections = {
-          lualine_a = { { "mode", separator = { left = "", right = "" } } },
+          lualine_a = { { "mode", separator = { left = "", right = "" } } },
           lualine_b = { "filename", "branch", "diff", "diagnostics" },
           lualine_c = lualine_c,
           lualine_x = {},
           lualine_y = { "filetype", "progress" },
-          lualine_z = { { "location", separator = { left = "", right = "" } } },
+          lualine_z = { { "location", separator = { left = "", right = "" } } },
         },
         inactive_sections = {
           lualine_a = { "filename" },
@@ -59,7 +59,8 @@ return {
         extensions = {},
       }
     end,
-    init = function()
+    config = function(_, opts)
+      require("lualine").setup(opts)
       vim.api.nvim_set_hl(0, "StatusLine", { link = "Normal" }) -- fix for https://github.com/nvim-lualine/lualine.nvim/issues/867
     end,
   },
@@ -122,5 +123,20 @@ return {
       vim.o.timeoutlen = 300
       return { icons = { mappings = false } }
     end,
+  },
+  {
+    "giusgad/pets.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", { "giusgad/hologram.nvim", dev = false } },
+    cmd = { "PetsNew", "PetsNewCustom" },
+    opts = {
+      row = 7,
+      default_pet = "slime",
+      default_style = "green",
+      random = true,
+      popup = {
+        -- winblend = 10,
+      },
+    },
+    dev = false,
   },
 }

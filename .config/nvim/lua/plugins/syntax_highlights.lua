@@ -47,16 +47,14 @@ return {
   { "nvim-treesitter/playground", event = "VeryLazy" },
   {
     "RRethy/vim-illuminate",
-    init = function()
-      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#3c3836" })
-      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#3c3836" })
-      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
-    end,
     opts = {
       min_count_to_highlight = 2,
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#3c3836" })
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#3c3836" })
       -- from LazyVim's config
       local function map(key, dir, buffer)
         vim.keymap.set("n", key, function()
@@ -78,6 +76,7 @@ return {
       { "]]", desc = "Next Reference" },
       { "[[", desc = "Prev Reference" },
     },
+    event = "BufRead",
   },
   {
     "HiPhish/rainbow-delimiters.nvim",
