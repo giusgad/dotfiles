@@ -13,6 +13,11 @@ return {
     },
   },
   {
+    "rcarriga/nvim-notify",
+    keys = { { "<leader>n", require("notify").dismiss, desc = "Dismiss [N]otifications" } },
+    event = "VeryLazy",
+  },
+  {
     "numToStr/Comment.nvim",
     opts = {
       padding = true, -- Add a space b/w comment and the line
@@ -41,9 +46,17 @@ return {
     },
     keys = { "<leader>cc", "<leader>cb", "<leader>co", "<leader>cO", "<leader>ca" },
   },
-  { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+  },
   { "chrisgrieser/nvim-various-textobjs", opts = { useDefaultKeymaps = true } },
-  { "kylechui/nvim-surround", version = "*", config = true },
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    config = true,
+  },
   {
     "monaqa/dial.nvim",
     opts = function()
@@ -87,6 +100,17 @@ return {
     end,
     config = function(_, opts)
       require("dial.config").augends:register_group(opts)
+    end,
+    keys = function()
+      local dial = require("dial.map")
+      return {
+        { "<C-a>", dial.inc_normal() },
+        { "<C-x>", dial.dec_normal() },
+        { "<C-a>", dial.inc_visual(), mode = "v" },
+        { "<C-x>", dial.dec_visual(), mode = "v" },
+        { "g<C-a>", dial.inc_gvisual(), mode = "v" },
+        { "g<C-x>", dial.dec_gvisual(), mode = "v" },
+      }
     end,
   },
   "andymass/vim-matchup",

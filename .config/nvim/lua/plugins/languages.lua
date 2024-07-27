@@ -45,7 +45,17 @@ return {
       vim.g.mkdp_markdown_css = vim.fn.expand("~/.config/nvim/lua/markdown.css")
     end,
   },
-  { "jbyuki/nabla.nvim", ft = "markdown" },
+  {
+    "jbyuki/nabla.nvim",
+    ft = "markdown",
+    keys = function()
+      local nabla = require("nabla")
+      return {
+        { "<leader>mp", nabla.popup, desc = "Show [M]ath preview [P]opup" },
+        { "<leader>mv", nabla.toggle_virt, desc = "Show [Math] [V]irtual lines" },
+      }
+    end,
+  },
   -- TYPESCRIPT
   {
     "windwp/nvim-ts-autotag",

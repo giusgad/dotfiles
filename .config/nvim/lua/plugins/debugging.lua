@@ -29,6 +29,15 @@ return {
       dap.configurations.rust = dap.configurations.cpp
       dap.configurations.c = dap.configurations.cpp
     end,
+    keys = function()
+      local dap = require("dap")
+      return {
+        { "<leader>bc", dap.continue, desc = "dap [C]ontinue" },
+        { "<leader>bi", dap.step_into, desc = "dap step [I]nto" },
+        { "<leader>bo", dap.step_over, desc = "dap step [O]ver" },
+        { "<leader>bu", dap.step_out, desc = "dap step o[U]t" },
+      }
+    end,
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -46,6 +55,11 @@ return {
       vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint" })
       vim.fn.sign_define("DapStopped", { text = "" })
     end,
+    keys = function()
+      return {
+        { "<leader>bv", require("dapui").toggle, desc = "Toggle dap ui" },
+      }
+    end,
   },
   {
     "jayp0521/mason-nvim-dap.nvim",
@@ -54,11 +68,20 @@ return {
   },
   {
     "Weissle/persistent-breakpoints.nvim",
+    event = "BufReadPost",
     opts = {
       save_dir = vim.fn.stdpath("data") .. "/nvim_breakpoints",
       load_breakpoints_event = "BufReadPost",
       perf_record = false,
     },
+    keys = function()
+      local pb = require("persistent-breakpoints")
+      return {
+        { "<leader>bb", pb.toggle_breakpoint, desc = "dap toggle [B]reakpoint" },
+        { "<leader>bB", pb.set_conditional_breakpoint, desc = "dap conditional [B]reakpoint" },
+        { "<leader>bR", pb.clear_all_breakpoints, desc = "dap [R]emove all [B]reakpoints" },
+      }
+    end,
   },
   {
     "leoluz/nvim-dap-go",
@@ -73,5 +96,11 @@ return {
         },
       },
     },
-  }, -- go debugging with delve
+    keys = function()
+      local dap_go = require("dap-go")
+      return {
+        { "<leader>bt", dap_go.debug_test, desc = "De[b]ug go [T]est" },
+      }
+    end,
+  },
 }
