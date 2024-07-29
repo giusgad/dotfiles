@@ -51,7 +51,7 @@ return {
     keys = function()
       local nabla = require("nabla")
       return {
-        { "<leader>mp", nabla.popup, desc = "Show [M]ath preview [P]opup" },
+        { "<leader>mp", nabla.popup,       desc = "Show [M]ath preview [P]opup" },
         { "<leader>mv", nabla.toggle_virt, desc = "Show [Math] [V]irtual lines" },
       }
     end,
@@ -79,7 +79,6 @@ return {
         server = {
           on_attach = require("plugins.lsp.handlers").on_attach,
           settings = {
-            -- rust-analyzer language server configuratio
             ["rust-analyzer"] = require("plugins.lsp.settings.rust-analyzer"),
           },
         },

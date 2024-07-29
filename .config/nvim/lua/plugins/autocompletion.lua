@@ -1,4 +1,3 @@
---TODO: config
 return {
   {
     "L3MON4D3/LuaSnip",
@@ -11,7 +10,6 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true,
     opts = {
       check_ts = true,
       ts_config = {
@@ -20,15 +18,23 @@ return {
       disable_filetype = { "TelescopePrompt" },
       enable_check_bracket_line = true, -- don't add pair if matching closing on the same line
     },
+    config = function(_, opts)
+      require("nvim-autopairs").setup(opts)
+      local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+      local cmp = require("cmp")
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    version = false,
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- lsp completions
-      "hrsh7th/cmp-buffer", -- buffer completions
-      "hrsh7th/cmp-path", -- path completions
-      "hrsh7th/cmp-cmdline", -- cmdline completions
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
     },
     opts = function()
@@ -53,13 +59,19 @@ return {
           { name = "crates" },
         }),
         mapping = cmp.mapping.preset.insert({
-          ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<C-j>"] = cmp.mapping.select_next_item(),
+          ["<C-p>"] = cmp.mapping.select_prev_item(),
+          ["<C-n>"] = cmp.mapping.select_next_item(),
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping(function(fallback)
+          ["<C-m>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping(function()
             if cmp.visible() then
-              cmp.confirm({ select = true })
+              if luasnip.expandable() then
+                luasnip.expand()
+              else
+                cmp.confirm({
+                  select = true,
+                })
+              end
             else
               cmp.mapping.complete()
             end
@@ -69,8 +81,6 @@ return {
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif luasnip.expandable() then
-              luasnip.expand()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
             else
@@ -123,33 +133,27 @@ return {
     config = function(_, opts)
       local cmp = require("cmp")
       cmp.setup(opts)
-      -- Set configuration for specific filetype.
-      cmp.setup.filetype("gitcommit", {
-        sources = cmp.config.sources({
-          { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
-        }, {
-          { name = "buffer" },
-        }),
-      })
-      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
-      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = "path" },
         }, {
-          { name = "cmdline" },
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            },
+          },
         }),
+      })
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
       })
     end,
   },
-  "saadparwaiz1/cmp_luasnip", -- snippet completions
   {
     "Exafunction/codeium.nvim",
     dependencies = {

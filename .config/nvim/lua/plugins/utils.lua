@@ -44,7 +44,13 @@ return {
         extra = true, -- Extra mapping; `gco`, `gcO`, `gcA`
       },
     },
-    keys = { "<leader>cc", "<leader>cb", "<leader>co", "<leader>cO", "<leader>ca" },
+    keys = {
+      { "<leader>cc", mode = { "v", "n" } },
+      { "<leader>cb", mode = { "v", "n" } },
+      "<leader>co",
+      "<leader>cO",
+      "<leader>ca",
+    },
   },
   {
     "folke/todo-comments.nvim",
