@@ -2,7 +2,7 @@
 b = "build"
 br = "build --release"
 t = "test -- --nocapture"
-tq = "test"
+tw = "test --workspace -- --nocapture"
 r = "run"
 rr = "run --release"
 
