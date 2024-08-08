@@ -142,4 +142,5 @@ return {
     },
     dev = false,
   },
+  { "shortcuts/no-neck-pain.nvim", version = "*" },
 }

@@ -61,7 +61,37 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*",
-    config = true,
+    opts = function()
+      return {
+        surrounds = {
+          -- GENERICS from https://github.com/kylechui/nvim-surround/discussions/53#discussioncomment-8593596
+          g = {
+            add = function()
+              local config = require("nvim-surround.config")
+              local result = config.get_input("Enter the generic name: ")
+              if result then
+                return { { result .. "<" }, { ">" } }
+              end
+            end,
+            find = function()
+              local config = require("nvim-surround.config")
+              return config.get_selection({ node = "generic_type" })
+            end,
+            delete = "^(.-<)().-(>)()$",
+            change = {
+              target = "^(.-<)().-(>)()$",
+              replacement = function()
+                local config = require("nvim-surround.config")
+                local result = config.get_input("Enter the generic name: ")
+                if result then
+                  return { { result .. "<" }, { ">" } }
+                end
+              end,
+            },
+          },
+        },
+      }
+    end,
   },
   {
     "monaqa/dial.nvim",
