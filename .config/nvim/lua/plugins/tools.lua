@@ -32,6 +32,7 @@ return {
           desc = "telescope buffer diagnostics",
         },
         { "<leader>fg", builtin.live_grep, desc = "telescope [G]rep" },
+        { "<leader>fG", builtin.git_status, desc = "telescope [G]it status" },
         {
           "<leader>fb",
           builtin.buffers,
@@ -131,10 +132,15 @@ return {
         { "<leader>h", function() ui.nav_file(1) end, desc = "Harpoon jump" },
         { "<leader>j", function() ui.nav_file(2) end, desc = "Harpoon jump" },
         { "<leader>k", function() ui.nav_file(3) end, desc = "Harpoon jump" },
-        { "<leader>l", function() ui.nav_file(4) end, desc = "Harpoon jump" }
-,
+        { "<leader>l", function() ui.nav_file(4) end, desc = "Harpoon jump" },
         -- stylua: ignore end
       }
     end,
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    dependencies = { { "junegunn/fzf", build = "fzf#install" } },
+    ft = "qf",
+    config = true,
   },
 }
