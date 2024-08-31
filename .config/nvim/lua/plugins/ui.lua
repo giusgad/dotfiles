@@ -2,7 +2,15 @@ return {
   {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
-    config = function()
+    opts = {
+      italic = {
+        strings = false,
+        comments = false,
+        folds = false,
+      },
+    },
+    config = function(_, opts)
+      require("gruvbox").setup(opts)
       vim.cmd.colorscheme("gruvbox")
     end,
   },
@@ -12,6 +20,7 @@ return {
     event = "VeryLazy",
     opts = function()
       local has_noice, noice = pcall(require, "noice")
+      local lualine_c
       if has_noice then
         lualine_c = { -- show macro recording
           {
@@ -83,11 +92,11 @@ return {
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
       },
       routes = {
         {

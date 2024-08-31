@@ -51,8 +51,16 @@ return {
     keys = function()
       local nabla = require("nabla")
       return {
-        { "<leader>mp", nabla.popup,       desc = "Show [M]ath preview [P]opup" },
-        { "<leader>mv", nabla.toggle_virt, desc = "Show [Math] [V]irtual lines" },
+        { "<leader>mp", nabla.popup, desc = "Show [M]ath preview [P]opup" },
+        {
+          "<leader>mv",
+          function() -- preserve wrap (workaround for nabla bug)
+            local wrap = vim.o.wrap
+            nabla.toggle_virt()
+            vim.o.wrap = wrap
+          end,
+          desc = "Show [Math] [V]irtual lines",
+        },
       }
     end,
   },
@@ -88,9 +96,9 @@ return {
     keys = function()
       return {
         -- stylua: ignore start
-        { "<leader>rr", function() vim.cmd.RustLsp("run") end,   desc = "[R]un current target" },
+        { "<leader>rr", function() vim.cmd.RustLsp("run") end,         desc = "[R]un current target" },
         { "<leader>rR", function() vim.cmd.RustLsp("runnables") end,   desc = "Select and [R]un target" },
-        { "<leader>rd", function() vim.cmd.RustLsp("debug") end, desc = "[D]ebug current target" },
+        { "<leader>rd", function() vim.cmd.RustLsp("debug") end,       desc = "[D]ebug current target" },
         { "<leader>rD", function() vim.cmd.RustLsp("debuggables") end, desc = "Select and [D]ebug target" },
         -- stylua: ignore end
       }

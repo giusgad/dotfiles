@@ -75,7 +75,7 @@ return {
       perf_record = false,
     },
     keys = function()
-      local pb = require("persistent-breakpoints")
+      local pb = require("persistent-breakpoints.api")
       return {
         { "<leader>bb", pb.toggle_breakpoint, desc = "dap toggle [B]reakpoint" },
         { "<leader>bB", pb.set_conditional_breakpoint, desc = "dap conditional [B]reakpoint" },
