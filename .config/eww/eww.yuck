@@ -37,12 +37,12 @@
     :space-evenly false
     (button
       :class "tray-element"
-      :onclick "wifi toggle"
+      :onclick "scripts/wifi toggle"
       :tooltip " ${wifi-network=="" ? "Wi-fi off" : wifi-network} "
-      "${wifi-status=="on" ? "󰖩" : "󰖪"}" )
+      "${wifi-status=="enabled" ? "󰖩" : "󰖪"}" )
     (button
       :class "tray-element"
-      :onclick "bluetooth toggle"
+      :onclick "scripts/bluetooth toggle"
       :tooltip " ${bluetooth-device=="" ? "Bluetooth off" : bluetooth-device} "
       "${bluetooth-status=="on" ? "󰂯" : "󰂲"}" )
   )
@@ -138,7 +138,7 @@
   :geometry (geometry
     :x "0%"
     :y "3px"
-    :width "100%"
+    :width "125%"
     :height "30px"
     :anchor "top center")
   :stacking "fg"

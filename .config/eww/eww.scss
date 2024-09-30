@@ -198,12 +198,12 @@ scale trough {
   margin: 5px 0px;
 }
 
-.wifi-dropdown-on {
+.wifi-dropdown-enabled {
   @include dropdown;
   background-color: $purple-dark;
 }
 
-.wifi-dropdown-off {
+.wifi-dropdown-disabled {
   @include dropdown;
   background-color: $gray;
 }

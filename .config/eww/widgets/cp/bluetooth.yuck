@@ -1,7 +1,7 @@
 (defwidget bluetooth []
   (dropdown
     :class "bluetooth-dropdown-${bluetooth-status}"
-    :click-event "bluetooth toggle"
+    :click-event "scripts/bluetooth toggle"
     :dropdown-var bluetooth-show
     :var-name "bluetooth-show"
     :title "${bluetooth-status=="on" ? "" : "Bluetooth: off"}${bluetooth-device}"

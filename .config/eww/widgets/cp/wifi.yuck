@@ -3,10 +3,10 @@
 (defwidget wifi []
   (dropdown
     :class "wifi-dropdown-${wifi-status}"
-    :click-event "wifi toggle"
+    :click-event "scripts/wifi toggle"
     :dropdown-var wifi-show
     :var-name "wifi-show"
-    :title "${wifi-status=="on" ? "" : "Wi-Fi: off"}${wifi-network}"
+    :title "${wifi-status=="enabled" ? "" : "Wi-Fi: off"}${wifi-network}"
     :icon "󰖩"
     :entries-json wifi-available-networks
     :menu-click-event "nmcli device wifi connect"

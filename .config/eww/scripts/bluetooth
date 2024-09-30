@@ -1,7 +1,7 @@
 #!/bin/bash
-#
+
 get_status() {
-    bluetooth | awk '{print $3}'
+    bluetoothctl show | grep PowerState | awk '{print $2}'
 }
 
 get_device() {
@@ -21,13 +21,21 @@ connect() {
     bluetoothctl connect $uuid
 }
 
+toggle() {
+    if [ $(get_status) = on ]; then
+        bluetoothctl power off
+    else
+        bluetoothctl power on
+    fi
+}
+
 available_devices() {
     if [ ! $(get_status) = "on" ]; then
         exit
     fi
     active=$(get_device)
     devices=$(bluetoothctl devices | awk '{$1=$2="";print substr($0,3)}' | head -n 10 | sed "s/${active}//" | grep -v '^[[:blank:]]*$')
-    devices=$(sed 's/.*/"&"/' <<< "$devices" | tr '\n' ',')
+    devices=$(sed 's/.*/"&"/' <<<"$devices" | tr '\n' ',')
     devices="[${devices%,}]"
     echo $devices
 }
@@ -36,4 +44,5 @@ available_devices() {
 [ "$1" = "get-device" ] && get_device && exit
 [ "$1" = "devices" ] && available_devices && exit
 [ "$1" = "connect" ] && connect "${@:2}" && exit
+[ "$1" = "toggle" ] && toggle && exit
 exit

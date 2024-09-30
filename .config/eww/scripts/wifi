@@ -1,11 +1,11 @@
 #/bin/bash
 
 get_status() {
-    wifi | awk '{print $3}'
+    nmcli radio wifi
 }
 
 get_network() {
-    if [ $(get_status) = on ]; then
+    if [ $(get_status) = "enabled" ]; then
         state=$(nmcli device status | grep "wifi " | awk '{print $3}')
         if [ "$state" = "connected" ]; then
             nmcli device status | grep "wifi " | awk '{$1=$2=$3="";print substr($0,4)}'
@@ -16,7 +16,7 @@ get_network() {
 }
 
 available_networks() {
-    if [ ! $(get_status) = "on" ]; then
+    if [ ! $(get_status) = "enabled" ]; then
         exit
     fi
     active=$(get_network)
@@ -27,7 +27,16 @@ available_networks() {
     echo $networks
 }
 
+toggle_wifi() {
+    if [ $(get_status) = "enabled" ]; then
+        nmcli radio wifi off
+    else
+        nmcli radio wifi on
+    fi
+}
+
 [ "$1" = "status" ] && get_status && exit
 [ "$1" = "get-network" ] && get_network && exit
 [ "$1" = "networks" ] && available_networks && exit
+[ "$1" = "toggle" ] && toggle_wifi && exit
 exit
