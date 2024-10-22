@@ -77,7 +77,16 @@ return {
   {
     "saecki/crates.nvim",
     config = true,
-    ft = "toml",
+    ft = { "toml", "rust" },
+    keys = function()
+      local crates = require("crates")
+      return {
+        { "<leader>cf", crates.show_features_popup, desc = "[C]rates show [F]eatures" },
+        { "<leader>cd", crates.open_documentation, desc = "[C]rates open [D]ocs" },
+        { "<leader>cr", crates.reload, desc = "[C]rates [R]eload" },
+        { "<leader>cg", crates.open_repository, desc = "[C]rates open [G]it repo" },
+      }
+    end,
   },
   {
     "mrcjkb/rustaceanvim",
