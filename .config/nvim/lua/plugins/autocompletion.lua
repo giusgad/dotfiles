@@ -59,8 +59,20 @@ return {
           { name = "crates" },
         }),
         mapping = cmp.mapping.preset.insert({
-          ["<C-p>"] = cmp.mapping.select_prev_item(),
-          ["<C-n>"] = cmp.mapping.select_next_item(),
+          ["<C-n>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+          ["<C-p>"] = function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            else
+              fallback()
+            end
+          end,
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-m>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping(function()
@@ -78,13 +90,11 @@ return {
           end),
           ["<C-e>"] = cmp.mapping.abort(), -- working with insert mapping esc
           -- ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<Tab>"] = cmp.mapping(function(fallback)
+          ["<Tab>"] = cmp.mapping(function(_)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
               luasnip.expand_or_jump()
-            else
-              fallback()
             end
           end, {
             "i",
@@ -95,8 +105,6 @@ return {
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
               luasnip.jump(-1)
-            else
-              fallback()
             end
           end, {
             "i",
@@ -161,6 +169,16 @@ return {
       "hrsh7th/nvim-cmp",
     },
     event = "InsertEnter",
-    config = true,
+    opts = {
+      virtual_text = {
+        filetypes = { markdown = false, oil = false },
+        enabled = true,
+        key_bindings = { accept = "<C-y>", next = "<C-}>", prev = "<C-{>" },
+      },
+    },
+    config = function(_, opts)
+      require("codeium").setup(opts)
+      vim.api.nvim_set_hl(0, "CodeiumSuggestion", { link = "Comment" })
+    end,
   },
 }
