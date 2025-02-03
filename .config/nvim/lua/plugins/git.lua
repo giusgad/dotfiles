@@ -5,7 +5,7 @@ return {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
     },
-    opts = { graph_style = "unicode" },
+    opts = { graph_style = "kitty" },
     keys = function()
       local neogit = require("neogit")
       return {

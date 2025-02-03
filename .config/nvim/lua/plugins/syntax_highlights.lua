@@ -7,14 +7,16 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufRead" },
-    config = function()
+    config = function(_, opts)
       vim.treesitter.language.register("wgsl_bevy", "wgsl")
       vim.api.nvim_set_hl(0, "rainbowcol1", { ctermfg = "White" })
+      local configs = require("nvim-treesitter.configs")
+      configs.setup(opts)
     end,
     opts = {
-      ensure_installed = {}, -- A list of parser names, or "all"
-      sync_install = false, -- Install parsers synchronously (only applied to `ensure_installed`)
-      auto_install = false, -- set to false if tree-sitter cli not installed
+      ensure_installed = { "markdown", "markdown_inline", "vim", "vimdoc", "lua" },
+      sync_install = false,
+      auto_install = true, -- set to false if tree-sitter cli not installed
       autopairs = { enable = true },
       highlight = {
         enable = true, -- `false` will disable the whole extension
@@ -26,8 +28,8 @@ return {
         enable = true,
         disable = disable_plugin,
         -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-        extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-        max_file_lines = nil, -- Do not enable for files with more than n lines, int
+        extended_mode = true,                                          -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+        max_file_lines = nil,                                          -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         termcolors = { "Yellow", "Green", "Cyan", "Magenta", "Blue" }, -- table of colour name strings
       },
