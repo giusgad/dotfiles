@@ -75,6 +75,9 @@ source "$HOME/.aliases"
 function mvk
     mkdir $argv[1]; mv -t $argv
 end
+function zn
+    z $argv && nvim
+end
 
 ### STARSHIP PROMPT
 starship init fish | source

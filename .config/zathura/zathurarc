@@ -60,6 +60,3 @@ set recolor-keephue "true"
 
 set render-loading "false"
 set scroll-step 50
-unmap f
-map f toggle_fullscreen
-map [fullscreen] f toggle_fullscreen

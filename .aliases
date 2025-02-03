@@ -3,6 +3,7 @@ alias clear='/bin/clear; $HOME/.scripts/fetch.sh'
 alias ta='tmux attach -t'
 alias cat="bat --style plain"
 alias OPENTHEBOOK='firefox $HOME/coding/rust/learning_resources/book/book/index.html'
+alias n='nvim'
 
 alias rust-compile='cargo build; notify-send -u critical -i cpu \'Finished compiling\' "Finished compiling $(pwd | rev | cut -d/ -f1|rev)"'
 
