@@ -7,12 +7,12 @@ set -gx VISUAL "nvim"
 
 ### KEYBINDINGS
 # emacs mode
-bind -k nul accept-autosuggestion
+bind ctrl-space accept-autosuggestion
 bind \b backward-kill-word
 bind \e\[3\;5~ kill-word
 
 # vi mode keybindings
-bind -k nul --mode insert accept-autosuggestion
+bind ctrl-space --mode insert accept-autosuggestion
 bind --mode insert \b backward-kill-word
 bind --mode insert \cp up-or-search
 bind --mode insert \cn down-or-search 
@@ -58,18 +58,6 @@ bind --mode insert '$' __history_previous_command_arguments
 # set man pages colors - see https://man.archlinux.org/man/less.1#D
 set -xU MANPAGER 'less -R --use-color -Dd+y -Du+b'
 
-# Run fetch tool at startup in interactive session
-if status is-interactive
-    # neofetch
-    /home/giuseppe/.scripts/fetch.sh
-end
-
-### CONDA
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-# alias anaconda='eval /home/giuseppe/anaconda3/bin/conda "shell.fish" "hook" $argv | source'
-# <<< conda initialize <<<
-
 ### ALIASES
 source "$HOME/.aliases"
 function mvk
@@ -110,7 +98,7 @@ set -Ux JAVA_HOME /usr/lib/jvm/java-17-openjdk
 set -Ux JAVA_OPTS ""
 
 ## bob (nvim version manager)
-set PATH "$PATH:$HOME/.local/share/bob/nvim-bin"
+# set PATH "$PATH:$HOME/.local/share/bob/nvim-bin"
 
 ### OTHER
 # fix for E79: Cannot load wildcards
