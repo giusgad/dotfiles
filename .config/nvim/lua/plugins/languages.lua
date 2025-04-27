@@ -13,9 +13,8 @@ return {
   -- MARKDOWN/LATEX
   {
     "epwalsh/obsidian.nvim",
-    config = true,
     opts = {
-      dir = "~/Documents/obsidian/vault/",
+      dir = "~/Nextcloud/documents/vault",
       completion = { nvim_cmp = true },
       disable_frontmatter = true,
       mappings = {
@@ -68,7 +67,7 @@ return {
   {
     "windwp/nvim-ts-autotag",
     config = true,
-    ft = { "typescriptreact", "php" },
+    ft = { "typescriptreact", "php", "html" },
     main = "nvim-ts-autotag",
   },
   -- YUCK

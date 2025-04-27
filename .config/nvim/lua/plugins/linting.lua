@@ -1,14 +1,16 @@
 return {
   {
     "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
       "nvimtools/none-ls.nvim",
     },
+    opts = {},
   }, -- null-ls to mason integration
   {
     "nvimtools/none-ls.nvim",
-    event = "BufReadPre",
+    event = { "BufReadPre", "BufNewFile" },
     opts = function()
       local formatting = require("null-ls").builtins.formatting
       return {
@@ -18,7 +20,7 @@ return {
           formatting.gofmt,
           formatting.stylua,
           -- sources installed with mason are setup automatically
-          formatting.prettierd,
+          formatting.prettier,
           formatting.sql_formatter,
         },
         -- you can reuse a shared lspconfig on_attach callback here
@@ -121,21 +123,21 @@ return {
       },
     },
     keys = {
-      { "<leader>vu", "<cmd>Lspsaga finder<CR>",                  desc = "lsp show references ([U]sed)" },
+      { "<leader>vu", "<cmd>Lspsaga finder<CR>", desc = "lsp show references ([U]sed)" },
       {
         "<leader>va",
         "<cmd>Lspsaga code_action<CR>",
         desc = "lsp code [A]ction",
         mode = { "n", "v" },
       },
-      { "<leader>vr", "<cmd>Lspsaga rename<CR>",                  desc = "lsp [R]ename" },
-      { "<leader>vD", "<cmd>Lspsaga peek_definition<CR>",         desc = "lsp peek [D]efinition" },
-      { "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>",   desc = "lsp [L]ine diagnostics" },
+      { "<leader>vr", "<cmd>Lspsaga rename<CR>", desc = "lsp [R]ename" },
+      { "<leader>vD", "<cmd>Lspsaga peek_definition<CR>", desc = "lsp peek [D]efinition" },
+      { "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<CR>", desc = "lsp [L]ine diagnostics" },
       { "<leader>vc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", desc = "lsp [C]ursor diagnostics" },
-      { "<leader>vo", "<cmd>Lspsaga outline<CR>",                 desc = "lsp [O]utline" },
-      { "K",          "<cmd>Lspsaga hover_doc<CR>",               desc = "hover doc" },
-      { "[e",         "<cmd>Lspsaga diagnostic_jump_prev<CR>",    desc = "prev diagnostic" },
-      { "]e",         "<cmd>Lspsaga diagnostic_jump_next<CR>",    desc = "next diagnostic" },
+      { "<leader>vo", "<cmd>Lspsaga outline<CR>", desc = "lsp [O]utline" },
+      { "K", "<cmd>Lspsaga hover_doc<CR>", desc = "hover doc" },
+      { "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", desc = "prev diagnostic" },
+      { "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", desc = "next diagnostic" },
       {
         "[E",
         function()

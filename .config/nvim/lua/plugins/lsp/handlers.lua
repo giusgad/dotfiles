@@ -10,8 +10,18 @@ M.setup = function()
 
   for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    -- vim.diagnostic.config({ signs = { [sign.name] = {} } })
   end
+
+  --[[ vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      },
+    },
+  }) ]]
 
   local config = {
     -- virtual_text = true, -- text at the end of the line

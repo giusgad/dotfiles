@@ -16,6 +16,7 @@ return {
     "rcarriga/nvim-notify",
     keys = { { "<leader>n", require("notify").dismiss, desc = "Dismiss [N]otifications" } },
     event = "VeryLazy",
+    opts = { background_colour = "#282828" },
   },
   {
     "numToStr/Comment.nvim",
@@ -57,7 +58,7 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
     config = true,
   },
-  { "chrisgrieser/nvim-various-textobjs", opts = { useDefaultKeymaps = true } },
+  { "chrisgrieser/nvim-various-textobjs", opts = { keymaps = { useDefaults = true } } },
   {
     "kylechui/nvim-surround",
     version = "*",
@@ -150,4 +151,19 @@ return {
     end,
   },
   "andymass/vim-matchup",
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    opts = {
+      provider_selector = function(bufnr, filetype, buftype)
+        return { "treesitter", "indent" }
+      end,
+    },
+    init = function()
+      vim.o.foldcolumn = "0"
+      vim.o.foldlevel = 99
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+    end,
+  },
 }

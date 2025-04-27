@@ -34,6 +34,7 @@ return {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-calc",
       "saadparwaiz1/cmp_luasnip",
       "L3MON4D3/LuaSnip",
     },
@@ -52,11 +53,12 @@ return {
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "codeium" },
           { name = "luasnip" },
           { name = "buffer" },
+          { name = "codeium" },
           { name = "path" },
           { name = "crates" },
+          { name = "calc" },
         }),
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = function(fallback)
@@ -90,26 +92,6 @@ return {
           end),
           ["<C-e>"] = cmp.mapping.abort(), -- working with insert mapping esc
           -- ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-          ["<Tab>"] = cmp.mapping(function(_)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, {
-            "i",
-            "s",
-          }),
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, {
-            "i",
-            "s",
-          }),
         }),
         formatting = {
           format = function(entry, vim_item)
@@ -162,7 +144,7 @@ return {
       })
     end,
   },
-  {
+  --[[ {
     "Exafunction/codeium.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -180,5 +162,5 @@ return {
       require("codeium").setup(opts)
       vim.api.nvim_set_hl(0, "CodeiumSuggestion", { link = "Comment" })
     end,
-  },
+  }, ]]
 }
