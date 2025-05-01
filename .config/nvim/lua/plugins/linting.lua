@@ -1,34 +1,5 @@
 return {
   {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "williamboman/mason.nvim",
-      "nvimtools/none-ls.nvim",
-    },
-    opts = {},
-  }, -- null-ls to mason integration
-  {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      local formatting = require("null-ls").builtins.formatting
-      return {
-        debug = false,
-        sources = {
-          -- code_actions.refactoring, -- requires refactoring plugin
-          formatting.gofmt,
-          formatting.stylua,
-          -- sources installed with mason are setup automatically
-          formatting.prettier,
-          formatting.sql_formatter,
-        },
-        -- you can reuse a shared lspconfig on_attach callback here
-        on_attach = require("plugins.lsp.handlers").on_attach,
-      }
-    end,
-  },
-  {
     "glepnir/lspsaga.nvim",
     event = "BufRead",
     opts = {

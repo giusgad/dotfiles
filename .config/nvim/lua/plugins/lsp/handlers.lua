@@ -1,18 +1,14 @@
 local M = {}
 
 M.setup = function()
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
-  --[[ vim.diagnostic.config({
+  local config = {
+    -- virtual_text = true, -- text at the end of the line
+    virtual_text = {
+      prefix = "",
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
     signs = {
       text = {
         [vim.diagnostic.severity.ERROR] = "",
@@ -21,35 +17,12 @@ M.setup = function()
         [vim.diagnostic.severity.INFO] = "",
       },
     },
-  }) ]]
-
-  local config = {
-    -- virtual_text = true, -- text at the end of the line
-    virtual_text = {
-      prefix = "",
-    },
-    signs = {
-      active = signs, -- show signs
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
   }
 
   vim.diagnostic.config(config)
 end
 
-M.on_attach = function(client, bufnr)
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-  vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = augroup,
-    buffer = bufnr,
-    callback = function()
-      vim.lsp.buf.format({ async = false })
-    end,
-  })
-end
+M.on_attach = function(client, bufnr) end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
