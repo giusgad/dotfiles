@@ -22,8 +22,6 @@ M.setup = function()
   vim.diagnostic.config(config)
 end
 
-M.on_attach = function(client, bufnr) end
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 local cmp_nvim_lsp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

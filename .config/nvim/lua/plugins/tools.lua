@@ -90,7 +90,7 @@ return {
     },
     keys = function()
       local keys = { "<M-d>" }
-      for i = 1, 10, 1 do -- create separate terminals
+      for i = 1, 9, 1 do -- create separate terminals
         table.insert(keys, { "<leader>g" .. i, ":" .. i .. "ToggleTerm<CR>", desc = "open new term with id:" .. i })
       end
       return keys
@@ -133,6 +133,7 @@ return {
         { "<leader>j", function() ui.nav_file(2) end, desc = "Harpoon jump" },
         { "<leader>k", function() ui.nav_file(3) end, desc = "Harpoon jump" },
         { "<leader>l", function() ui.nav_file(4) end, desc = "Harpoon jump" },
+        { "<leader>;", function() ui.nav_file(5) end, desc = "Harpoon jump" },
         -- stylua: ignore end
       }
     end,

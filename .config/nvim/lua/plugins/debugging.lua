@@ -4,7 +4,7 @@ return {
     dependencies = { "mason.nvim" },
     config = function()
       local dap = require("dap")
-      local lldb_bin = require("mason-registry").get_package("codelldb"):get_install_path()
+      --[[ local lldb_bin = require("mason-registry").get_package("codelldb"):get_install_path()
           .. "/extension/adapter/codelldb"
       dap.adapters.codelldb = {
         type = "server",
@@ -13,7 +13,7 @@ return {
           command = lldb_bin,
           args = { "--port", "${port}" },
         },
-      }
+      } ]]
       dap.configurations.cpp = {
         {
           name = "Launch file",
@@ -32,11 +32,11 @@ return {
     keys = function()
       local dap = require("dap")
       return {
-        { "<leader>bc", dap.continue,  desc = "dap [C]ontinue" },
+        { "<leader>bc", dap.continue, desc = "dap [C]ontinue" },
         { "<leader>bi", dap.step_into, desc = "dap step [I]nto" },
         { "<leader>bo", dap.step_over, desc = "dap step [O]ver" },
-        { "<leader>bu", dap.step_out,  desc = "dap step o[U]t" },
-        { "<leader>bs", dap.close,     desc = "dap [S]top" },
+        { "<leader>bu", dap.step_out, desc = "dap step o[U]t" },
+        { "<leader>bs", dap.close, desc = "dap [S]top" },
       }
     end,
   },
@@ -78,9 +78,9 @@ return {
     keys = function()
       local pb = require("persistent-breakpoints.api")
       return {
-        { "<leader>bb", pb.toggle_breakpoint,          desc = "dap toggle [B]reakpoint" },
+        { "<leader>bb", pb.toggle_breakpoint, desc = "dap toggle [B]reakpoint" },
         { "<leader>bB", pb.set_conditional_breakpoint, desc = "dap conditional [B]reakpoint" },
-        { "<leader>bR", pb.clear_all_breakpoints,      desc = "dap [R]emove all [B]reakpoints" },
+        { "<leader>bR", pb.clear_all_breakpoints, desc = "dap [R]emove all [B]reakpoints" },
       }
     end,
   },

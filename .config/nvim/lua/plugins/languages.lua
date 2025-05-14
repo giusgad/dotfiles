@@ -93,10 +93,7 @@ return {
     init = function()
       vim.g.rustaceanvim = {
         server = {
-          on_attach = require("plugins.lsp.handlers").on_attach,
-          settings = {
-            ["rust-analyzer"] = require("plugins.lsp.settings.rust-analyzer"),
-          },
+          settings = {},
         },
       }
     end,

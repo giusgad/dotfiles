@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "Bufenter" }, {
   end,
 })
 
-vim.filetype.add({ extension = { wgsl = "wgsl", ampl = "ampl", ejs = "html" } })
+vim.filetype.add({ extension = { wgsl = "wgsl", ampl = "ampl", ejs = "ejs" } })
 -- indentation to 2 spaces
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   pattern = "*.mod",

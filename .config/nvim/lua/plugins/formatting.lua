@@ -14,6 +14,7 @@ return {
         javascript = prettier,
         typescript = prettier,
         html = prettier,
+        json = prettier,
         css = prettier,
         scss = prettier,
         less = prettier,
