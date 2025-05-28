@@ -66,9 +66,13 @@ return {
   -- TYPESCRIPT
   {
     "windwp/nvim-ts-autotag",
-    config = true,
-    ft = { "typescriptreact", "php", "html" },
+    ft = { "typescriptreact", "php", "html", "ejs" },
     main = "nvim-ts-autotag",
+    opts = {
+      aliases = {
+        ["ejs"] = "html",
+      },
+    },
   },
   -- YUCK
   { "elkowar/yuck.vim", ft = "yuck", config = true },
