@@ -11,6 +11,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         rust = { "rustfmt", lsp_format = "fallback" },
+        markdown = prettier,
         javascript = prettier,
         typescript = prettier,
         html = prettier,
